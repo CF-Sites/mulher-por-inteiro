@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluxer Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    :root {
+      --bg-page: #0B0C0E;
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-surface: rgba(255, 255, 255, 0.03);
+      --accent-glow: rgba(249, 115, 22, 0.4);
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-page);
+      color: #EDEDED;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .linear-grid {
+      background-size: 40px 40px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    }
+    .linear-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .linear-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .shine-button {
+      position: relative;
+      overflow: hidden;
+    }
+    .shine-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: 0.5s;
+    }
+    .shine-button:hover::after {
+      left: 100%;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    .animate-fade-up {
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    @keyframes flow-line {
+      to { stroke-dashoffset: -20; }
+    }
+    .animate-flow {
+      animation: flow-line 1s linear infinite;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes marquee-rtl {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes marquee-ltr {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Background -->
+  <div class="fixed inset-0 z-0">
+    <div class="linear-grid absolute inset-0"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-gradient-to-b from-orange-500/5 to-transparent rounded-full blur-[120px]"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 border-b border-white/[0.06] bg-[#0B0C0E]/80 backdrop-blur-xl top-0">
+    <div class="flex h-14 max-w-7xl mx-auto px-6 items-center justify-between">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        <span class="text-sm font-medium text-white/90 tracking-tight">Fluxer DS</span>
+      </div>
+      <div class="hidden md:flex items-center gap-6">
+        <a href="#hero" class="text-[13px] text-white/60 hover:text-white transition-colors">Hero</a>
+        <a href="#typography" class="text-[13px] text-white/60 hover:text-white transition-colors">Typography</a>
+        <a href="#colors" class="text-[13px] text-white/60 hover:text-white transition-colors">Colors</a>
+        <a href="#components" class="text-[13px] text-white/60 hover:text-white transition-colors">Components</a>
+        <a href="#layout" class="text-[13px] text-white/60 hover:text-white transition-colors">Layout</a>
+        <a href="#motion" class="text-[13px] text-white/60 hover:text-white transition-colors">Motion</a>
+        <a href="#icons" class="text-[13px] text-white/60 hover:text-white transition-colors">Icons</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0: HERO -->
+  <!-- ============================================================ -->
+  <section id="hero">
+    <main class="z-10 max-w-7xl mr-auto ml-auto pt-32 pr-6 pb-20 pl-6 relative">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 gap-x-16 gap-y-16 items-center">
+        <!-- Left: Text -->
+        <div class="flex flex-col animate-fade-up opacity-0 items-start">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02] mb-8">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+            </span>
+            <span class="text-xs font-medium text-orange-400/90 tracking-tight">Design System v1.0</span>
+          </div>
+          <h1 class="text-5xl lg:text-7xl font-medium tracking-tight text-white mb-6 leading-[1.1]">
+            Fluxer Design<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-200 via-orange-400 to-amber-500">System.</span>
+          </h1>
+          <p class="text-lg text-white/60 max-w-lg mb-10 leading-relaxed font-light">
+            A living reference of every color, type style, component, and motion pattern used across the Fluxer landing page.
+          </p>
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="#typography" class="shine-button h-12 px-8 rounded-full bg-[#EBEBEB] text-[#0B0C0E] text-[15px] font-medium hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,255,255,0.15)] flex items-center">
+              Explore System
+            </a>
+            <a href="#components" class="h-12 px-8 rounded-full border border-white/[0.08] bg-transparent text-white/80 text-[15px] font-medium hover:bg-white/[0.04] transition-colors flex items-center gap-2">
+              View Source
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-circle text-white/40 ml-2"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+            </a>
+          </div>
+        </div>
+        <!-- Right: Stylized Card -->
+        <div class="relative opacity-0 animate-fade-up delay-2">
+          <div class="absolute inset-0 bg-gradient-to-tr from-orange-500/20 to-transparent blur-[60px] rounded-full opacity-40"></div>
+          <div class="relative w-full max-w-md ml-auto bg-[#131418] rounded-2xl border border-white/[0.08] p-6 shadow-2xl shadow-black/50 overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            <div class="relative z-10 flex justify-between items-start mb-8">
+              <div>
+                <div class="text-[13px] text-white/40 font-medium mb-1 uppercase tracking-wider">OPTIMIZATION</div>
+                <h3 class="text-xl text-white font-medium tracking-tight">Site Performance</h3>
+              </div>
+              <div class="px-2 py-1 bg-orange-500/10 border border-orange-500/20 rounded text-[11px] font-medium text-orange-400 flex items-center gap-1.5">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                100
+              </div>
+            </div>
+            <div class="relative z-10 h-32 w-full mb-8">
+              <svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 200 100">
+                <defs>
+                  <linearGradient id="glowGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#F97316" stop-opacity="0.2"></stop>
+                    <stop offset="100%" stop-color="#F97316" stop-opacity="0"></stop>
+                  </linearGradient>
+                </defs>
+                <path d="M0 80 C 40 80, 50 60, 80 50 C 110 40, 130 20, 160 15 C 180 10, 190 5, 200 0" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round" class="drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]"></path>
+                <path d="M0 80 C 40 80, 50 60, 80 50 C 110 40, 130 20, 160 15 C 180 10, 190 5, 200 0 V 100 H 0 Z" fill="url(#glowGradient)" stroke="none"></path>
+              </svg>
+              <div class="absolute top-0 right-0 w-3 h-3 bg-[#131418] border-2 border-orange-500 rounded-full shadow-[0_0_15px_rgba(249,115,22,1)]"></div>
+            </div>
+            <div class="relative z-10 space-y-3">
+              <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.03] border border-white/[0.04]">
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+                  <span class="text-[13px] text-white/80">Lighthouse Score</span>
+                </div>
+                <span class="text-[13px] font-medium text-white">100</span>
+              </div>
+              <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.03] border border-white/[0.04]">
+                <div class="flex items-center gap-3">
+                  <div class="w-2 h-2 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.4)] bg-orange-500"></div>
+                  <span class="text-[13px] text-white/80">First Contentful Paint</span>
+                </div>
+                <span class="text-[13px] font-medium text-white">0.2s</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1: TYPOGRAPHY -->
+  <!-- ============================================================ -->
+  <section id="typography" class="relative z-10 max-w-7xl mx-auto px-6 py-24">
+    <div class="mb-12">
+      <div class="text-[11px] text-orange-400 font-medium uppercase tracking-widest mb-3">01</div>
+      <h2 class="text-4xl font-medium tracking-tight text-white mb-4">Typography</h2>
+      <p class="text-lg text-white/60 font-light max-w-2xl">Every type style used across the Fluxer landing page, from hero headlines to the smallest captions.</p>
+    </div>
+
+    <div class="space-y-0">
+      <!-- Heading 1 (Hero) -->
+      <div class="flex items-baseline justify-between py-6 border-b border-white/[0.06]">
+        <div class="flex-1">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-3">Heading 1 (Hero)</div>
+          <h1 class="text-5xl lg:text-7xl font-medium tracking-tight text-white leading-[1.1]">Design at speed</h1>
+        </div>
+        <div class="text-[11px] text-white/30 font-mono whitespace-nowrap ml-8">48px / 1.1 &middot; 72px / 1.1</div>
+      </div>
+
+      <!-- Heading 1 Gradient -->
+      <div class="flex items-baseline justify-between py-6 border-b border-white/[0.06]">
+        <div class="flex-1">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-3">Heading 1 Gradient</div>
+          <h1 class="text-5xl lg:text-7xl font-medium tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-orange-200 via-orange-400 to-amber-500">your canvas.</h1>
+        </div>
+        <div class="text-[11px] text-white/30 font-mono whitespace-nowrap ml-8">48px / 1.1 &middot; 72px / 1.1</div>
+      </div>
+
+      <!-- Heading 2 -->
+      <div class="flex items-baseline justify-between py-6 border-b border-white/[0.06]">
+        <div class="flex-1">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-3">Heading 2</div>
+          <h2 class="text-4xl font-medium tracking-tight text-white">Section headline</h2>
+        </div>
+        <div class="text-[11px] text-white/30 font-mono whitespace-nowrap ml-8">36px / tight</div>
+      </div>
+
+      <!-- Heading 3 -->
+      <div class="flex items-baseline justify-between py-6 border-b border-white/[0.06]">
+        <div class="flex-1">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-3">Heading 3</div>
+          <h3 class="text-xl text-white font-medium tracking-tight">Card title or subtitle</h3>
+        </div>
+        <div class="text-[11px] text-white/30 font-mono whitespace-nowrap ml-8">20px / tight</div>
+      </div>
+
+      <!-- Heading 4 / Label -->
+      <div class="flex items-baseline justify-between py-6 border-b border-white/[0.06]">
+        <div class="flex-1">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-3">Heading 4 / Label</div>
+          <div class="text-[13px] text-white/40 font-medium uppercase tracking-wider">OPTIMIZATION</div>
+        </div>
+        <div class="text-[11px] text-white/30 font-mono whitespace-nowrap ml-8">13px / wider</div>
+      </div>
+
+      <!-- Body Large -->
+      <div class="flex items-baseline justify-between py-6 border-b border-white/[0.06]">
+        <div class="flex-1">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-3">Body Large</div>
+          <p class="text-lg text-white/60 leading-relaxed font-light">Build, launch, and scale your website with the power of AI. No code required.</p>
+        </div>
+        <div class="text-[11px] text-white/30 font-mono whitespace-nowrap ml-8">18px / 1.625</div>
+      </div>
+
+      <!-- Body Medium -->
+      <div class="flex items-baseline justify-between py-6 border-b border-white/[0.06]">
+        <div class="flex-1">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-3">Body Medium</div>
+          <span class="text-[15px] font-medium text-white">Get Started Free</span>
+        </div>
+        <div class="text-[11px] text-white/30 font-mono whitespace-nowrap ml-8">15px</div>
+      </div>
+
+      <!-- Body Small -->
+      <div class="flex items-baseline justify-between py-6 border-b border-white/[0.06]">
+        <div class="flex-1">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-3">Body Small</div>
+          <span class="text-[13px] text-white/80">Lighthouse Score</span>
+        </div>
+        <div class="text-[11px] text-white/30 font-mono whitespace-nowrap ml-8">13px</div>
+      </div>
+
+      <!-- Caption / XS -->
+      <div class="flex items-baseline justify-between py-6 border-b border-white/[0.06]">
+        <div class="flex-1">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-3">Caption / XS</div>
+          <span class="text-xs font-medium text-orange-400/90 tracking-tight">Fluxer 2.0 is live</span>
+        </div>
+        <div class="text-[11px] text-white/30 font-mono whitespace-nowrap ml-8">12px / tight</div>
+      </div>
+
+      <!-- Tiny -->
+      <div class="flex items-baseline justify-between py-6 border-b border-white/[0.06]">
+        <div class="flex-1">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-3">Tiny</div>
+          <span class="text-[11px] font-medium text-white/40 uppercase tracking-wider">NOW IN BETA</span>
+        </div>
+        <div class="text-[11px] text-white/30 font-mono whitespace-nowrap ml-8">11px</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2: COLORS & SURFACES -->
+  <!-- ============================================================ -->
+  <section id="colors" class="relative z-10 max-w-7xl mx-auto px-6 py-24">
+    <div class="mb-12">
+      <div class="text-[11px] text-orange-400 font-medium uppercase tracking-widest mb-3">02</div>
+      <h2 class="text-4xl font-medium tracking-tight text-white mb-4">Colors &amp; Surfaces</h2>
+      <p class="text-lg text-white/60 font-light max-w-2xl">The full palette of backgrounds, accents, text shades, borders, gradients, and surface treatments.</p>
+    </div>
+
+    <!-- Page & Surface Backgrounds -->
+    <div class="mb-12">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Page &amp; Surface Backgrounds</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-[#0B0C0E] border border-white/[0.06] shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Page Background</div>
+            <div class="text-[11px] text-white/40 font-mono">#0B0C0E / --bg-page</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-[#0E0F11] border border-white/[0.06] shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Nav / Dropdown</div>
+            <div class="text-[11px] text-white/40 font-mono">#0E0F11</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-[#131418] border border-white/[0.06] shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Card Elevated</div>
+            <div class="text-[11px] text-white/40 font-mono">#131418</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-[#1C1C1E] border border-white/[0.06] shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Muted Surface</div>
+            <div class="text-[11px] text-white/40 font-mono">#1C1C1E</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accent Colors -->
+    <div class="mb-12">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Accent Colors</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-orange-500 shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Primary Accent</div>
+            <div class="text-[11px] text-white/40 font-mono">#F97316 / orange-500</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-orange-400 shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Lighter Accent</div>
+            <div class="text-[11px] text-white/40 font-mono">#FB923C / orange-400</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-amber-500 shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Gradient End</div>
+            <div class="text-[11px] text-white/40 font-mono">#F59E0B / amber-500</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-orange-200 shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Gradient Start</div>
+            <div class="text-[11px] text-white/40 font-mono">#FBBF24 / orange-200</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-emerald-500 shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Success</div>
+            <div class="text-[11px] text-white/40 font-mono">#10B981 / emerald-500</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-purple-500 shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Secondary Accent</div>
+            <div class="text-[11px] text-white/40 font-mono">#A855F7 / purple-500</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-red-500 shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Error / Danger</div>
+            <div class="text-[11px] text-white/40 font-mono">#EF4444 / red-500</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Text Colors -->
+    <div class="mb-12">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Text Colors</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-white border border-white/[0.06] shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Primary Text</div>
+            <div class="text-[11px] text-white/40 font-mono">#FFFFFF / text-white</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg border border-white/[0.06] shrink-0" style="background: rgba(255,255,255,0.9)"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">white/90</div>
+            <div class="text-[11px] text-white/40 font-mono">rgba(255,255,255,0.9)</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg border border-white/[0.06] shrink-0" style="background: rgba(255,255,255,0.8)"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">white/80</div>
+            <div class="text-[11px] text-white/40 font-mono">rgba(255,255,255,0.8)</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg border border-white/[0.06] shrink-0" style="background: rgba(255,255,255,0.6)"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Secondary Text</div>
+            <div class="text-[11px] text-white/40 font-mono">rgba(255,255,255,0.6)</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg border border-white/[0.06] shrink-0" style="background: rgba(255,255,255,0.4)"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Muted Text</div>
+            <div class="text-[11px] text-white/40 font-mono">rgba(255,255,255,0.4)</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg border border-white/[0.06] shrink-0" style="background: rgba(255,255,255,0.2)"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Placeholder</div>
+            <div class="text-[11px] text-white/40 font-mono">rgba(255,255,255,0.2)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Borders & Glass -->
+    <div class="mb-12">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Borders &amp; Glass</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-transparent border-2 shrink-0" style="border-color: rgba(255,255,255,0.08)"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Default Border</div>
+            <div class="text-[11px] text-white/40 font-mono">white/[0.08]</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-transparent border-2 shrink-0" style="border-color: rgba(255,255,255,0.06)"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Subtle Border</div>
+            <div class="text-[11px] text-white/40 font-mono">white/[0.06]</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-transparent border-2 shrink-0" style="border-color: rgba(255,255,255,0.04)"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Faintest Border</div>
+            <div class="text-[11px] text-white/40 font-mono">white/[0.04]</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-12 h-12 rounded-lg bg-transparent border-2 shrink-0" style="border-color: rgba(255,255,255,0.15)"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Hover Border</div>
+            <div class="text-[11px] text-white/40 font-mono">white/[0.15]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gradients -->
+    <div class="mb-12">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Gradients</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-24 h-12 rounded-lg bg-gradient-to-r from-orange-200 via-orange-400 to-amber-500 shrink-0"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Hero Gradient</div>
+            <div class="text-[11px] text-white/40 font-mono">from-orange-200 via-orange-400 to-amber-500</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-4 p-4 rounded-lg border border-white/[0.06]">
+          <div class="w-24 h-12 rounded-lg bg-gradient-to-tr from-orange-500/20 to-transparent shrink-0 border border-white/[0.04]"></div>
+          <div>
+            <div class="text-[13px] text-white font-medium">Glow Gradient</div>
+            <div class="text-[11px] text-white/40 font-mono">from-orange-500/20 to-transparent</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Surface Examples -->
+    <div class="mb-12">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Surface Examples</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Glass Card -->
+        <div class="p-6 rounded-xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-xl">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-2">Glass Card</div>
+          <div class="text-[13px] text-white/80">bg-white/[0.02] + border-white/[0.08] + backdrop-blur</div>
+        </div>
+        <!-- Elevated Card -->
+        <div class="p-6 rounded-xl bg-[#131418] border border-white/[0.08]">
+          <div class="text-[11px] text-white/40 uppercase tracking-wider mb-2">Elevated Card</div>
+          <div class="text-[13px] text-white/80">bg-[#131418] + border-white/[0.08]</div>
+        </div>
+        <!-- Noise Texture -->
+        <div class="p-6 rounded-xl bg-[#131418] border border-white/[0.08] relative overflow-hidden">
+          <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+          <div class="relative z-10">
+            <div class="text-[11px] text-white/40 uppercase tracking-wider mb-2">Noise Texture</div>
+            <div class="text-[13px] text-white/80">grainy-gradients noise overlay at 20% opacity</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3: UI COMPONENTS -->
+  <!-- ============================================================ -->
+  <section id="components" class="relative z-10 max-w-7xl mx-auto px-6 py-24">
+    <div class="mb-12">
+      <div class="text-[11px] text-orange-400 font-medium uppercase tracking-widest mb-3">03</div>
+      <h2 class="text-4xl font-medium tracking-tight text-white mb-4">UI Components</h2>
+      <p class="text-lg text-white/60 font-light max-w-2xl">Buttons, badges, cards, inputs, and other reusable building blocks.</p>
+    </div>
+
+    <!-- Buttons -->
+    <div class="mb-16">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Buttons</h3>
+      <div class="flex flex-wrap items-center gap-6 p-8 rounded-xl border border-white/[0.06] bg-white/[0.01]">
+        <!-- Primary CTA -->
+        <div class="flex flex-col items-center gap-3">
+          <a class="shine-button h-12 px-8 rounded-full bg-[#EBEBEB] text-[#0B0C0E] text-[15px] font-medium hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,255,255,0.15)] flex items-center cursor-pointer">
+            Primary CTA
+          </a>
+          <span class="text-[11px] text-white/30">Primary</span>
+        </div>
+        <!-- Secondary -->
+        <div class="flex flex-col items-center gap-3">
+          <a class="h-12 px-8 rounded-full border border-white/[0.08] bg-transparent text-white/80 text-[15px] font-medium hover:bg-white/[0.04] transition-colors flex items-center gap-2 cursor-pointer">
+            Secondary
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-white/40"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+          </a>
+          <span class="text-[11px] text-white/30">Secondary</span>
+        </div>
+        <!-- Outline -->
+        <div class="flex flex-col items-center gap-3">
+          <a class="shine-button h-12 px-6 rounded-full border border-white/[0.15] bg-transparent text-white text-[15px] font-medium hover:bg-white/[0.04] transition-colors flex items-center cursor-pointer">
+            Outline
+          </a>
+          <span class="text-[11px] text-white/30">Outline</span>
+        </div>
+        <!-- Small Publish -->
+        <div class="flex flex-col items-center gap-3">
+          <button class="bg-orange-600 text-[11px] font-medium text-white px-3 py-1.5 rounded hover:bg-orange-700 transition-colors shadow-lg shadow-orange-900/20">
+            Publish
+          </button>
+          <span class="text-[11px] text-white/30">Small Publish</span>
+        </div>
+        <!-- Icon Button -->
+        <div class="flex flex-col items-center gap-3">
+          <button class="w-10 h-10 rounded-full bg-white/[0.05] border border-white/[0.06] flex items-center justify-center hover:bg-white/[0.1] hover:border-white/[0.2] transition-colors text-white">
+            <i data-lucide="plus" class="w-4 h-4"></i>
+          </button>
+          <span class="text-[11px] text-white/30">Icon Button</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Badges -->
+    <div class="mb-16">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Badges</h3>
+      <div class="flex flex-wrap items-center gap-6 p-8 rounded-xl border border-white/[0.06] bg-white/[0.01]">
+        <!-- Status badge with ping -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.08] bg-white/[0.02]">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+            </span>
+            <span class="text-xs font-medium text-orange-400/90 tracking-tight">Fluxer 2.0 is live</span>
+          </div>
+          <span class="text-[11px] text-white/30">Status (Ping)</span>
+        </div>
+        <!-- Beta badge -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full border border-orange-500/20 bg-orange-500/10">
+            <span class="text-[11px] font-medium text-orange-400">Now in Beta</span>
+          </div>
+          <span class="text-[11px] text-white/30">Beta</span>
+        </div>
+        <!-- Score badge -->
+        <div class="flex flex-col items-center gap-3">
+          <div class="px-2 py-1 bg-orange-500/10 border border-orange-500/20 rounded text-[11px] font-medium text-orange-400 flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+            100
+          </div>
+          <span class="text-[11px] text-white/30">Score</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="mb-16">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Cards</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Performance Card (mini) -->
+        <div class="relative bg-[#131418] rounded-2xl border border-white/[0.08] p-6 shadow-2xl shadow-black/50 overflow-hidden">
+          <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+          <div class="relative z-10">
+            <div class="text-[13px] text-white/40 font-medium mb-1 uppercase tracking-wider">METRIC</div>
+            <h3 class="text-xl text-white font-medium tracking-tight mb-4">Performance Card</h3>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.03] border border-white/[0.04]">
+              <div class="flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+                <span class="text-[13px] text-white/80">Score</span>
+              </div>
+              <span class="text-[13px] font-medium text-white">100</span>
+            </div>
+          </div>
+        </div>
+        <!-- Linear Card -->
+        <div class="linear-card rounded-2xl p-6">
+          <div class="text-[13px] text-white/40 font-medium mb-1 uppercase tracking-wider">FEATURE</div>
+          <h3 class="text-xl text-white font-medium tracking-tight mb-4">Linear Card</h3>
+          <p class="text-[13px] text-white/60 leading-relaxed">Uses .linear-card class with glass background and hover border transition.</p>
+        </div>
+        <!-- Metric Row -->
+        <div class="rounded-2xl border border-white/[0.06] p-6 bg-white/[0.01]">
+          <div class="text-[13px] text-white/40 font-medium mb-4 uppercase tracking-wider">METRIC ROWS</div>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.03] border border-white/[0.04]">
+              <div class="flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+                <span class="text-[13px] text-white/80">Lighthouse</span>
+              </div>
+              <span class="text-[13px] font-medium text-white">100</span>
+            </div>
+            <div class="flex items-center justify-between p-3 rounded-lg bg-white/[0.03] border border-white/[0.04]">
+              <div class="flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.4)]"></div>
+                <span class="text-[13px] text-white/80">FCP</span>
+              </div>
+              <span class="text-[13px] font-medium text-white">0.2s</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div class="mb-16">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Input</h3>
+      <div class="max-w-sm p-8 rounded-xl border border-white/[0.06] bg-white/[0.01]">
+        <div class="relative">
+          <i data-lucide="search" class="w-4 h-4 text-white/30 absolute left-2 top-1/2 -translate-y-1/2"></i>
+          <input type="text" placeholder="Search layers" class="w-full bg-white/[0.03] border border-transparent focus:border-white/[0.08] hover:bg-white/[0.05] rounded-md py-1.5 pl-8 pr-2 text-[12px] text-white placeholder-white/20 focus:outline-none transition-all">
+        </div>
+      </div>
+    </div>
+
+    <!-- Dropdown -->
+    <div class="mb-16">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Dropdown</h3>
+      <div class="max-w-xs p-8 rounded-xl border border-white/[0.06] bg-white/[0.01]">
+        <div class="bg-[#0E0F11] border border-white/[0.08] rounded-lg p-1 shadow-xl shadow-black/50">
+          <button class="w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/[0.05] transition-colors text-left">
+            <i data-lucide="home" class="w-4 h-4 text-white/40"></i>
+            <span class="text-[13px] text-white/80">Dashboard</span>
+          </button>
+          <button class="w-full flex items-center gap-3 px-3 py-2 rounded-md bg-white/[0.05] transition-colors text-left">
+            <i data-lucide="layout-template" class="w-4 h-4 text-orange-400"></i>
+            <span class="text-[13px] text-white">Templates</span>
+          </button>
+          <button class="w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/[0.05] transition-colors text-left">
+            <i data-lucide="book" class="w-4 h-4 text-white/40"></i>
+            <span class="text-[13px] text-white/80">Documentation</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4: LAYOUT & SPACING -->
+  <!-- ============================================================ -->
+  <section id="layout" class="relative z-10 max-w-7xl mx-auto px-6 py-24">
+    <div class="mb-12">
+      <div class="text-[11px] text-orange-400 font-medium uppercase tracking-widest mb-3">04</div>
+      <h2 class="text-4xl font-medium tracking-tight text-white mb-4">Layout &amp; Spacing</h2>
+      <p class="text-lg text-white/60 font-light max-w-2xl">Grid systems, container widths, and spacing patterns used throughout the page.</p>
+    </div>
+
+    <!-- Hero Layout -->
+    <div class="mb-12">
+      <div class="text-[13px] text-white/80 font-medium mb-4">Hero Layout &mdash; <span class="text-white/40 font-mono">grid grid-cols-1 lg:grid-cols-2 gap-16 items-center</span></div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="border-2 border-dashed border-white/[0.1] rounded-xl p-8 flex items-center justify-center min-h-[200px]">
+          <div class="text-[13px] text-white/40">Text Content</div>
+        </div>
+        <div class="border-2 border-dashed border-orange-500/30 rounded-xl p-8 flex items-center justify-center min-h-[200px]">
+          <div class="text-[13px] text-orange-400/60">Card / Visual</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bento Grid -->
+    <div class="mb-12">
+      <div class="text-[13px] text-white/80 font-medium mb-4">Bento Grid &mdash; <span class="text-white/40 font-mono">grid grid-cols-1 md:grid-cols-3 gap-6</span></div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-2 border-2 border-dashed border-white/[0.1] rounded-xl p-8 flex items-center justify-center min-h-[160px]">
+          <div class="text-[13px] text-white/40">md:col-span-2</div>
+        </div>
+        <div class="border-2 border-dashed border-white/[0.1] rounded-xl p-8 flex items-center justify-center min-h-[160px]">
+          <div class="text-[13px] text-white/40">1 col</div>
+        </div>
+        <div class="border-2 border-dashed border-white/[0.1] rounded-xl p-8 flex items-center justify-center min-h-[160px]">
+          <div class="text-[13px] text-white/40">1 col</div>
+        </div>
+        <div class="md:col-span-2 border-2 border-dashed border-white/[0.1] rounded-xl p-8 flex items-center justify-center min-h-[160px]">
+          <div class="text-[13px] text-white/40">md:col-span-2</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Container -->
+    <div class="mb-12">
+      <div class="text-[13px] text-white/80 font-medium mb-4">Container &mdash; <span class="text-white/40 font-mono">max-w-7xl mr-auto ml-auto pr-6 pl-6</span></div>
+      <div class="border-2 border-dashed border-white/[0.1] rounded-xl p-4">
+        <div class="bg-white/[0.02] border border-white/[0.06] rounded-lg p-6 text-center">
+          <div class="text-[13px] text-white/40">max-w-7xl (1280px) with 24px horizontal padding</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5: MOTION & INTERACTION -->
+  <!-- ============================================================ -->
+  <section id="motion" class="relative z-10 max-w-7xl mx-auto px-6 py-24">
+    <div class="mb-12">
+      <div class="text-[11px] text-orange-400 font-medium uppercase tracking-widest mb-3">05</div>
+      <h2 class="text-4xl font-medium tracking-tight text-white mb-4">Motion &amp; Interaction</h2>
+      <p class="text-lg text-white/60 font-light max-w-2xl">Animation patterns, transitions, and interactive effects used across the page.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <!-- fadeUp Animation -->
+      <div class="p-8 rounded-xl border border-white/[0.06] bg-white/[0.01]">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <div class="text-[13px] text-white font-medium mb-1">fadeUp</div>
+            <div class="text-[11px] text-white/40 font-mono">0.8s cubic-bezier(0.16, 1, 0.3, 1)</div>
+          </div>
+          <button onclick="replayFadeUp()" class="text-[11px] text-orange-400 font-medium px-3 py-1 rounded-full border border-orange-500/20 bg-orange-500/10 hover:bg-orange-500/20 transition-colors cursor-pointer">Replay</button>
+        </div>
+        <div id="fadeup-demo" class="animate-fade-up opacity-0 p-4 rounded-lg bg-white/[0.03] border border-white/[0.04]">
+          <div class="text-[13px] text-white/80">This card fades up with blur</div>
+        </div>
+      </div>
+
+      <!-- Ping Animation -->
+      <div class="p-8 rounded-xl border border-white/[0.06] bg-white/[0.01]">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <div class="text-[13px] text-white font-medium mb-1">Ping</div>
+            <div class="text-[11px] text-white/40 font-mono">animate-ping (infinite)</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-6">
+          <div class="flex items-center gap-3">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+              <span class="relative inline-flex h-3 w-3 rounded-full bg-orange-400"></span>
+            </span>
+            <span class="text-[13px] text-white/60">Orange ping</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex h-3 w-3 rounded-full bg-emerald-400"></span>
+            </span>
+            <span class="text-[13px] text-white/60">Green ping</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shine Button Effect -->
+      <div class="p-8 rounded-xl border border-white/[0.06] bg-white/[0.01]">
+        <div class="mb-6">
+          <div class="text-[13px] text-white font-medium mb-1">Shine Effect</div>
+          <div class="text-[11px] text-white/40 font-mono">.shine-button::after (hover)</div>
+        </div>
+        <a class="shine-button h-12 px-8 rounded-full bg-[#EBEBEB] text-[#0B0C0E] text-[15px] font-medium hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,255,255,0.15)] inline-flex items-center cursor-pointer">
+          Hover me
+        </a>
+      </div>
+
+      <!-- Hover Transitions -->
+      <div class="p-8 rounded-xl border border-white/[0.06] bg-white/[0.01]">
+        <div class="mb-6">
+          <div class="text-[13px] text-white font-medium mb-1">Hover Transitions</div>
+          <div class="text-[11px] text-white/40 font-mono">border-color 0.3s, bg 0.2s, transform 0.3s</div>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="linear-card rounded-lg p-4 cursor-pointer hover:transform hover:scale-[1.02]">
+            <span class="text-[13px] text-white/80">Card hover</span>
+          </div>
+          <button class="w-10 h-10 rounded-full bg-white/[0.05] border border-white/[0.06] flex items-center justify-center hover:bg-white/[0.1] hover:border-white/[0.2] transition-colors text-white cursor-pointer">
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+          <a class="text-[13px] text-white/60 hover:text-white transition-colors cursor-pointer">Link hover</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6: ICONS -->
+  <!-- ============================================================ -->
+  <section id="icons" class="relative z-10 max-w-7xl mx-auto px-6 py-24">
+    <div class="mb-12">
+      <div class="text-[11px] text-orange-400 font-medium uppercase tracking-widest mb-3">06</div>
+      <h2 class="text-4xl font-medium tracking-tight text-white mb-4">Icons</h2>
+      <p class="text-lg text-white/60 font-light max-w-2xl">Lucide icons and Iconify brand logos used across the Fluxer landing page.</p>
+    </div>
+
+    <!-- Lucide Icons -->
+    <div class="mb-12">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Lucide Icons</h3>
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-4">
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="zap" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">zap</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="chevron-down" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">chevron-down</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="plus" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">plus</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="check-circle-2" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">check-circle-2</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="play-circle" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">play-circle</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="menu" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">menu</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="mouse-pointer-2" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">mouse-pointer-2</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="layout-template" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">layout-template</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="type" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">type</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="home" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">home</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="search" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">search</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="sparkles" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">sparkles</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="quote" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">quote</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="arrow-right" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">arrow-right</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="check" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">check</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="globe" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">globe</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="users" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">users</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="database" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">database</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="cloud-upload" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">cloud-upload</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="book" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">book</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="rocket" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">rocket</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="briefcase" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">briefcase</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="calendar" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">calendar</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="message-square" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">message-square</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <i data-lucide="twitter" class="w-5 h-5 text-white/80"></i>
+          </div>
+          <span class="text-[11px] text-white/40">twitter</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Iconify Brand Logos -->
+    <div class="mb-12">
+      <h3 class="text-xl text-white font-medium tracking-tight mb-6">Iconify Brand Logos</h3>
+      <p class="text-[13px] text-white/60 mb-6">Brand icons loaded via Iconify for third-party logos.</p>
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <iconify-icon icon="mdi:twitter" width="20" height="20" style="color: rgba(255,255,255,0.8)"></iconify-icon>
+          </div>
+          <span class="text-[11px] text-white/40">mdi:twitter</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <iconify-icon icon="mdi:github" width="20" height="20" style="color: rgba(255,255,255,0.8)"></iconify-icon>
+          </div>
+          <span class="text-[11px] text-white/40">mdi:github</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <iconify-icon icon="mdi:discord" width="20" height="20" style="color: rgba(255,255,255,0.8)"></iconify-icon>
+          </div>
+          <span class="text-[11px] text-white/40">mdi:discord</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <iconify-icon icon="simple-icons:figma" width="20" height="20" style="color: rgba(255,255,255,0.8)"></iconify-icon>
+          </div>
+          <span class="text-[11px] text-white/40">simple-icons:figma</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <iconify-icon icon="simple-icons:vercel" width="20" height="20" style="color: rgba(255,255,255,0.8)"></iconify-icon>
+          </div>
+          <span class="text-[11px] text-white/40">simple-icons:vercel</span>
+        </div>
+        <div class="flex flex-col items-center gap-2 p-4">
+          <div class="w-10 h-10 rounded-lg bg-white/[0.05] border border-white/[0.06] flex items-center justify-center">
+            <iconify-icon icon="simple-icons:netlify" width="20" height="20" style="color: rgba(255,255,255,0.8)"></iconify-icon>
+          </div>
+          <span class="text-[11px] text-white/40">simple-icons:netlify</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-white/[0.06] py-12">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        <span class="text-[13px] text-white/40">Fluxer Design System v1.0</span>
+      </div>
+      <span class="text-[11px] text-white/30">Built with Tailwind CSS + Inter + Lucide</span>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    lucide.createIcons();
+
+    function replayFadeUp() {
+      const el = document.getElementById('fadeup-demo');
+      el.classList.remove('animate-fade-up');
+      el.style.opacity = '0';
+      void el.offsetWidth;
+      el.classList.add('animate-fade-up');
+    }
+  </script>
+</body>
+</html>

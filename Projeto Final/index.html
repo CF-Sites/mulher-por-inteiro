@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mulher Por Inteiro — Imersão Feminina</title>
+
+  <!-- Fonts (Design System) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+            geist: ['"Geist"', '"Inter"', 'sans-serif'],
+            inter: ['"Inter"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* ============================================
+       ROOT VARIABLES — design_system.html
+       ============================================ */
+    :root {
+      --bg-color: #050505;
+      --bg-elevated: #0a0a0a;
+      --card-bg: #111111;
+      --text-main: #ffffff;
+      --text-dim: #888888;
+      --text-subtle: #555555;
+      --border-color: #222222;
+      --border-elevated: #333333;
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-surface: rgba(255, 255, 255, 0.03);
+      --accent-orange: #F97316;
+      --accent-amber: #FBBF24;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', 'Geist', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ============================================
+       CUSTOM CURSOR — design_system.html
+       ============================================ */
+    #cursor-dot,
+    #cursor-outline {
+      pointer-events: none;
+      position: fixed;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      z-index: 99999;
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    #cursor-dot {
+      width: 6px; height: 6px;
+      background-color: #ffca28;
+      box-shadow: 0 0 10px #ff8f00;
+    }
+    #cursor-outline {
+      width: 35px; height: 35px;
+      border: 2px solid #ffca28;
+      background: radial-gradient(circle, rgba(255, 143, 0, 0.3) 0%, rgba(255, 202, 40, 0) 70%);
+      box-shadow: 0 0 15px rgba(255, 143, 0, 0.2);
+      transition: all 0.15s ease-out;
+    }
+    .cursor-active #cursor-dot {
+      transform: translate(-50%, -50%) scale(0.5);
+      background-color: #ffffff;
+    }
+    .cursor-active #cursor-outline {
+      transform: translate(-50%, -50%) scale(1.8);
+      background-color: rgba(255, 143, 0, 0.15);
+      border-color: #ffca28;
+      box-shadow: 0 0 25px rgba(255, 143, 0, 0.4);
+    }
+    @media (pointer: fine) {
+      html, body { cursor: none; }
+      a, button, .hover-target, [role="button"] { cursor: none !important; }
+    }
+
+    /* ============================================
+       GRID BACKGROUND — design_system.html
+       ============================================ */
+    .linear-grid {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    }
+
+    /* ============================================
+       NOISE OVERLAY — design_system.html
+       ============================================ */
+    .noise-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity: 0.15;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ============================================
+       HERO PHOTO — Original image, B&W only
+       ============================================ */
+    .photo-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+      filter: grayscale(1);
+    }
+
+    /* Featured Card — rotating border (Design System) */
+    .featured-card-outer {
+      position: absolute;
+      bottom: -5%;
+      right: -8%;
+      z-index: 20;
+      border-radius: 16px;
+      padding: 1px;
+      overflow: hidden;
+      max-width: 320px;
+      box-shadow: 0 0 40px rgba(147, 51, 234, 0.1);
+    }
+
+    /* Animated rotating border */
+    .featured-card-outer .rotating-border {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .featured-card-outer .rotating-border .border-bg {
+      position: absolute;
+      inset: 0;
+      background: #1a1a1a;
+    }
+    .featured-card-outer .rotating-border .border-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200%;
+      height: 10rem;
+      background: linear-gradient(to bottom, transparent, #9333ea, transparent);
+      opacity: 0.8;
+      animation: rotatePlan 6s linear infinite;
+    }
+
+    /* Card inner content */
+    .featured-card-inner {
+      position: relative;
+      z-index: 10;
+      border-radius: 15px;
+      padding: 0.85rem 1.2rem;
+      background-color: #0a0a0a;
+      background-image:
+        radial-gradient(at 0% 0%, rgba(168,85,247,0.12) 0px, transparent 65%),
+        radial-gradient(at 100% 100%, rgba(217,70,239,0.08) 0px, transparent 65%);
+      box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.05) inset;
+    }
+
+    /* Noise inside card */
+    .featured-card-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity: 0.2;
+      pointer-events: none;
+      border-radius: inherit;
+    }
+
+    @keyframes rotatePlan {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Orbiting particles */
+    @keyframes orbit {
+      from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+    }
+    @keyframes orbit-reverse {
+      from { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+      to { transform: rotate(-360deg) translateX(180px) rotate(360deg); }
+    }
+
+    /* ============================================
+       TITLE — Outline stroke style for "MULHER"
+       ============================================ */
+    .title-outline {
+      -webkit-text-stroke: 1.5px rgba(251, 191, 36, 0.7);
+      color: transparent;
+      font-size: clamp(3.8rem, 8vw, 8rem);
+      line-height: 0.9;
+    }
+
+    .title-solid {
+      color: var(--text-main);
+      font-size: clamp(3rem, 6.5vw, 6.5rem);
+      line-height: 0.95;
+    }
+
+    /* Shimmer gradient for "INTEIRO" */
+    .title-gradient {
+      background: linear-gradient(90deg, #fdba74, #fb923c, #f97316, #fbbf24, #fdba74);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s linear infinite;
+    }
+
+    /* Text reveal animation */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    /* ============================================
+       OVERLINE WITH LINE
+       ============================================ */
+    .overline-line::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--text-subtle);
+      vertical-align: middle;
+      margin-right: 12px;
+    }
+
+    /* ============================================
+       ACCENT TAG (Resgate sua essência)
+       ============================================ */
+    .accent-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      border-radius: 9999px;
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.25);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-orange);
+    }
+
+    .accent-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-orange);
+      box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);
+    }
+
+
+    /* ============================================
+       INFO INLINE
+       ============================================ */
+    .info-inline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: center;
+      font-family: 'Geist', 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .info-inline .info-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .info-inline .ph {
+      font-size: 1rem;
+      color: var(--accent-orange);
+    }
+
+    /* Urgency vagas line */
+    .urgency-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ef4444;
+    }
+
+    .urgency-line .ph {
+      font-size: 1rem;
+      color: #ef4444;
+    }
+
+    /* ============================================
+       CREDIBILITY LINE
+       ============================================ */
+    .credit-line {
+      padding-left: 1rem;
+      border-left: 2px solid rgba(249, 115, 22, 0.4);
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       CTA — Orange Pill (design_system.html)
+       ============================================ */
+    .cta-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      height: 56px;
+      padding: 0 2.2rem;
+      border-radius: 9999px;
+      font-family: 'Geist', 'Inter', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .cta-pill .cta-glow {
+      position: absolute; inset: 0;
+      border-radius: 9999px;
+      background: linear-gradient(to right, rgba(249,115,22,0.2), rgba(251,191,36,0.3), rgba(249,115,22,0.2));
+      box-shadow: 0 0 22px rgba(248,181,129,0.55);
+      outline: 1px solid rgba(251,191,36,0.6);
+      pointer-events: none;
+    }
+    .cta-pill .cta-fill {
+      position: absolute; inset: 3px;
+      border-radius: 9999px;
+      background: linear-gradient(to bottom, #fb923c, #f97316, #fbbf24);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.45);
+      pointer-events: none;
+    }
+    .cta-pill .cta-reflect {
+      position: absolute; bottom: -12px;
+      left: 50%; transform: translateX(-50%);
+      width: 70%; height: 16px;
+      border-radius: 9999px;
+      background: rgba(251,191,36,0.35);
+      filter: blur(16px);
+      pointer-events: none;
+    }
+    .cta-pill .cta-label {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .cta-pill:hover {
+      transform: translateY(-3px) scale(1.04);
+      filter: brightness(1.1);
+    }
+    .cta-pill:active { transform: scale(0.97); }
+    .cta-pill::after {
+      content: '';
+      position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.6s; z-index: 11;
+    }
+    .cta-pill:hover::after { left: 100%; }
+
+    /* Idle pulse */
+    @keyframes breathe-cta {
+      0%, 100% { box-shadow: 0 0 20px rgba(249,115,22,0.3), 0 0 60px rgba(249,115,22,0.1); }
+      50% { box-shadow: 0 0 40px rgba(249,115,22,0.5), 0 0 100px rgba(249,115,22,0.2); }
+    }
+    .cta-breathing { animation: breathe-cta 2s ease-in-out infinite; }
+
+    /* ============================================
+       KEYFRAMES — design_system.html
+       ============================================ */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 1023px) {
+      .hero-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+      }
+      .photo-col { order: -1; }
+      .content-col { order: 1; text-align: center; }
+      .content-inner { align-items: center !important; }
+      .photo-wrapper {
+        max-width: 380px;
+        margin: 0 auto;
+      }
+      .featured-card-outer {
+        position: relative !important;
+        right: auto !important;
+        bottom: auto !important;
+        margin: -1.5rem auto 0;
+      }
+      .info-inline { justify-content: center; }
+      .credit-line { text-align: left; }
+      .cta-area { align-items: center; }
+    }
+
+    @media (max-width: 640px) {
+      .title-outline { font-size: clamp(2.8rem, 14vw, 4.5rem) !important; }
+      .title-solid { font-size: clamp(2.2rem, 11vw, 3.5rem) !important; }
+      .photo-wrapper { max-width: 300px; }
+      .info-inline { flex-direction: column; gap: 0.6rem; }
+    }
+  </style>
+</head>
+
+<body class="relative">
+
+  <!-- Custom Cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-outline"></div>
+
+  <!-- Fixed Background -->
+  <div class="fixed inset-0 z-0 pointer-events-none">
+    <div class="absolute inset-0 linear-grid"></div>
+    <div class="absolute top-0 right-0 w-[800px] h-[500px] bg-orange-500/[0.07] blur-[120px] rounded-full opacity-50"
+         style="animation: pulse-glow 8s ease-in-out infinite;"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[400px] bg-amber-400/[0.04] blur-[100px] rounded-full opacity-40"
+         style="animation: pulse-glow 10s ease-in-out infinite; animation-delay: 3s;"></div>
+  </div>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section class="relative min-h-screen flex items-center overflow-hidden noise-overlay">
+
+    <!-- Orbiting particles (from design_system.html) -->
+    <div class="absolute top-1/2 right-[25%] -translate-y-1/2 w-[300px] h-[300px] pointer-events-none z-[5]">
+      <div class="absolute w-2 h-2 rounded-full bg-orange-400 shadow-[0_0_12px_rgba(249,115,22,0.8)]" style="animation: orbit 12s linear infinite;"></div>
+      <div class="absolute w-1.5 h-1.5 rounded-full bg-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.6)]" style="animation: orbit-reverse 18s linear infinite;"></div>
+      <div class="absolute w-1 h-1 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]" style="animation: orbit 25s linear infinite; animation-delay: -5s;"></div>
+    </div>
+
+    <!-- Grain overlay (from design_system.html) -->
+    <div class="absolute inset-0 pointer-events-none z-[2] opacity-30"
+         style="background-image: url('https://grainy-gradients.vercel.app/noise.svg'); animation: grain 8s steps(10) infinite;"></div>
+
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 py-16 lg:py-0 min-h-screen flex items-center">
+
+      <!-- Grid: Content LEFT | Photo RIGHT -->
+      <div class="hero-grid w-full" style="display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: center;">
+
+        <!-- ===== LEFT: Content ===== -->
+        <div class="content-col">
+          <div class="content-inner flex flex-col items-start gap-6">
+
+            <!-- Overline -->
+            <div class="overline-line font-geist text-xs uppercase tracking-[0.15em] text-[#555] reveal-up">
+              Imersão Presencial • 16 de Maio
+            </div>
+
+            <!-- Title: MULHER (outline) + POR INTEIRO (solid) -->
+            <div class="flex flex-col gap-1">
+              <h1 class="title-outline font-jakarta font-extrabold tracking-tight uppercase reveal-up">
+                Mulher
+              </h1>
+              <div class="title-solid font-jakarta font-extrabold tracking-tight uppercase reveal-up">
+                Por <span class="title-gradient">Inteiro</span>
+              </div>
+            </div>
+
+            <!-- Accent Tag -->
+            <div class="accent-tag font-geist reveal-up">Resgate sua essência</div>
+
+            <!-- Subtitle -->
+            <p class="font-geist text-base md:text-[1.1rem] leading-relaxed max-w-lg reveal-up" style="color: var(--text-dim);">
+              Uma imersão para resgatar sua essência, romper o automático e despertar a mulher <em class="not-italic text-orange-300 font-medium">forte, confiante e viva</em> que existe dentro de você.
+            </p>
+
+            <!-- Credibility -->
+            <div class="credit-line font-geist reveal-up">
+              Conduzido por <strong class="text-white">Fabianna Lima</strong>, terapeuta sistêmica intercultural • <strong class="text-orange-400">+5.000 mulheres impactadas</strong>
+            </div>
+
+            <!-- Info inline -->
+            <div class="info-inline reveal-up">
+              <span class="info-item"><i class="ph ph-map-pin"></i> Los Altos, Califórnia</span>
+              <span class="info-item"><i class="ph ph-calendar-blank"></i> 16 de Maio</span>
+              <span class="info-item"><i class="ph ph-clock"></i> 2:00 PM</span>
+            </div>
+
+            <!-- Urgency line -->
+            <div class="urgency-line reveal-up">
+              <i class="ph ph-users"></i>
+              <span>Apenas 30 vagas</span>
+            </div>
+
+            <!-- CTA + micro-copy -->
+            <div class="cta-area flex flex-col items-start gap-3 mt-1 reveal-up">
+              <a href="#participar" class="cta-pill" id="cta-btn">
+                <span class="cta-glow"></span>
+                <span class="cta-fill"></span>
+                <span class="cta-reflect"></span>
+                <span class="cta-label font-geist">
+                  Garanta minha vaga
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </a>
+              <span class="text-[11px] font-geist text-[#555] tracking-wide">Vagas limitadas • Evento presencial</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ===== RIGHT: Photo ===== -->
+        <div class="photo-col relative">
+          <!-- Warm glow behind figure -->
+          <div class="photo-glow absolute top-[0%] left-1/2 -translate-x-1/2 w-[120%] h-[90%] rounded-full pointer-events-none z-0"
+               style="background: radial-gradient(ellipse at 50% 45%, rgba(249,115,22,0.2) 0%, rgba(251,191,36,0.12) 20%, rgba(249,115,22,0.04) 45%, transparent 65%); filter: blur(70px); animation: pulse-glow 7s ease-in-out infinite;"></div>
+
+          <div class="photo-wrapper relative z-10 reveal-up" id="heroPhoto" style="animation: float 8s ease-in-out infinite;">
+            <img src="../Fotos/Branding Fabi-44.jpg" alt="Fabianna Lima">
+          </div>
+
+          <!-- Floating card: Imersão info (DS dark glass pattern) -->
+          <!-- Featured Card (DS: rotating border, horizontal) -->
+          <div class="featured-card-outer reveal-up" style="animation: float 7s ease-in-out infinite; animation-delay: 1s;">
+            <div class="rotating-border">
+              <div class="border-bg"></div>
+              <div class="border-glow"></div>
+            </div>
+            <div class="featured-card-inner">
+              <div class="relative z-10 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center border border-white/10 flex-shrink-0">
+                  <i class="ph ph-sun text-lg text-purple-400"></i>
+                </div>
+                <div>
+                  <div class="text-[12px] font-jakarta font-medium text-white tracking-tight">Imersão Presencial</div>
+                  <div class="text-[10px] text-white/40 font-geist">4h de reconexão • Reflexões guiadas e presença corporal</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator absolute bottom-6 right-8 md:right-10 flex items-center gap-2 z-20 reveal-up">
+      <span class="text-[10px] text-white/30 uppercase tracking-widest font-geist">Descubra mais</span>
+      <div class="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1">
+        <div class="w-1 h-2 rounded-full bg-white/40 animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SCRIPTS
+       ============================================ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* Custom Cursor */
+      const dot = document.getElementById('cursor-dot');
+      const outline = document.getElementById('cursor-outline');
+      let mx = 0, my = 0, ox = 0, oy = 0;
+
+      if (window.matchMedia('(pointer: fine)').matches) {
+        document.addEventListener('mousemove', (e) => {
+          mx = e.clientX; my = e.clientY;
+          dot.style.left = mx + 'px';
+          dot.style.top = my + 'px';
+        });
+        (function loop() {
+          ox += (mx - ox) * 0.15;
+          oy += (my - oy) * 0.15;
+          outline.style.left = ox + 'px';
+          outline.style.top = oy + 'px';
+          requestAnimationFrame(loop);
+        })();
+        document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+          el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+          el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+        });
+      } else {
+        dot.style.display = 'none';
+        outline.style.display = 'none';
+      }
+
+      /* Entrance Animations */
+      const contentEls = document.querySelectorAll('.content-inner .reveal-up');
+      const tl = gsap.timeline({ defaults: { ease: 'power4.out' }, delay: 0.2 });
+
+      // 1. Photo: blur-in + scale
+      tl.fromTo('#heroPhoto', {
+        opacity: 0, scale: 1.08, filter: 'blur(20px)'
+      }, {
+        opacity: 1, scale: 1, filter: 'blur(0px)',
+        duration: 1.8, ease: 'power3.out'
+      });
+
+      // 2. Glow behind photo
+      tl.fromTo('.photo-glow', {
+        opacity: 0, scale: 0.5
+      }, {
+        opacity: 1, scale: 1,
+        duration: 1.4, ease: 'power2.out'
+      }, '-=1.4');
+
+      // 3. Content stagger
+      tl.to(contentEls, {
+        opacity: 1, y: 0,
+        duration: 1, stagger: 0.1,
+        ease: 'power3.out'
+      }, '-=1.0');
+
+      // 4. Featured card
+      tl.to('.featured-card-outer', {
+        opacity: 1, y: 0,
+        duration: 0.8, ease: 'back.out(1.4)'
+      }, '-=0.4');
+
+      // 5. Scroll indicator
+      tl.to('.scroll-indicator', {
+        opacity: 1, y: 0,
+        duration: 0.6, ease: 'power2.out'
+      }, '-=0.2');
+
+      // CTA Idle Pulse
+      const btn = document.getElementById('cta-btn');
+      let timer;
+      function resetPulse() {
+        clearTimeout(timer);
+        btn.classList.remove('cta-breathing');
+        timer = setTimeout(() => btn.classList.add('cta-breathing'), 3500);
+      }
+      tl.eventCallback('onComplete', () => {
+        document.addEventListener('mousemove', resetPulse);
+        document.addEventListener('scroll', resetPulse);
+        document.addEventListener('touchstart', resetPulse);
+        resetPulse();
+      });
+    });
+  </script>
+
+</body>
+</html>

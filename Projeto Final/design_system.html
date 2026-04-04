@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System — Mulher Por Inteiro</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Iconify -->
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
+            geist: ['"Geist"', '"Inter"', 'sans-serif'],
+            inter: ['"Inter"', 'sans-serif'],
+          }
+        }
+      },
+      plugins: [
+        function({ addUtilities }) {
+          const perspectiveUtilities = {
+            ".perspective-none": { perspective: "none" },
+            ".perspective-dramatic": { perspective: "100px" },
+            ".perspective-near": { perspective: "300px" },
+            ".perspective-normal": { perspective: "500px" },
+            ".perspective-midrange": { perspective: "800px" },
+            ".perspective-distant": { perspective: "1200px" },
+          };
+          const transformStyleUtilities = {
+            ".transform-style-preserve-3d": { "transform-style": "preserve-3d" },
+            ".transform-style-flat": { "transform-style": "flat" },
+          };
+          addUtilities({ ...perspectiveUtilities, ...transformStyleUtilities });
+        }
+      ]
+    };
+  </script>
+
+  <style>
+    /* ============================================
+       ROOT VARIABLES
+       ============================================ */
+    :root {
+      --bg-color: #050505;
+      --bg-elevated: #0a0a0a;
+      --card-bg: #111111;
+      --text-main: #ffffff;
+      --text-dim: #888888;
+      --text-subtle: #555555;
+      --border-color: #222222;
+      --border-elevated: #333333;
+      --accent: #ffffff;
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-surface: rgba(255, 255, 255, 0.03);
+      --accent-glow: rgba(249, 115, 22, 0.4);
+      --accent-orange: #F97316;
+      --accent-amber: #FBBF24;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', 'Geist', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ============================================
+       CUSTOM CURSOR
+       ============================================ */
+    #cursor-dot,
+    #cursor-outline {
+      pointer-events: none;
+      position: fixed;
+      top: 0; left: 0;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      z-index: 99999;
+      transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    #cursor-dot {
+      width: 6px; height: 6px;
+      background-color: #ffca28;
+      box-shadow: 0 0 10px #ff8f00;
+    }
+
+    #cursor-outline {
+      width: 35px; height: 35px;
+      border: 2px solid #ffca28;
+      background: radial-gradient(circle, rgba(255, 143, 0, 0.3) 0%, rgba(255, 202, 40, 0) 70%);
+      box-shadow: 0 0 15px rgba(255, 143, 0, 0.2);
+      transition: all 0.15s ease-out;
+    }
+
+    .cursor-active #cursor-dot {
+      transform: translate(-50%, -50%) scale(0.5);
+      background-color: #ffffff;
+    }
+
+    .cursor-active #cursor-outline {
+      transform: translate(-50%, -50%) scale(1.8);
+      background-color: rgba(255, 143, 0, 0.15);
+      border-color: #ffca28;
+      box-shadow: 0 0 25px rgba(255, 143, 0, 0.4);
+    }
+
+    @media (pointer: fine) {
+      html, body { cursor: none; }
+      a, button, .hover-target, [role="button"] { cursor: none !important; }
+    }
+
+    /* ============================================
+       DESIGN SYSTEM NAVIGATION
+       ============================================ */
+    .ds-nav {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(5, 5, 5, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .ds-nav a {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .ds-nav a:hover { color: var(--text-main); }
+
+    /* ============================================
+       DS DOCUMENTATION CLASSES
+       ============================================ */
+    .ds-section-label {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .ds-row {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .ds-row-label {
+      min-width: 120px;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      font-family: 'Geist', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .ds-row-preview { flex: 1; }
+
+    .ds-row-spec {
+      font-size: 0.7rem;
+      color: #555;
+      font-family: 'Geist', monospace;
+      white-space: nowrap;
+    }
+
+    .ds-swatch {
+      width: 100%;
+      height: 80px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: flex-end;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .ds-swatch-label {
+      font-size: 0.65rem;
+      font-family: 'Geist', monospace;
+      opacity: 0.7;
+    }
+
+    /* ============================================
+       KEYFRAME ANIMATIONS
+       ============================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+
+    @keyframes fadeSlideIn {
+      0% { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0px); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-2deg); }
+      50% { transform: translateY(-10px) rotate(0deg); }
+    }
+
+    @keyframes float-reverse {
+      0%, 100% { transform: translateY(0) rotate(4deg) scale(0.9); }
+      50% { transform: translateY(-15px) rotate(2deg) scale(0.9); }
+    }
+
+    @keyframes flow-line {
+      to { stroke-dashoffset: -20; }
+    }
+
+    @keyframes marquee-rtl {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes marquee-ltr {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0); }
+    }
+
+    @keyframes rotatePlan {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    @keyframes orbit {
+      from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+      to { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+    }
+
+    @keyframes orbit-reverse {
+      from { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+      to { transform: rotate(-360deg) translateX(180px) rotate(360deg); }
+    }
+
+    @keyframes breathe {
+      0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3), 0 0 60px rgba(249, 115, 22, 0.1); }
+      50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.5), 0 0 100px rgba(249, 115, 22, 0.2); }
+    }
+
+    @keyframes text-reveal {
+      0% { clip-path: inset(0 100% 0 0); }
+      100% { clip-path: inset(0 0 0 0); }
+    }
+
+    @keyframes grain {
+      0%, 100% { transform: translate(0, 0); }
+      10% { transform: translate(-5%, -10%); }
+      30% { transform: translate(3%, -15%); }
+      50% { transform: translate(12%, 9%); }
+      70% { transform: translate(9%, 4%); }
+      90% { transform: translate(-1%, 7%); }
+    }
+
+    @keyframes opacity-anim {
+      80% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes move-top-left {
+      90% { opacity: .6; }
+      100% { top: calc(var(--dot-size) * -0.5); left: calc(var(--dot-size) * -0.5); opacity: 1; }
+    }
+
+    @keyframes move-top-right {
+      80% { opacity: .6; }
+      100% { top: calc(var(--dot-size) * -0.5); right: calc(var(--dot-size) * -0.5); opacity: 1; }
+    }
+
+    @keyframes move-bottom-right {
+      80% { opacity: .6; }
+      100% { bottom: calc(var(--dot-size) * -0.5); right: calc(var(--dot-size) * -0.5); opacity: 1; }
+    }
+
+    @keyframes move-bottom-left {
+      80% { opacity: .6; }
+      100% { bottom: calc(var(--dot-size) * -0.5); left: calc(var(--dot-size) * -0.5); opacity: 1; }
+    }
+
+    @keyframes draw-top { 100% { transform: rotate(0deg) scaleX(1); } }
+    @keyframes draw-bottom { 100% { transform: rotate(0deg) scaleX(1); } }
+    @keyframes draw-left { 100% { transform: rotate(0deg) scaleY(1); } }
+    @keyframes draw-right { 100% { transform: rotate(0deg) scaleY(1); } }
+
+    /* ============================================
+       ANIMATION CLASSES
+       ============================================ */
+    .animate-fade-up {
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-fade-slide {
+      animation: fadeSlideIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-flow { animation: flow-line 1s linear infinite; }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-100 { animation-delay: 100ms; }
+    .delay-200 { animation-delay: 200ms; }
+    .delay-300 { animation-delay: 300ms; }
+    .delay-400 { animation-delay: 400ms; }
+    .delay-500 { animation-delay: 500ms; }
+    .delay-600 { animation-delay: 600ms; }
+    .delay-700 { animation-delay: 700ms; }
+
+    .book-float-1 { animation: float 6s ease-in-out infinite; }
+    .book-float-2 { animation: float-reverse 7s ease-in-out infinite; animation-delay: 1s; }
+
+    /* ============================================
+       GRID BACKGROUND
+       ============================================ */
+    .linear-grid {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+    }
+
+    /* ============================================
+       GLASS PANELS
+       ============================================ */
+    .glass-panel {
+      background: rgba(17, 17, 17, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-color);
+    }
+
+    .linear-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .linear-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* ============================================
+       SHINE BUTTON
+       ============================================ */
+    .shine-button {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shine-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+      transition: 0.5s;
+    }
+
+    .shine-button:hover::after {
+      left: 100%;
+    }
+
+    /* ============================================
+       BTN-WRAPPER (Writer Platform)
+       ============================================ */
+    .btn-wrapper {
+      --dot-size: 8px;
+      --line-weight: 1px;
+      --line-distance: 0.8rem 1rem;
+      --animation-speed: 0.35s;
+      --dot-color: #fffa;
+      --line-color: #fffa;
+      --grid-color: rgba(255, 255, 255, 0.1);
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: auto;
+      height: auto;
+      padding: var(--line-distance);
+      background-color: rgba(0, 0, 0, 0);
+      user-select: none;
+      text-decoration: none;
+    }
+
+    .btn-wrapper::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border-radius: inherit;
+      pointer-events: none;
+      background-color: #0000;
+      background-image: repeating-linear-gradient(45deg, var(--grid-color) 0 1px, transparent 2px 5px);
+      opacity: 0;
+      z-index: -1;
+    }
+
+    .btn-wrapper:has(.btn:hover)::after {
+      animation: opacity-anim calc(var(--animation-speed) * 4) ease-in-out forwards;
+    }
+
+    .btn-wrapper .btn {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0.8rem 1.5rem;
+      background-color: #fff0;
+      border: 1px solid var(--grid-color);
+      color: rgba(255, 255, 255, 0.9);
+      font-family: "Geist", "Inter", sans-serif;
+      letter-spacing: -0.01em;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: capitalize;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform .2s ease-in-out, letter-spacing .2s ease-in-out, background-color .2s, color .2s;
+    }
+
+    .btn-wrapper .btn:hover {
+      background-color: #ffffff;
+      color: #000000;
+      transform: scale(1.02);
+      letter-spacing: .02em;
+    }
+
+    .btn-wrapper .btn:active { transform: scale(.98); }
+
+    .btn-wrapper .btn-svg {
+      margin-left: .5rem;
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.4);
+      transition: all .2s ease-in-out;
+    }
+
+    .btn-wrapper .btn:hover .btn-svg { color: #000000; }
+
+    .btn-wrapper .dot {
+      position: absolute;
+      width: var(--dot-size);
+      aspect-ratio: 1;
+      border-radius: 2px;
+      background-color: var(--dot-color);
+      transition: all .3s ease-in-out;
+      opacity: 0;
+    }
+
+    .btn-wrapper:has(.btn:hover) .dot.top.left {
+      top: 50%; left: 20%;
+      animation: move-top-left var(--animation-speed) ease-in-out forwards;
+    }
+
+    .btn-wrapper:has(.btn:hover) .dot.top.right {
+      top: 50%; right: 20%;
+      animation: move-top-right var(--animation-speed) ease-in-out forwards;
+      animation-delay: calc(var(--animation-speed)*.6);
+    }
+
+    .btn-wrapper:has(.btn:hover) .dot.bottom.right {
+      bottom: 50%; right: 20%;
+      animation: move-bottom-right var(--animation-speed) ease-in-out forwards;
+      animation-delay: calc(var(--animation-speed)*1.2);
+    }
+
+    .btn-wrapper:has(.btn:hover) .dot.bottom.left {
+      bottom: 50%; left: 20%;
+      animation: move-bottom-left var(--animation-speed) ease-in-out forwards;
+      animation-delay: calc(var(--animation-speed)*1.8);
+    }
+
+    .btn-wrapper .line {
+      position: absolute;
+      transition: all .3s ease-in-out;
+    }
+
+    .btn-wrapper .line.horizontal {
+      height: var(--line-weight); width: 100%;
+      background-image: repeating-linear-gradient(90deg, #0000 0 calc(var(--line-weight)*2), var(--line-color) calc(var(--line-weight)*2) calc(var(--line-weight)*4));
+    }
+
+    .btn-wrapper .line.vertical {
+      width: var(--line-weight); height: 100%;
+      background-image: repeating-linear-gradient(0deg, #0000 0 calc(var(--line-weight)*2), var(--line-color) calc(var(--line-weight)*2) calc(var(--line-weight)*4));
+    }
+
+    .btn-wrapper .line.top { top: calc(var(--line-weight)*-0.5); transform-origin: top left; transform: rotate(5deg) scaleX(0); }
+    .btn-wrapper .line.bottom { bottom: calc(var(--line-weight)*-0.5); transform-origin: bottom right; transform: rotate(5deg) scaleX(0); }
+    .btn-wrapper .line.left { left: calc(var(--line-weight)*-0.5); transform-origin: bottom left; transform: rotate(0deg) scaleY(0); }
+    .btn-wrapper .line.right { right: calc(var(--line-weight)*-0.5); transform-origin: top right; transform: rotate(5deg) scaleY(0); }
+
+    .btn-wrapper:has(.btn:hover) .line.top { animation: draw-top var(--animation-speed) ease-in-out forwards; animation-delay: calc(var(--animation-speed)*.8); }
+    .btn-wrapper:has(.btn:hover) .line.bottom { animation: draw-bottom var(--animation-speed) ease-in-out forwards; animation-delay: calc(var(--animation-speed)*2); }
+    .btn-wrapper:has(.btn:hover) .line.left { animation: draw-left var(--animation-speed) ease-in-out forwards; animation-delay: calc(var(--animation-speed)*2.4); }
+    .btn-wrapper:has(.btn:hover) .line.right { animation: draw-right var(--animation-speed) ease-in-out forwards; animation-delay: calc(var(--animation-speed)*1.4); }
+
+    /* ============================================
+       CUSTOM CHECKBOX
+       ============================================ */
+    .tech-checkbox {
+      appearance: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background-color: rgba(255, 255, 255, 0.03);
+      cursor: pointer;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .tech-checkbox:checked {
+      border-color: var(--accent);
+      background-color: var(--accent);
+    }
+
+    .tech-checkbox:checked::after {
+      content: '';
+      width: 0.5rem;
+      height: 0.5rem;
+      background-color: #000;
+      border-radius: 1px;
+    }
+
+    /* ============================================
+       NOISE TEXTURE OVERLAY
+       ============================================ */
+    .noise-overlay::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity: 0.15;
+      pointer-events: none;
+      animation: grain 8s steps(10) infinite;
+    }
+
+    /* ============================================
+       SCROLLBAR
+       ============================================ */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* ============================================
+       SCROLL REVEAL
+       ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal.delay-1 { transition-delay: 0.1s; }
+    .reveal.delay-2 { transition-delay: 0.2s; }
+    .reveal.delay-3 { transition-delay: 0.3s; }
+    .reveal.delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================
+       SECTION DIVIDER
+       ============================================ */
+    .section-glow {
+      position: relative;
+    }
+
+    .section-glow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
+    }
+
+    /* ============================================
+       TOOLTIP
+       ============================================ */
+    .tooltip-container {
+      position: relative;
+    }
+
+    .tooltip-container .tooltip-text {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: #1a1a1a;
+      border: 1px solid var(--border-color);
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .tooltip-container:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ============================================
+       MODAL
+       ============================================ */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 480px;
+      width: 90%;
+      transform: translateY(20px) scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-backdrop.active .modal-content {
+      transform: translateY(0) scale(1);
+    }
+  </style>
+</head>
+
+<body class="relative">
+
+  <!-- ========================================
+       CUSTOM CURSOR
+       ======================================== -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-outline"></div>
+
+  <!-- ========================================
+       FIXED BACKGROUND: GRID + GLOW ORBS
+       ======================================== -->
+  <div class="fixed inset-0 z-0 pointer-events-none">
+    <div class="absolute inset-0 linear-grid"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-orange-500/8 blur-[120px] rounded-full opacity-50" style="animation: pulse-glow 8s ease-in-out infinite;"></div>
+    <div class="absolute bottom-0 right-0 w-[600px] h-[400px] bg-purple-500/5 blur-[100px] rounded-full opacity-40" style="animation: pulse-glow 10s ease-in-out infinite; animation-delay: 3s;"></div>
+  </div>
+
+  <!-- ========================================
+       STICKY NAVIGATION
+       ======================================== -->
+  <nav class="ds-nav">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex items-center gap-6 overflow-x-auto no-scrollbar font-geist">
+      <span class="text-white text-sm font-medium font-jakarta whitespace-nowrap flex items-center gap-2">
+        <svg class="w-5 h-5 text-orange-500" viewBox="0 0 48 48" fill="currentColor">
+          <polygon points="24,4 44,16 44,32 24,44 4,32 4,16"></polygon>
+        </svg>
+        Design System
+      </span>
+      <span class="text-[#333] select-none">/</span>
+      <a href="#hero">Hero</a>
+      <a href="#typography">Tipografia</a>
+      <a href="#colors">Cores</a>
+      <a href="#components">Componentes</a>
+      <a href="#icons">Icones</a>
+      <a href="#animations">Animacoes</a>
+    </div>
+  </nav>
+
+  <!-- ================================================================
+       SECTION 1: HERO — DESIGN SYSTEM SHOWCASE
+       ================================================================ -->
+  <section id="hero" class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Animated orbiting particles -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] pointer-events-none">
+      <div class="absolute w-2 h-2 rounded-full bg-orange-400 shadow-[0_0_12px_rgba(249,115,22,0.8)]" style="animation: orbit 12s linear infinite;"></div>
+      <div class="absolute w-1.5 h-1.5 rounded-full bg-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.6)]" style="animation: orbit-reverse 18s linear infinite;"></div>
+      <div class="absolute w-1 h-1 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]" style="animation: orbit 25s linear infinite; animation-delay: -5s;"></div>
+    </div>
+
+    <!-- Top radial glow -->
+    <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full" style="background: radial-gradient(ellipse at center, rgba(249,115,22,0.12) 0%, transparent 70%); animation: pulse-glow 6s ease-in-out infinite;"></div>
+
+    <!-- Grain overlay -->
+    <div class="absolute inset-0 noise-overlay pointer-events-none opacity-30"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-32 lg:py-0">
+
+      <!-- LEFT: Text Content -->
+      <div class="flex flex-col items-start">
+
+        <!-- Status badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02] mb-8 opacity-0 animate-fade-up">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+          </span>
+          <span class="text-xs font-medium text-orange-400/90 tracking-tight font-geist">Design System v1.0</span>
+        </div>
+
+        <!-- Main headline -->
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight text-white mb-6 leading-[1.05] font-jakarta opacity-0 animate-fade-up delay-100">
+          Cada pixel conta
+          <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400" style="animation: shimmer 3s linear infinite; background-size: 200% 100%;">
+            uma historia.
+          </span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-lg md:text-xl text-[#888] font-jakarta font-medium leading-relaxed max-w-lg mb-10 opacity-0 animate-fade-up delay-200">
+          Sistema de design completo com tipografia, cores, componentes e animacoes — tudo documentado para construir experiencias incriveis.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 items-start opacity-0 animate-fade-up delay-300">
+          <!-- Primary CTA: Orange Pill -->
+          <div class="btn-wrapper">
+            <button class="btn font-geist" onclick="document.getElementById('typography').scrollIntoView({behavior:'smooth'})">
+              Explorar Sistema
+              <svg class="btn-svg ml-2" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+            <div class="dot top left"></div>
+            <div class="dot top right"></div>
+            <div class="dot bottom right"></div>
+            <div class="dot bottom left"></div>
+            <div class="line top horizontal"></div>
+            <div class="line bottom horizontal"></div>
+            <div class="line left vertical"></div>
+            <div class="line right vertical"></div>
+          </div>
+
+          <!-- Secondary: Shine Button -->
+          <a class="shine-button h-12 px-8 rounded-full border border-white/[0.08] bg-transparent text-white/80 text-[15px] font-medium hover:bg-white/[0.04] transition-colors flex items-center gap-2 cursor-pointer font-geist" href="#components">
+            Componentes
+            <i data-lucide="layers" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <!-- Stats row -->
+        <div class="flex gap-8 mt-12 opacity-0 animate-fade-up delay-400">
+          <div>
+            <div class="text-2xl font-medium text-white font-jakarta tracking-tight">48+</div>
+            <div class="text-xs text-[#555] font-geist mt-1">Componentes</div>
+          </div>
+          <div class="w-px bg-white/10"></div>
+          <div>
+            <div class="text-2xl font-medium text-white font-jakarta tracking-tight">12</div>
+            <div class="text-xs text-[#555] font-geist mt-1">Animacoes</div>
+          </div>
+          <div class="w-px bg-white/10"></div>
+          <div>
+            <div class="text-2xl font-medium text-white font-jakarta tracking-tight">AA+</div>
+            <div class="text-xs text-[#555] font-geist mt-1">Contraste</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Showcase Card Stack -->
+      <div class="relative hidden lg:block opacity-0 animate-fade-up delay-200" style="height: 520px;">
+        <!-- Outer glow -->
+        <div class="absolute inset-0 bg-gradient-to-tr from-orange-500/15 to-transparent blur-[60px] rounded-full opacity-60"></div>
+
+        <!-- Back card (floating) -->
+        <div class="absolute top-8 right-0 w-72 book-float-2 opacity-50">
+          <div class="bg-[#131418] rounded-2xl border border-white/[0.06] p-5 shadow-2xl shadow-black/50 overflow-hidden relative">
+            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-2 mb-3">
+                <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                  <i data-lucide="palette" class="w-4 h-4 text-purple-400"></i>
+                </div>
+                <span class="text-xs font-medium text-white/60 font-geist">Color Tokens</span>
+              </div>
+              <div class="flex gap-2">
+                <div class="w-8 h-8 rounded-lg bg-orange-500"></div>
+                <div class="w-8 h-8 rounded-lg bg-amber-400"></div>
+                <div class="w-8 h-8 rounded-lg bg-purple-500"></div>
+                <div class="w-8 h-8 rounded-lg bg-emerald-500"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle card (floating) -->
+        <div class="absolute top-32 left-0 w-64 book-float-1 opacity-70">
+          <div class="bg-[#131418] rounded-2xl border border-white/[0.08] p-5 shadow-2xl shadow-black/50 overflow-hidden relative">
+            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            <div class="relative z-10">
+              <div class="text-[11px] text-white/40 uppercase tracking-wider font-geist mb-2">Tipografia</div>
+              <div class="text-2xl font-jakarta font-medium text-white tracking-tight mb-1">Aa</div>
+              <div class="text-xs text-white/40 font-geist">Plus Jakarta Sans</div>
+              <div class="flex gap-1 mt-3">
+                <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">300</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">400</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-white/10 text-white/80 font-geist">500</span>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">700</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main front card with chart -->
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-80 z-20" style="animation: breathe 4s ease-in-out infinite;">
+          <div class="bg-[#131418] rounded-2xl border border-white/[0.08] p-6 shadow-2xl shadow-black/50 overflow-hidden relative">
+            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            <div class="relative z-10">
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <div class="text-[11px] text-white/40 uppercase tracking-wider font-geist">Performance</div>
+                  <div class="text-xl font-medium text-white font-jakarta tracking-tight mt-1">Design Score</div>
+                </div>
+                <div class="px-2 py-1 bg-orange-500/10 border border-orange-500/20 rounded text-[11px] font-medium text-orange-400 flex items-center gap-1.5">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                  100
+                </div>
+              </div>
+
+              <!-- SVG Chart -->
+              <div class="relative h-24 mb-4">
+                <svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 200 100">
+                  <defs>
+                    <linearGradient id="heroGlowGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#F97316" stop-opacity="0.2"/>
+                      <stop offset="100%" stop-color="#F97316" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0 80 C 40 80, 50 60, 80 50 C 110 40, 130 20, 160 15 C 180 10, 190 5, 200 0 V 100 H 0 Z" fill="url(#heroGlowGrad)" stroke="none"/>
+                  <path d="M0 80 C 40 80, 50 60, 80 50 C 110 40, 130 20, 160 15 C 180 10, 190 5, 200 0" fill="none" stroke="#F97316" stroke-width="2" stroke-linecap="round" class="drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]"/>
+                </svg>
+                <div class="absolute top-0 right-0 w-3 h-3 bg-[#131418] border-2 border-orange-500 rounded-full shadow-[0_0_15px_rgba(249,115,22,1)]"></div>
+              </div>
+
+              <!-- Metric rows -->
+              <div class="space-y-2">
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.04]">
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+                    <span class="text-[12px] text-white/80 font-geist">Acessibilidade</span>
+                  </div>
+                  <span class="text-[12px] font-medium text-white font-geist">AAA</span>
+                </div>
+                <div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.04]">
+                  <div class="flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.4)]"></div>
+                    <span class="text-[12px] text-white/80 font-geist">Consistencia</span>
+                  </div>
+                  <span class="text-[12px] font-medium text-white font-geist">100%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom floating badge card -->
+        <div class="absolute bottom-8 right-12 book-float-1 z-10">
+          <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#131418]/90 border border-white/[0.08] backdrop-blur-xl shadow-xl">
+            <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+            </div>
+            <div>
+              <div class="text-[12px] font-medium text-white font-geist">Sistema Validado</div>
+              <div class="text-[10px] text-white/40 font-geist">WCAG 2.1 Compliant</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0 animate-fade-up delay-700">
+      <span class="text-[10px] text-white/30 uppercase tracking-widest font-geist">Scroll</span>
+      <div class="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1">
+        <div class="w-1 h-2 rounded-full bg-white/40 animate-bounce"></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SECTION 2: TYPOGRAPHY
+       ================================================================ -->
+  <section id="typography" class="relative py-32 section-glow">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="reveal">
+        <span class="ds-section-label font-geist">02 — Tipografia</span>
+        <h2 class="text-3xl md:text-5xl font-medium text-white tracking-tight font-jakarta mb-4">Sistema Tipografico</h2>
+        <p class="text-lg text-[#888] font-geist max-w-2xl mb-16">Hierarquia clara com Plus Jakarta Sans para titulos e Geist para corpo e UI.</p>
+      </div>
+
+      <!-- Font Families -->
+      <div class="reveal delay-1 mb-16">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-6">Font Families</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform">
+            <div class="text-4xl font-jakarta font-medium text-white tracking-tight mb-3">Aa</div>
+            <div class="text-sm text-white font-geist font-medium mb-1">Plus Jakarta Sans</div>
+            <div class="text-xs text-[#555] font-geist">Primary — Headings & Display</div>
+            <div class="text-xs text-[#555] font-geist mt-1">Weights: 300, 400, 500, 600, 700, 800</div>
+            <div class="flex gap-1 mt-3 flex-wrap">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">Light</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">Regular</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 font-geist">Medium</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">SemiBold</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">Bold</span>
+            </div>
+          </div>
+          <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform">
+            <div class="text-4xl font-geist font-medium text-white tracking-tight mb-3">Aa</div>
+            <div class="text-sm text-white font-geist font-medium mb-1">Geist</div>
+            <div class="text-xs text-[#555] font-geist">Secondary — Body & UI</div>
+            <div class="text-xs text-[#555] font-geist mt-1">Weights: 300, 400, 500, 600, 700</div>
+            <div class="flex gap-1 mt-3 flex-wrap">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">Light</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">Regular</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 font-geist">Medium</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">Bold</span>
+            </div>
+          </div>
+          <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform">
+            <div class="text-4xl font-inter font-medium text-white tracking-tight mb-3">Aa</div>
+            <div class="text-sm text-white font-geist font-medium mb-1">Inter</div>
+            <div class="text-xs text-[#555] font-geist">Fallback — System UI</div>
+            <div class="text-xs text-[#555] font-geist mt-1">Weights: 300, 400, 500, 600, 700</div>
+            <div class="flex gap-1 mt-3 flex-wrap">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">Google Fonts CDN</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-white/5 text-white/50 font-geist">swap</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Type Scale -->
+      <div class="reveal delay-2">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Type Scale</h3>
+
+        <div class="space-y-0">
+          <!-- H1 -->
+          <div class="ds-row group">
+            <div class="ds-row-label">H1</div>
+            <div class="ds-row-preview">
+              <span class="text-5xl lg:text-7xl font-jakarta font-medium text-white tracking-tight leading-[1.05]">Heading One</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Jakarta / 500 / 72px / 1.05 / -0.02em</div>
+          </div>
+
+          <!-- H2 -->
+          <div class="ds-row group">
+            <div class="ds-row-label">H2</div>
+            <div class="ds-row-preview">
+              <span class="text-3xl md:text-5xl font-jakarta font-medium text-white tracking-tight">Heading Two</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Jakarta / 500 / 48px / 1.1 / -0.02em</div>
+          </div>
+
+          <!-- H3 -->
+          <div class="ds-row group">
+            <div class="ds-row-label">H3</div>
+            <div class="ds-row-preview">
+              <span class="text-2xl font-jakarta font-medium text-white tracking-tight">Heading Three</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Jakarta / 500 / 24px / 1.2 / tight</div>
+          </div>
+
+          <!-- H4 -->
+          <div class="ds-row group">
+            <div class="ds-row-label">H4</div>
+            <div class="ds-row-preview">
+              <span class="text-xl font-jakarta font-medium text-white tracking-tight">Heading Four</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Jakarta / 500 / 20px / 1.3 / tight</div>
+          </div>
+
+          <!-- H5 -->
+          <div class="ds-row group">
+            <div class="ds-row-label">H5</div>
+            <div class="ds-row-preview">
+              <span class="text-lg font-jakarta font-medium text-white">Heading Five</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Jakarta / 500 / 18px / 1.4 / normal</div>
+          </div>
+
+          <!-- H6 -->
+          <div class="ds-row group">
+            <div class="ds-row-label">H6</div>
+            <div class="ds-row-preview">
+              <span class="text-base font-jakarta font-semibold text-white uppercase tracking-wider">Heading Six</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Jakarta / 600 / 16px / 1.5 / 0.05em / uppercase</div>
+          </div>
+
+          <!-- Body LG -->
+          <div class="ds-row group">
+            <div class="ds-row-label">Body LG</div>
+            <div class="ds-row-preview">
+              <span class="text-lg text-white/80 font-geist leading-relaxed">Body text large for paragraphs and long-form content with comfortable reading rhythm.</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Geist / 400 / 18px / 1.625 / normal</div>
+          </div>
+
+          <!-- Body -->
+          <div class="ds-row group">
+            <div class="ds-row-label">Body</div>
+            <div class="ds-row-preview">
+              <span class="text-[15px] text-white/80 font-geist font-medium">Standard body text for UI, buttons, and general content.</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Geist / 500 / 15px / 1.5 / normal</div>
+          </div>
+
+          <!-- Body SM -->
+          <div class="ds-row group">
+            <div class="ds-row-label">Body SM</div>
+            <div class="ds-row-preview">
+              <span class="text-sm text-white/60 font-geist">Small body text for secondary information and descriptions.</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Geist / 400 / 14px / 1.5 / normal</div>
+          </div>
+
+          <!-- Caption -->
+          <div class="ds-row group">
+            <div class="ds-row-label">Caption</div>
+            <div class="ds-row-preview">
+              <span class="text-xs text-white/50 font-geist">Caption text for metadata, timestamps, and auxiliary information.</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Geist / 400 / 12px / 1.4 / normal</div>
+          </div>
+
+          <!-- Label -->
+          <div class="ds-row group">
+            <div class="ds-row-label">Label</div>
+            <div class="ds-row-preview">
+              <span class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist">LABEL / OVERLINE</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Geist / 600 / 12px / 1.4 / 0.1em / uppercase</div>
+          </div>
+
+          <!-- Helper -->
+          <div class="ds-row group">
+            <div class="ds-row-label">Helper</div>
+            <div class="ds-row-preview">
+              <span class="text-[11px] text-white/30 font-geist">Helper text for form fields, tooltips, and micro-copy.</span>
+            </div>
+            <div class="ds-row-spec hidden md:block">Geist / 400 / 11px / 1.3 / normal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SECTION 3: COLOR SYSTEM
+       ================================================================ -->
+  <section id="colors" class="relative py-32 section-glow" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.5) 50%, transparent 100%);">
+
+    <!-- Ambient glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-orange-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+
+      <div class="reveal">
+        <span class="ds-section-label font-geist">03 — Cores</span>
+        <h2 class="text-3xl md:text-5xl font-medium text-white tracking-tight font-jakarta mb-4">Sistema de Cores</h2>
+        <p class="text-lg text-[#888] font-geist max-w-2xl mb-16">Paleta escura com acentos quentes em laranja/ambar e feedback semantico.</p>
+      </div>
+
+      <!-- Backgrounds -->
+      <div class="reveal delay-1 mb-12">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-6">Backgrounds</h3>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div>
+            <div class="ds-swatch" style="background:#050505;"><span class="ds-swatch-label text-white/50">#050505</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Page</div>
+            <div class="text-[10px] text-[#555] font-geist">rgb(5,5,5) · hsl(0,0%,2%)</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#0a0a0a;"><span class="ds-swatch-label text-white/50">#0a0a0a</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Elevated</div>
+            <div class="text-[10px] text-[#555] font-geist">rgb(10,10,10) · hsl(0,0%,4%)</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#0B0C0E;"><span class="ds-swatch-label text-white/50">#0B0C0E</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Alt Dark</div>
+            <div class="text-[10px] text-[#555] font-geist">rgb(11,12,14)</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#111111;"><span class="ds-swatch-label text-white/50">#111111</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Card</div>
+            <div class="text-[10px] text-[#555] font-geist">rgb(17,17,17) · hsl(0,0%,7%)</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#131418;"><span class="ds-swatch-label text-white/50">#131418</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Card Elevated</div>
+            <div class="text-[10px] text-[#555] font-geist">rgb(19,20,24)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Colors -->
+      <div class="reveal delay-2 mb-12">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-6">Texto</h3>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div>
+            <div class="ds-swatch" style="background:#050505; border-color:#333;"><span class="text-white font-geist text-sm font-medium">Aa</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Main — #FFFFFF</div>
+            <div class="text-[10px] text-[#555] font-geist">Titulos e texto primario</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#050505; border-color:#333;"><span class="text-[#ddd] font-geist text-sm font-medium">Aa</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Emphasis — #DDDDDD</div>
+            <div class="text-[10px] text-[#555] font-geist">Texto enfatizado</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#050505; border-color:#333;"><span class="text-[#888] font-geist text-sm font-medium">Aa</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Dim — #888888</div>
+            <div class="text-[10px] text-[#555] font-geist">Texto secundario</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#050505; border-color:#333;"><span class="text-[#555] font-geist text-sm font-medium">Aa</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Subtle — #555555</div>
+            <div class="text-[10px] text-[#555] font-geist">Placeholders e helpers</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#050505; border-color:#333;"><span class="text-orange-400 font-geist text-sm font-medium">Aa</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Accent — #FB923C</div>
+            <div class="text-[10px] text-[#555] font-geist">Links e destaques</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accent & Semantic -->
+      <div class="reveal delay-3 mb-12">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-6">Accent & Semantico</h3>
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+          <div>
+            <div class="ds-swatch" style="background:#F97316;"><span class="ds-swatch-label text-black/60">#F97316</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Primary</div>
+            <div class="text-[10px] text-[#555] font-geist">Orange-500 · hsl(25,95%,53%)</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#FB923C;"><span class="ds-swatch-label text-black/60">#FB923C</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Secondary</div>
+            <div class="text-[10px] text-[#555] font-geist">Orange-400</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#FBBF24;"><span class="ds-swatch-label text-black/60">#FBBF24</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Accent</div>
+            <div class="text-[10px] text-[#555] font-geist">Amber-400</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#10B981;"><span class="ds-swatch-label text-black/60">#10B981</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Success</div>
+            <div class="text-[10px] text-[#555] font-geist">Emerald-500</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#A855F7;"><span class="ds-swatch-label text-white/60">#A855F7</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Decorative</div>
+            <div class="text-[10px] text-[#555] font-geist">Purple-500</div>
+          </div>
+          <div>
+            <div class="ds-swatch" style="background:#EF4444;"><span class="ds-swatch-label text-white/60">#EF4444</span></div>
+            <div class="text-[11px] text-white/60 font-geist mt-2">Error</div>
+            <div class="text-[10px] text-[#555] font-geist">Red-500</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gradients -->
+      <div class="reveal delay-4 mb-12">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-6">Gradientes</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="linear-card rounded-2xl p-1 overflow-hidden">
+            <div class="h-24 rounded-xl" style="background: linear-gradient(to right, #FBBF24, #FB923C, #F59E0B);"></div>
+            <div class="p-4">
+              <div class="text-sm text-white font-geist font-medium">Hero Gradient</div>
+              <div class="text-[10px] text-[#555] font-geist mt-1">from-orange-200 via-orange-400 to-amber-500</div>
+              <div class="text-[10px] text-[#555] font-geist">Uso: Texto destaque, headline gradient</div>
+            </div>
+          </div>
+          <div class="linear-card rounded-2xl p-1 overflow-hidden">
+            <div class="h-24 rounded-xl" style="background: linear-gradient(135deg, rgba(249,115,22,0.2), transparent);"></div>
+            <div class="p-4">
+              <div class="text-sm text-white font-geist font-medium">Ambient Glow</div>
+              <div class="text-[10px] text-[#555] font-geist mt-1">from-orange-500/20 to-transparent</div>
+              <div class="text-[10px] text-[#555] font-geist">Uso: Background glow orbs</div>
+            </div>
+          </div>
+          <div class="linear-card rounded-2xl p-1 overflow-hidden">
+            <div class="h-24 rounded-xl relative overflow-hidden">
+              <div class="absolute inset-0 bg-[#222]"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[60px] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-80" style="animation: rotatePlan 4s linear infinite;"></div>
+            </div>
+            <div class="p-4">
+              <div class="text-sm text-white font-geist font-medium">Rotating Border</div>
+              <div class="text-[10px] text-[#555] font-geist mt-1">via-purple-600 · rotatePlan 6s</div>
+              <div class="text-[10px] text-[#555] font-geist">Uso: Cards destaque (pricing)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Borders & Opacity -->
+      <div class="reveal">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-6">Bordas & Opacidade</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="p-4 rounded-xl border border-white/[0.04] bg-white/[0.01]">
+            <div class="text-[11px] text-white/40 font-geist mb-1">white/4%</div>
+            <div class="text-xs text-[#555] font-geist">Dividers sutis</div>
+          </div>
+          <div class="p-4 rounded-xl border border-white/[0.08] bg-white/[0.02]">
+            <div class="text-[11px] text-white/40 font-geist mb-1">white/8%</div>
+            <div class="text-xs text-[#555] font-geist">Bordas padrão</div>
+          </div>
+          <div class="p-4 rounded-xl border border-white/[0.15] bg-white/[0.03]">
+            <div class="text-[11px] text-white/40 font-geist mb-1">white/15%</div>
+            <div class="text-xs text-[#555] font-geist">Bordas hover</div>
+          </div>
+          <div class="p-4 rounded-xl border border-[#444] bg-white/[0.04]">
+            <div class="text-[11px] text-white/40 font-geist mb-1">#444444</div>
+            <div class="text-xs text-[#555] font-geist">Bordas interativas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SECTION 4: UI COMPONENTS
+       ================================================================ -->
+  <section id="components" class="relative py-32 section-glow">
+    <div class="max-w-7xl mx-auto px-6">
+
+      <div class="reveal">
+        <span class="ds-section-label font-geist">04 — Componentes UI</span>
+        <h2 class="text-3xl md:text-5xl font-medium text-white tracking-tight font-jakarta mb-4">Componentes</h2>
+        <p class="text-lg text-[#888] font-geist max-w-2xl mb-16">Biblioteca completa de componentes com estados, animacoes e variacoes.</p>
+      </div>
+
+      <!-- BUTTONS -->
+      <div class="reveal delay-1 mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Buttons</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+          <!-- Left: Button showcase -->
+          <div class="space-y-8">
+            <!-- Primary CTA Pill -->
+            <div>
+              <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Primary — Orange Pill</div>
+              <button type="button" class="inline-flex text-[12px] transition-all hover:brightness-110 z-10 font-light text-white tracking-tight font-geist h-9 rounded-full px-6 relative items-center justify-center">
+                <span class="absolute inset-0 rounded-full pointer-events-none bg-gradient-to-r from-orange-400/20 via-amber-300/30 to-orange-400/20 shadow-[0_0_22px_rgba(248,181,129,0.55)] ring-1 ring-amber-300/60"></span>
+                <span class="absolute inset-[3px] rounded-full pointer-events-none bg-gradient-to-b from-orange-400 via-orange-500 to-amber-300 shadow-[0_4px_12px_rgba(0,0,0,0.45)]"></span>
+                <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[70%] h-4 rounded-full blur-xl pointer-events-none bg-amber-300/35"></span>
+                <span class="font-medium font-geist z-10 relative">Call to Action</span>
+              </button>
+            </div>
+
+            <!-- Shine Button Light -->
+            <div>
+              <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Shine — Light</div>
+              <a class="shine-button h-12 px-8 rounded-full bg-[#EBEBEB] text-[#0B0C0E] text-[15px] font-medium hover:bg-white transition-colors shadow-[0_0_20px_rgba(255,255,255,0.15)] inline-flex items-center cursor-pointer font-geist">
+                Shine Light
+              </a>
+            </div>
+
+            <!-- Shine Button Ghost -->
+            <div>
+              <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Shine — Ghost</div>
+              <a class="shine-button h-12 px-8 rounded-full border border-white/[0.08] bg-transparent text-white/80 text-[15px] font-medium hover:bg-white/[0.04] transition-colors inline-flex items-center gap-2 cursor-pointer font-geist">
+                Ghost Button
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+              </a>
+            </div>
+
+            <!-- Grid Button (btn-wrapper) -->
+            <div>
+              <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Grid — Animated Dots</div>
+              <div class="btn-wrapper">
+                <button class="btn font-geist">
+                  Hover Me
+                  <svg class="btn-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+                <div class="dot top left"></div>
+                <div class="dot top right"></div>
+                <div class="dot bottom right"></div>
+                <div class="dot bottom left"></div>
+                <div class="line top horizontal"></div>
+                <div class="line bottom horizontal"></div>
+                <div class="line left vertical"></div>
+                <div class="line right vertical"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: More buttons -->
+          <div class="space-y-8">
+            <!-- Outline -->
+            <div>
+              <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Outline</div>
+              <button class="hover:bg-[#111111] hover:border-[#555555] transition-all text-sm font-medium text-white bg-transparent border-[#333333] border rounded-lg py-3 px-4 font-geist">
+                Start Creating
+              </button>
+            </div>
+
+            <!-- Solid White -->
+            <div>
+              <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Solid White</div>
+              <button class="hover:bg-gray-200 transition-colors text-sm font-medium text-black bg-white rounded-lg py-3 px-4 shadow-[0_0_20px_rgba(255,255,255,0.2)] font-geist">
+                Get Full Access
+              </button>
+            </div>
+
+            <!-- Dark Button -->
+            <div>
+              <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Dark</div>
+              <button class="hover:bg-[#222222] transition-colors text-sm font-medium text-white bg-[#111111] border-[#333333] border rounded-lg py-3 px-4 font-geist">
+                Contact for Teams
+              </button>
+            </div>
+
+            <!-- Small Orange -->
+            <div>
+              <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Compact — Orange</div>
+              <button class="bg-orange-600 text-[11px] font-medium text-white px-3 py-1.5 rounded hover:bg-orange-700 transition-colors shadow-lg shadow-orange-900/20 font-geist">
+                Publish
+              </button>
+            </div>
+
+            <!-- Icon Button -->
+            <div>
+              <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Icon Button</div>
+              <div class="flex gap-3">
+                <button class="w-10 h-10 rounded-full bg-white/[0.05] border border-white/[0.06] flex items-center justify-center hover:bg-white/[0.1] hover:border-white/[0.2] transition-colors text-white">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                </button>
+                <button class="w-10 h-10 rounded-full bg-white/[0.05] border border-white/[0.06] flex items-center justify-center hover:bg-white/[0.1] hover:border-white/[0.2] transition-colors text-white">
+                  <i data-lucide="search" class="w-4 h-4"></i>
+                </button>
+                <button class="w-10 h-10 rounded-full bg-white/[0.05] border border-white/[0.06] flex items-center justify-center hover:bg-white/[0.1] hover:border-white/[0.2] transition-colors text-white">
+                  <i data-lucide="settings" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INPUTS -->
+      <div class="reveal mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Inputs</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Search Input -->
+          <div>
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Search</div>
+            <div class="relative">
+              <i data-lucide="search" class="w-4 h-4 text-white/30 absolute left-3 top-1/2 -translate-y-1/2"></i>
+              <input type="text" placeholder="Search components..." class="w-full bg-white/[0.03] border border-transparent focus:border-white/[0.08] hover:bg-white/[0.05] rounded-lg py-2.5 pl-10 pr-4 text-sm text-white placeholder-white/20 focus:outline-none transition-all font-geist">
+            </div>
+          </div>
+
+          <!-- Regular Input -->
+          <div>
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Text Input</div>
+            <input type="text" placeholder="Enter your email..." class="w-full bg-white/[0.03] border border-[#222] focus:border-white/[0.15] rounded-lg py-2.5 px-4 text-sm text-white placeholder-white/20 focus:outline-none transition-all font-geist">
+          </div>
+
+          <!-- Checkbox -->
+          <div>
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Checkbox</div>
+            <div class="space-y-3">
+              <label class="flex items-center gap-4 p-4 border border-[#222] rounded-xl cursor-pointer hover:border-[#444] hover:bg-[#111] transition-all group">
+                <input type="checkbox" class="tech-checkbox" checked>
+                <span class="text-sm font-medium text-[#888] group-hover:text-white transition-colors font-geist">Option checked</span>
+              </label>
+              <label class="flex items-center gap-4 p-4 border border-[#222] rounded-xl cursor-pointer hover:border-[#444] hover:bg-[#111] transition-all group">
+                <input type="checkbox" class="tech-checkbox">
+                <span class="text-sm font-medium text-[#888] group-hover:text-white transition-colors font-geist">Option unchecked</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Toggle -->
+          <div>
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Toggle Switch</div>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-5 bg-white rounded-full relative cursor-pointer" onclick="this.classList.toggle('bg-white');this.classList.toggle('bg-[#222]');this.querySelector('div').classList.toggle('right-1');this.querySelector('div').classList.toggle('left-1');this.querySelector('div').classList.toggle('bg-black');this.querySelector('div').classList.toggle('bg-[#555]');">
+                  <div class="absolute right-1 top-1 w-3 h-3 bg-black rounded-full transition-all"></div>
+                </div>
+                <span class="text-sm text-[#888] font-geist">Ativado</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="cursor-pointer bg-[#222] w-10 h-5 rounded-full relative">
+                  <div class="absolute left-1 top-1 w-3 h-3 bg-[#555] rounded-full"></div>
+                </div>
+                <span class="text-sm text-[#888] font-geist">Desativado</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARDS -->
+      <div class="reveal mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Cards</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Glass Card -->
+          <div class="glass-panel rounded-2xl p-6 hover:border-[#444] transition-colors group">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center group-hover:bg-orange-500/20 transition-colors">
+                <i data-lucide="zap" class="w-5 h-5 text-orange-400"></i>
+              </div>
+              <h4 class="text-lg font-jakarta font-medium text-white tracking-tight">Glass Panel</h4>
+            </div>
+            <p class="text-sm text-[#888] font-geist leading-relaxed">Background com blur, bordas sutis e efeito glass morphism.</p>
+          </div>
+
+          <!-- Linear Card -->
+          <div class="linear-card rounded-2xl p-6 group">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center group-hover:bg-white/[0.1] transition-colors">
+                <i data-lucide="layout-template" class="w-5 h-5 text-white/60"></i>
+              </div>
+              <h4 class="text-lg font-jakarta font-medium text-white tracking-tight">Linear Card</h4>
+            </div>
+            <p class="text-sm text-[#888] font-geist leading-relaxed">Card minimalista com borda sutil e hover state.</p>
+          </div>
+
+          <!-- Noise Card -->
+          <div class="bg-[#131418] rounded-2xl border border-white/[0.08] p-6 relative overflow-hidden group hover:border-white/[0.15] transition-colors">
+            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            <div class="relative z-10">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center group-hover:bg-purple-500/20 transition-colors">
+                  <i data-lucide="sparkles" class="w-5 h-5 text-purple-400"></i>
+                </div>
+                <h4 class="text-lg font-jakarta font-medium text-white tracking-tight">Noise Texture</h4>
+              </div>
+              <p class="text-sm text-[#888] font-geist leading-relaxed">Card elevado com textura noise e profundidade visual.</p>
+            </div>
+          </div>
+
+          <!-- Animated Border Card (Pricing style) -->
+          <div class="relative group rounded-2xl p-[1px] overflow-hidden shadow-[0_0_40px_rgba(147,51,234,0.1)] md:col-span-2">
+            <div class="absolute inset-0 z-0">
+              <div class="absolute inset-0 bg-[#222]"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[15rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-80" style="animation: rotatePlan 6s linear infinite;"></div>
+            </div>
+            <div class="relative z-10 rounded-[15px] p-6" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.12) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.12) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.05) inset">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center border border-white/20">
+                  <i data-lucide="sparkles" class="w-5 h-5 text-purple-400"></i>
+                </div>
+                <div>
+                  <h4 class="text-lg font-jakarta font-medium text-white tracking-tight">Featured Card</h4>
+                  <span class="text-[10px] uppercase font-semibold text-white tracking-widest bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full px-2 py-0.5 font-geist">Destaque</span>
+                </div>
+              </div>
+              <p class="text-sm text-[#888] font-geist leading-relaxed">Card com borda animada rotacional e gradiente interno. Perfeito para planos pricing ou destaques.</p>
+            </div>
+          </div>
+
+          <!-- Stats Card -->
+          <div class="glass-panel rounded-2xl p-8">
+            <h2 class="text-3xl tracking-tight text-white mb-2 font-jakarta font-medium">2.5M</h2>
+            <p class="text-sm text-[#888] font-geist">Chapters published.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BADGES -->
+      <div class="reveal mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Badges</h3>
+        <div class="flex flex-wrap gap-4 items-center">
+          <!-- Ping badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02]">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+            </span>
+            <span class="text-xs font-medium text-orange-400/90 tracking-tight font-geist">Live Status</span>
+          </div>
+
+          <!-- Dark pill with pulse -->
+          <div class="inline-flex gap-2 uppercase text-xs font-medium text-[#888] tracking-widest font-geist bg-[#111] border-[#222] border rounded-full py-1.5 px-3 items-center">
+            Integration Active
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+          </div>
+
+          <!-- Gradient badge -->
+          <span class="text-[10px] uppercase font-semibold text-white tracking-widest bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full py-1 px-3 shadow-lg font-geist">Popular</span>
+
+          <!-- Score badge -->
+          <div class="px-2 py-1 bg-orange-500/10 border border-orange-500/20 rounded text-[11px] font-medium text-orange-400 flex items-center gap-1.5 font-geist">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            100
+          </div>
+
+          <!-- Beta badge -->
+          <div class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full border border-orange-500/20 bg-orange-500/10">
+            <span class="text-[11px] font-medium text-orange-400 font-geist">Beta</span>
+          </div>
+
+          <!-- Light badge -->
+          <span class="text-[11px] uppercase font-semibold text-amber-600 tracking-wider font-geist bg-slate-200 rounded-md py-1 px-2">Hit</span>
+        </div>
+      </div>
+
+      <!-- NAVBAR -->
+      <div class="reveal mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Navbar</h3>
+        <div class="rounded-2xl border border-[#222] overflow-hidden">
+          <nav class="bg-[#0B0C0E]/80 backdrop-blur-xl border-b border-white/[0.06]">
+            <div class="flex h-14 max-w-7xl mx-auto px-6 items-center justify-between">
+              <div class="flex gap-2 text-lg text-white tracking-tight items-center font-jakarta font-medium">
+                <svg class="w-5 h-5 text-orange-500" viewBox="0 0 48 48" fill="currentColor">
+                  <polygon points="24,4 44,16 44,32 24,44 4,32 4,16"></polygon>
+                </svg>
+                Brand
+              </div>
+              <div class="hidden md:flex gap-8 text-sm text-[#888] items-center">
+                <a href="#" class="hover:text-white transition-colors font-geist">Features</a>
+                <a href="#" class="hover:text-white transition-colors font-geist">Pricing</a>
+                <a href="#" class="hover:text-white transition-colors font-geist">About</a>
+              </div>
+              <a class="shine-button h-9 px-5 rounded-full bg-[#EBEBEB] text-[#0B0C0E] text-[13px] font-medium hover:bg-white transition-colors inline-flex items-center cursor-pointer font-geist">
+                Get Started
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <!-- DROPDOWN / MENU -->
+      <div class="reveal mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Dropdown Menu</h3>
+        <div class="inline-block">
+          <div class="bg-[#0E0F11] border border-white/[0.08] rounded-lg p-1 shadow-xl shadow-black/50 w-64">
+            <button class="w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/[0.05] transition-colors text-left">
+              <i data-lucide="home" class="w-4 h-4 text-white/40"></i>
+              <span class="text-[13px] text-white/80 font-geist">Dashboard</span>
+            </button>
+            <button class="w-full flex items-center gap-3 px-3 py-2 rounded-md bg-white/[0.05] transition-colors text-left">
+              <i data-lucide="layout-template" class="w-4 h-4 text-orange-400"></i>
+              <span class="text-[13px] text-white font-geist">Templates</span>
+            </button>
+            <button class="w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/[0.05] transition-colors text-left">
+              <i data-lucide="book" class="w-4 h-4 text-white/40"></i>
+              <span class="text-[13px] text-white/80 font-geist">Documentation</span>
+            </button>
+            <div class="h-px bg-white/[0.06] my-1"></div>
+            <button class="w-full flex items-center gap-3 px-3 py-2 rounded-md hover:bg-white/[0.05] transition-colors text-left">
+              <i data-lucide="settings" class="w-4 h-4 text-white/40"></i>
+              <span class="text-[13px] text-white/80 font-geist">Settings</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOLTIPS -->
+      <div class="reveal mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Tooltips</h3>
+        <div class="flex gap-6 items-center">
+          <div class="tooltip-container">
+            <button class="w-10 h-10 rounded-full bg-white/[0.05] border border-white/[0.06] flex items-center justify-center hover:bg-white/[0.1] hover:border-white/[0.2] transition-colors text-white">
+              <i data-lucide="heart" class="w-4 h-4"></i>
+            </button>
+            <span class="tooltip-text font-geist">Favoritar</span>
+          </div>
+          <div class="tooltip-container">
+            <button class="w-10 h-10 rounded-full bg-white/[0.05] border border-white/[0.06] flex items-center justify-center hover:bg-white/[0.1] hover:border-white/[0.2] transition-colors text-white">
+              <i data-lucide="share-2" class="w-4 h-4"></i>
+            </button>
+            <span class="tooltip-text font-geist">Compartilhar</span>
+          </div>
+          <div class="tooltip-container">
+            <button class="w-10 h-10 rounded-full bg-white/[0.05] border border-white/[0.06] flex items-center justify-center hover:bg-white/[0.1] hover:border-white/[0.2] transition-colors text-white">
+              <i data-lucide="download" class="w-4 h-4"></i>
+            </button>
+            <span class="tooltip-text font-geist">Download</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL -->
+      <div class="reveal mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Modal</h3>
+        <button onclick="document.getElementById('demo-modal').classList.add('active')" class="hover:bg-[#111] hover:border-[#555] transition-all text-sm font-medium text-white bg-transparent border-[#333] border rounded-lg py-3 px-4 font-geist">
+          Abrir Modal
+        </button>
+      </div>
+
+      <!-- SECTIONS / BROWSER CHROME -->
+      <div class="reveal">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Browser Chrome / App Mock</h3>
+        <div class="glass-panel rounded-2xl p-1 shadow-2xl overflow-hidden">
+          <div class="flex bg-[#111] h-10 border-[#222] rounded-t-xl border-b px-4 gap-2 items-center">
+            <div class="w-3 h-3 rounded-full bg-[#FF5F57]"></div>
+            <div class="w-3 h-3 rounded-full bg-[#FEBC2E]"></div>
+            <div class="w-3 h-3 rounded-full bg-[#28C840]"></div>
+            <div class="ml-4 text-xs font-medium text-[#555] font-geist">app.mulherporinteiro.com</div>
+          </div>
+          <div class="bg-[#0a0a0a] rounded-b-xl p-10 flex items-center justify-center min-h-[200px]">
+            <div class="text-center">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 mb-4">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span class="text-[11px] font-medium text-emerald-400 font-geist">Online</span>
+              </div>
+              <p class="text-sm text-[#888] font-geist">App content area preview</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SECTION 5: ICONS
+       ================================================================ -->
+  <section id="icons" class="relative py-32 section-glow" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.5) 50%, transparent 100%);">
+
+    <div class="absolute top-1/3 right-0 w-[400px] h-[300px] bg-purple-500/5 blur-[80px] rounded-full pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+
+      <div class="reveal">
+        <span class="ds-section-label font-geist">05 — Icones</span>
+        <h2 class="text-3xl md:text-5xl font-medium text-white tracking-tight font-jakarta mb-4">Iconografia</h2>
+        <p class="text-lg text-[#888] font-geist max-w-2xl mb-16">Lucide Icons para UI + Iconify para marcas e icones especializados.</p>
+      </div>
+
+      <!-- Lucide -->
+      <div class="reveal delay-1 mb-16">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-6">Lucide Icons — UI</h3>
+        <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4">
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="zap" class="w-5 h-5 text-white/60 group-hover:text-orange-400 transition-colors"></i>
+            <span class="tooltip-text font-geist">zap</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="sparkles" class="w-5 h-5 text-white/60 group-hover:text-purple-400 transition-colors"></i>
+            <span class="tooltip-text font-geist">sparkles</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="heart" class="w-5 h-5 text-white/60 group-hover:text-red-400 transition-colors"></i>
+            <span class="tooltip-text font-geist">heart</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="home" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">home</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="search" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">search</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="user" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">user</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="settings" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">settings</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="arrow-right" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">arrow-right</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="check-circle-2" class="w-5 h-5 text-white/60 group-hover:text-emerald-400 transition-colors"></i>
+            <span class="tooltip-text font-geist">check-circle</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="globe" class="w-5 h-5 text-white/60 group-hover:text-blue-400 transition-colors"></i>
+            <span class="tooltip-text font-geist">globe</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="palette" class="w-5 h-5 text-white/60 group-hover:text-pink-400 transition-colors"></i>
+            <span class="tooltip-text font-geist">palette</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="layers" class="w-5 h-5 text-white/60 group-hover:text-amber-400 transition-colors"></i>
+            <span class="tooltip-text font-geist">layers</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="layout-template" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">layout</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="play-circle" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">play</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="download" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">download</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="share-2" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">share</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="book" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">book</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="rocket" class="w-5 h-5 text-white/60 group-hover:text-orange-400 transition-colors"></i>
+            <span class="tooltip-text font-geist">rocket</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="plus" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">plus</span>
+          </div>
+          <div class="tooltip-container flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all group cursor-pointer">
+            <i data-lucide="menu" class="w-5 h-5 text-white/60 group-hover:text-white transition-colors"></i>
+            <span class="tooltip-text font-geist">menu</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Iconify Brands -->
+      <div class="reveal delay-2">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-6">Iconify — Marcas & Especializados</h3>
+        <div class="flex flex-wrap gap-6">
+          <div class="flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all cursor-pointer">
+            <iconify-icon icon="mdi:github" width="24" height="24" style="color: rgba(255,255,255,0.6)"></iconify-icon>
+            <span class="text-[10px] text-[#555] font-geist">GitHub</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all cursor-pointer">
+            <iconify-icon icon="mdi:twitter" width="24" height="24" style="color: rgba(255,255,255,0.6)"></iconify-icon>
+            <span class="text-[10px] text-[#555] font-geist">Twitter</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all cursor-pointer">
+            <iconify-icon icon="mdi:discord" width="24" height="24" style="color: rgba(255,255,255,0.6)"></iconify-icon>
+            <span class="text-[10px] text-[#555] font-geist">Discord</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all cursor-pointer">
+            <iconify-icon icon="simple-icons:figma" width="24" height="24" style="color: rgba(255,255,255,0.6)"></iconify-icon>
+            <span class="text-[10px] text-[#555] font-geist">Figma</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all cursor-pointer">
+            <iconify-icon icon="simple-icons:vercel" width="24" height="24" style="color: rgba(255,255,255,0.6)"></iconify-icon>
+            <span class="text-[10px] text-[#555] font-geist">Vercel</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all cursor-pointer">
+            <iconify-icon icon="solar:map-linear" width="24" height="24" style="color: rgba(255,255,255,0.6)"></iconify-icon>
+            <span class="text-[10px] text-[#555] font-geist">Solar Map</span>
+          </div>
+          <div class="flex flex-col items-center gap-2 p-4 rounded-xl border border-white/[0.04] hover:border-white/[0.15] hover:bg-white/[0.03] transition-all cursor-pointer">
+            <iconify-icon icon="solar:tuning-square-2-linear" width="24" height="24" style="color: rgba(255,255,255,0.6)"></iconify-icon>
+            <span class="text-[10px] text-[#555] font-geist">Solar Tuning</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       SECTION 6: ANIMATIONS
+       ================================================================ -->
+  <section id="animations" class="relative py-32 section-glow">
+
+    <div class="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-orange-500/5 blur-[100px] rounded-full pointer-events-none" style="animation: pulse-glow 10s ease-in-out infinite;"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+
+      <div class="reveal">
+        <span class="ds-section-label font-geist">06 — Animacoes</span>
+        <h2 class="text-3xl md:text-5xl font-medium text-white tracking-tight font-jakarta mb-4">Sistema de Animacoes</h2>
+        <p class="text-lg text-[#888] font-geist max-w-2xl mb-16">Transicoes, efeitos de surgimento, background animations e micro-interacoes.</p>
+      </div>
+
+      <!-- Entrance Animations -->
+      <div class="reveal delay-1 mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Entrada / Surgimento</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Fade Up -->
+          <div class="linear-card rounded-2xl p-6 overflow-hidden">
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">fadeUp</div>
+            <div class="text-xs text-[#555] font-geist mb-4">0.8s · cubic-bezier(0.16, 1, 0.3, 1)</div>
+            <div id="fadeup-demo" class="h-16 bg-orange-500/10 border border-orange-500/20 rounded-xl flex items-center justify-center animate-fade-up">
+              <span class="text-sm text-orange-400 font-geist">Fade Up</span>
+            </div>
+            <button onclick="replayAnimation('fadeup-demo', 'animate-fade-up')" class="mt-3 text-[11px] text-[#555] hover:text-white font-geist transition-colors underline underline-offset-2 cursor-pointer">Replay</button>
+          </div>
+
+          <!-- Fade Slide In -->
+          <div class="linear-card rounded-2xl p-6 overflow-hidden">
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">fadeSlideIn</div>
+            <div class="text-xs text-[#555] font-geist mb-4">1s · blur(8px) to blur(0)</div>
+            <div id="fadeslide-demo" class="h-16 bg-purple-500/10 border border-purple-500/20 rounded-xl flex items-center justify-center animate-fade-slide">
+              <span class="text-sm text-purple-400 font-geist">Slide + Blur</span>
+            </div>
+            <button onclick="replayAnimation('fadeslide-demo', 'animate-fade-slide')" class="mt-3 text-[11px] text-[#555] hover:text-white font-geist transition-colors underline underline-offset-2 cursor-pointer">Replay</button>
+          </div>
+
+          <!-- Scroll Reveal -->
+          <div class="linear-card rounded-2xl p-6 overflow-hidden">
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-3">Scroll Reveal</div>
+            <div class="text-xs text-[#555] font-geist mb-4">IntersectionObserver · CSS transition</div>
+            <div class="h-16 bg-emerald-500/10 border border-emerald-500/20 rounded-xl flex items-center justify-center">
+              <span class="text-sm text-emerald-400 font-geist">Ativado on scroll</span>
+            </div>
+            <div class="mt-3 text-[10px] text-[#555] font-geist">.reveal + .visible</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Continuous Animations -->
+      <div class="reveal delay-2 mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Continuas / Loop</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+          <!-- Float -->
+          <div class="linear-card rounded-2xl p-6 flex flex-col items-center">
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-4">float</div>
+            <div class="w-16 h-16 rounded-2xl bg-orange-500/10 border border-orange-500/20 book-float-1"></div>
+            <div class="text-[10px] text-[#555] font-geist mt-3">6s ease-in-out infinite</div>
+          </div>
+
+          <!-- Ping -->
+          <div class="linear-card rounded-2xl p-6 flex flex-col items-center">
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-4">ping</div>
+            <div class="relative flex h-6 w-6 items-center justify-center">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
+            </div>
+            <div class="text-[10px] text-[#555] font-geist mt-3">1s cubic-bezier infinite</div>
+          </div>
+
+          <!-- Pulse Glow -->
+          <div class="linear-card rounded-2xl p-6 flex flex-col items-center">
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-4">pulse-glow</div>
+            <div class="w-16 h-16 rounded-full bg-orange-500/20" style="animation: pulse-glow 3s ease-in-out infinite;"></div>
+            <div class="text-[10px] text-[#555] font-geist mt-3">Background orbs</div>
+          </div>
+
+          <!-- Orbit -->
+          <div class="linear-card rounded-2xl p-6 flex flex-col items-center">
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-4">orbit</div>
+            <div class="relative w-20 h-20">
+              <div class="absolute inset-0 border border-white/[0.06] rounded-full"></div>
+              <div class="absolute w-2 h-2 rounded-full bg-orange-400 shadow-[0_0_8px_rgba(249,115,22,0.6)]" style="animation: orbit 4s linear infinite; top: 50%; left: 50%;"></div>
+            </div>
+            <div class="text-[10px] text-[#555] font-geist mt-3">Particulas decorativas</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interaction Animations -->
+      <div class="reveal delay-3 mb-20">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Interacao / Hover</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <!-- Shine Effect -->
+          <div class="linear-card rounded-2xl p-6">
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-4">Shine Sweep</div>
+            <a class="shine-button w-full h-12 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-sm text-white/60 font-geist cursor-pointer hover:bg-white/[0.08] transition-colors">
+              Hover para shine
+            </a>
+            <div class="text-[10px] text-[#555] font-geist mt-3">::after gradient sweep 0.5s</div>
+          </div>
+
+          <!-- Grid Button Effect -->
+          <div class="linear-card rounded-2xl p-6">
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-4">Grid + Dots + Lines</div>
+            <div class="btn-wrapper">
+              <button class="btn font-geist text-xs">Animated Grid</button>
+              <div class="dot top left"></div>
+              <div class="dot top right"></div>
+              <div class="dot bottom right"></div>
+              <div class="dot bottom left"></div>
+              <div class="line top horizontal"></div>
+              <div class="line bottom horizontal"></div>
+              <div class="line left vertical"></div>
+              <div class="line right vertical"></div>
+            </div>
+            <div class="text-[10px] text-[#555] font-geist mt-3">Corner dots + border draw</div>
+          </div>
+
+          <!-- Breathe Effect -->
+          <div class="linear-card rounded-2xl p-6">
+            <div class="text-[11px] text-[#555] font-geist uppercase tracking-wider mb-4">Breathe Glow</div>
+            <div class="w-full h-12 rounded-xl bg-[#131418] border border-orange-500/20 flex items-center justify-center" style="animation: breathe 3s ease-in-out infinite;">
+              <span class="text-sm text-orange-400 font-geist">Breathing</span>
+            </div>
+            <div class="text-[10px] text-[#555] font-geist mt-3">box-shadow pulsing 4s</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background Animations -->
+      <div class="reveal delay-4">
+        <h3 class="text-xs font-semibold text-white/40 uppercase tracking-widest font-geist mb-8">Background & Decorativo</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+          <!-- Grid + Mask -->
+          <div class="linear-card rounded-2xl overflow-hidden relative h-48">
+            <div class="absolute inset-0 linear-grid"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[150px] bg-orange-500/10 blur-[60px] rounded-full" style="animation: pulse-glow 4s ease-in-out infinite;"></div>
+            <div class="absolute inset-0 flex items-end p-4">
+              <div>
+                <div class="text-sm text-white font-geist font-medium">Grid + Ambient Glow</div>
+                <div class="text-[10px] text-[#555] font-geist mt-1">linear-grid + radial blur orb</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Noise Grain -->
+          <div class="linear-card rounded-2xl overflow-hidden relative h-48 noise-overlay">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-orange-500/10"></div>
+            <div class="absolute inset-0 flex items-end p-4 z-10">
+              <div>
+                <div class="text-sm text-white font-geist font-medium">Noise Grain Texture</div>
+                <div class="text-[10px] text-[#555] font-geist mt-1">SVG noise · grain keyframe 8s</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================================================================
+       MODAL (Hidden by default)
+       ================================================================ -->
+  <div id="demo-modal" class="modal-backdrop" onclick="if(event.target===this)this.classList.remove('active')">
+    <div class="modal-content">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-lg font-jakarta font-medium text-white tracking-tight">Modal Dialog</h3>
+        <button onclick="document.getElementById('demo-modal').classList.remove('active')" class="w-8 h-8 rounded-lg bg-white/[0.05] flex items-center justify-center hover:bg-white/[0.1] transition-colors text-white/60">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <p class="text-sm text-[#888] font-geist leading-relaxed mb-6">Modal com backdrop blur, entrada animada e fechamento ao clicar fora.</p>
+      <div class="flex gap-3 justify-end">
+        <button onclick="document.getElementById('demo-modal').classList.remove('active')" class="text-sm font-medium text-white/60 hover:text-white px-4 py-2 rounded-lg transition-colors font-geist">
+          Cancelar
+        </button>
+        <button onclick="document.getElementById('demo-modal').classList.remove('active')" class="text-sm font-medium text-black bg-white hover:bg-gray-200 px-4 py-2 rounded-lg transition-colors font-geist">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================================================================
+       FOOTER
+       ================================================================ -->
+  <footer class="bg-black/50 border-t border-[#222] pt-20 pb-10 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-16">
+        <div class="md:col-span-2">
+          <div class="text-xl tracking-tight text-white flex items-center gap-2 mb-4 font-jakarta font-medium">
+            <svg class="w-6 h-6 text-orange-500" viewBox="0 0 48 48" fill="currentColor">
+              <polygon points="24,4 44,16 44,32 24,44 4,32 4,16"></polygon>
+            </svg>
+            Design System
+          </div>
+          <p class="text-sm text-[#888] font-geist max-w-sm leading-relaxed">Sistema de design completo para o projeto Mulher Por Inteiro. Documenta todos os tokens visuais, componentes e animacoes.</p>
+        </div>
+        <div>
+          <h4 class="text-sm font-medium text-white mb-4 font-geist">Secoes</h4>
+          <ul class="space-y-2">
+            <li><a href="#hero" class="text-sm text-[#888] hover:text-white transition-colors font-geist">Hero</a></li>
+            <li><a href="#typography" class="text-sm text-[#888] hover:text-white transition-colors font-geist">Tipografia</a></li>
+            <li><a href="#colors" class="text-sm text-[#888] hover:text-white transition-colors font-geist">Cores</a></li>
+            <li><a href="#components" class="text-sm text-[#888] hover:text-white transition-colors font-geist">Componentes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-medium text-white mb-4 font-geist">Mais</h4>
+          <ul class="space-y-2">
+            <li><a href="#icons" class="text-sm text-[#888] hover:text-white transition-colors font-geist">Icones</a></li>
+            <li><a href="#animations" class="text-sm text-[#888] hover:text-white transition-colors font-geist">Animacoes</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-[#222] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-xs text-[#555] font-geist">Design System — Mulher Por Inteiro</p>
+        <div class="flex gap-4">
+          <a href="#" class="text-white/40 hover:text-white transition-colors">
+            <iconify-icon icon="mdi:github" width="18" height="18"></iconify-icon>
+          </a>
+          <a href="#" class="text-white/40 hover:text-white transition-colors">
+            <iconify-icon icon="mdi:twitter" width="18" height="18"></iconify-icon>
+          </a>
+          <a href="#" class="text-white/40 hover:text-white transition-colors">
+            <iconify-icon icon="simple-icons:figma" width="18" height="18"></iconify-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ================================================================
+       SCRIPTS
+       ================================================================ -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // ---- Custom Cursor ----
+    const dot = document.getElementById('cursor-dot');
+    const outline = document.getElementById('cursor-outline');
+
+    if (window.matchMedia('(pointer: fine)').matches) {
+      window.addEventListener('mousemove', (e) => {
+        dot.style.left = `${e.clientX}px`;
+        dot.style.top = `${e.clientY}px`;
+        outline.animate({
+          left: `${e.clientX}px`,
+          top: `${e.clientY}px`
+        }, { duration: 500, fill: "forwards" });
+      });
+
+      const attachCursorEvents = () => {
+        document.querySelectorAll('a, button, .hover-target, [role="button"], .btn-wrapper, .tooltip-container, input, .cursor-pointer').forEach(el => {
+          el.addEventListener('mouseenter', () => document.body.classList.add('cursor-active'));
+          el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-active'));
+        });
+      };
+
+      attachCursorEvents();
+
+      window.addEventListener('mousedown', () => {
+        outline.style.transform = 'translate(-50%, -50%) scale(0.7)';
+      });
+      window.addEventListener('mouseup', () => {
+        outline.style.transform = 'translate(-50%, -50%) scale(1)';
+      });
+    } else {
+      dot.style.display = 'none';
+      outline.style.display = 'none';
+    }
+
+    // ---- Scroll Reveal (IntersectionObserver) ----
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ---- Replay Animation Helper ----
+    function replayAnimation(id, className) {
+      const el = document.getElementById(id);
+      el.classList.remove(className);
+      el.style.opacity = '0';
+      void el.offsetWidth;
+      el.classList.add(className);
+    }
+  </script>
+
+</body>
+</html>
