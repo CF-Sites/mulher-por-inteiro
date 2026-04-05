@@ -20,6 +20,9 @@
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <script>
     tailwind.config = {
       theme: {
@@ -425,8 +428,75 @@
     .cta-breathing { animation: breathe-cta 2s ease-in-out infinite; }
 
     /* ============================================
+       SECTION GLOW — design_system.html
+       ============================================ */
+    .section-glow {
+      position: relative;
+    }
+    .section-glow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.3), transparent);
+    }
+
+    /* ============================================
+       LINEAR CARD — design_system.html
+       ============================================ */
+    .linear-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+    .linear-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    /* ============================================
+       SCROLL REVEAL — design_system.html
+       ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal.delay-1 { transition-delay: 0.1s; }
+    .reveal.delay-2 { transition-delay: 0.2s; }
+    .reveal.delay-3 { transition-delay: 0.3s; }
+    .reveal.delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================
+       DS SECTION LABEL — design_system.html
+       ============================================ */
+    .ds-section-label {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ============================================
        KEYFRAMES — design_system.html
        ============================================ */
+    @keyframes marquee-rtl {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-33.333%); }
+    }
+
     @keyframes shimmer {
       0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
@@ -616,6 +686,428 @@
     </div>
   </section>
 
+  <!-- ================================================================
+       MARQUEE — Letreiro Infinito
+       ================================================================ -->
+  <div class="w-full overflow-hidden border-y border-white/[0.04] bg-[#0a0a0a] py-3.5 relative">
+    <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none"></div>
+
+    <div class="flex items-center whitespace-nowrap" style="animation: marquee-rtl 40s linear infinite;">
+      <!-- Set 1 -->
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Resgate sua essência</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Rompa o automático</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Desperte sua força</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Volte a se escolher</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Mulher por inteiro</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <!-- Set 2 -->
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Resgate sua essência</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Rompa o automático</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Desperte sua força</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Volte a se escolher</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Mulher por inteiro</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <!-- Set 3 -->
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Resgate sua essência</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Rompa o automático</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Desperte sua força</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Volte a se escolher</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Mulher por inteiro</span>
+      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+    </div>
+  </div>
+
+  <!-- ================================================================
+       SECTION 2: PROBLEMA E PROMESSA
+       ================================================================ -->
+  <section class="relative py-24 md:py-32 section-glow" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.5) 50%, transparent 100%);">
+
+    <!-- Ambient glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-orange-500/[0.04] blur-[100px] rounded-full pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+
+      <!-- Cabeçalho: A Dor -->
+      <div class="text-center mb-16 reveal">
+        <h2 class="text-3xl md:text-5xl font-medium text-white tracking-tight font-jakarta mb-6 leading-[1.1]">
+          Chegou a hora de parar<br>de se deixar para depois
+        </h2>
+        <div class="max-w-2xl mx-auto space-y-4">
+          <p class="text-base md:text-lg text-[#888] font-geist leading-relaxed">
+            Você pode até estar dando conta de tudo… Mas no fundo, sente que se perdeu de si mesma.
+          </p>
+          <p class="text-base md:text-lg text-[#888] font-geist leading-relaxed">
+            Entre responsabilidades, trabalho, família e cobranças… você foi silenciando sua essência.<br>
+            Foi deixando de se escolher. Foi vivendo no automático.
+          </p>
+        </div>
+      </div>
+
+      <!-- Grid de Sintomas (2x2) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-20 reveal delay-1">
+
+        <!-- Card 1 -->
+        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
+            <i data-lucide="zap-off" class="w-5 h-5 text-orange-400"></i>
+          </div>
+          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Cansaço emocional</h3>
+          <p class="text-sm text-[#888] font-geist leading-relaxed">Aquele peso que não passa, mesmo quando você descansa. Uma exaustão que vem de dentro.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
+            <i data-lucide="user-minus" class="w-5 h-5 text-orange-400"></i>
+          </div>
+          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Falta de conexão com quem você é</h3>
+          <p class="text-sm text-[#888] font-geist leading-relaxed">Você olha no espelho e não reconhece a mulher que costumava ser. A essência está lá, mas distante.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
+            <i data-lucide="heart" class="w-5 h-5 text-orange-400"></i>
+          </div>
+          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Sua autoestima mais baixa do que deveria</h3>
+          <p class="text-sm text-[#888] font-geist leading-relaxed">Você se cobra, se compara e sente que nunca é suficiente. Mas a verdade é que você é muito mais.</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
+            <i data-lucide="clock" class="w-5 h-5 text-orange-400"></i>
+          </div>
+          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Sempre ocupada… mas vazia</h3>
+          <p class="text-sm text-[#888] font-geist leading-relaxed">A agenda está cheia, mas o coração está vazio. Produtividade sem propósito não é viver.</p>
+        </div>
+
+      </div>
+
+      <!-- Bloco da Promessa -->
+      <div class="text-center max-w-2xl mx-auto mb-12 reveal delay-2">
+        <p class="text-lg md:text-xl text-[#888] font-geist leading-relaxed mb-4">
+          Mas a verdade é que…
+        </p>
+        <p class="text-xl md:text-2xl font-jakarta font-medium text-white tracking-tight leading-snug mb-2">
+          Existe uma mulher dentro de você que não desapareceu.
+        </p>
+        <p class="text-xl md:text-2xl font-jakarta font-medium tracking-tight leading-snug">
+          Ela só está <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">adormecida.</span>
+        </p>
+        <p class="text-lg md:text-xl text-[#888] font-geist leading-relaxed mt-4">
+          E essa imersão é sobre <em class="not-italic text-orange-300 font-medium">despertar ela.</em>
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="flex justify-center reveal delay-3">
+        <a href="#participar" class="cta-pill">
+          <span class="cta-glow"></span>
+          <span class="cta-fill"></span>
+          <span class="cta-reflect"></span>
+          <span class="cta-label font-geist font-medium">
+            Eu quero participar
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION 3: PÚBLICO-ALVO
+       ================================================================ -->
+  <section class="relative py-24 md:py-32 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.5) 50%, transparent 100%);">
+
+    <!-- Ambient glows -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-orange-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-0 right-0 w-[400px] h-[300px] bg-purple-500/[0.03] blur-[80px] rounded-full pointer-events-none"></div>
+
+    <!-- Orbiting particles -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] pointer-events-none">
+      <div class="absolute w-1.5 h-1.5 rounded-full bg-orange-400 shadow-[0_0_10px_rgba(249,115,22,0.6)]" style="animation: orbit 15s linear infinite;"></div>
+      <div class="absolute w-1 h-1 rounded-full bg-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.4)]" style="animation: orbit-reverse 20s linear infinite;"></div>
+    </div>
+
+    <!-- Noise grain overlay -->
+    <div class="absolute inset-0 pointer-events-none opacity-20" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
+
+      <!-- Label + Cabeçalho -->
+      <div class="text-center mb-16 reveal">
+        <span class="ds-section-label font-geist">Para quem é essa imersão</span>
+        <h2 class="text-3xl md:text-5xl font-medium text-white tracking-tight font-jakarta mb-6 mt-6 leading-[1.1]">
+          Essa imersão é pra você que<br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400" style="animation: shimmer 3s linear infinite; background-size: 200% 100%;">sente que é hora de voltar.</span>
+        </h2>
+        <p class="text-base md:text-lg text-[#888] font-geist leading-relaxed max-w-2xl mx-auto">
+          Não existe perfil ideal. Existe a mulher que escuta o chamado de dentro.
+        </p>
+      </div>
+
+      <!-- Grid de Público-Alvo -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6 reveal delay-1">
+
+        <!-- Card 1 -->
+        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
+            <i data-lucide="unplug" class="w-5 h-5 text-orange-400"></i>
+          </div>
+          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Desconexão interior</h3>
+          <p class="text-sm text-[#888] font-geist leading-relaxed">Sente que se desconectou de si mesma, das suas vontades e do que te faz sentir viva.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
+            <i data-lucide="shield" class="w-5 h-5 text-orange-400"></i>
+          </div>
+          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Confiança abalada</h3>
+          <p class="text-sm text-[#888] font-geist leading-relaxed">Quer voltar a se sentir confiante e segura nas suas decisões, no seu corpo e na sua voz.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
+            <i data-lucide="flower-2" class="w-5 h-5 text-orange-400"></i>
+          </div>
+          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Feminilidade adormecida</h3>
+          <p class="text-sm text-[#888] font-geist leading-relaxed">Deseja resgatar sua feminilidade — aquela energia que é só sua e que o mundo te fez esconder.</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
+          <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center mb-4 group-hover:bg-orange-500/20 transition-colors">
+            <i data-lucide="trending-up" class="w-5 h-5 text-orange-400"></i>
+          </div>
+          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Crescimento pessoal</h3>
+          <p class="text-sm text-[#888] font-geist leading-relaxed">Busca crescimento emocional e pessoal real — não receitas prontas, mas transformação de dentro pra fora.</p>
+        </div>
+
+      </div>
+
+      <!-- Card 5: Featured Card (DS Animated Border) — Full width, destaque -->
+      <div class="reveal delay-2 mb-20">
+        <div class="relative group rounded-2xl p-[1px] overflow-hidden shadow-[0_0_40px_rgba(147,51,234,0.1)]">
+          <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-[#1a1a1a]"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[10rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-70" style="animation: rotatePlan 6s linear infinite;"></div>
+          </div>
+          <div class="relative z-10 rounded-[15px] p-6 md:p-8" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.1) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.08) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.04) inset">
+            <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+            <div class="relative z-10 flex items-center gap-5">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center border border-white/10 flex-shrink-0">
+                <i data-lucide="users" class="w-6 h-6 text-purple-400"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-3 mb-1">
+                  <h3 class="text-lg font-jakarta font-medium text-white tracking-tight">Conexão com outras mulheres</h3>
+                  <span class="text-[10px] uppercase font-semibold text-white tracking-widest bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full px-2 py-0.5 font-geist hidden md:inline-block">Especial</span>
+                </div>
+                <p class="text-sm text-[#888] font-geist leading-relaxed">Quer estar em um ambiente de conexão e troca com outras mulheres que também estão buscando se reencontrar.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloco de Fechamento -->
+      <div class="text-center max-w-xl mx-auto mb-12 reveal delay-3">
+        <p class="text-lg text-[#555] font-geist leading-relaxed mb-5">
+          Não importa sua fase de vida.
+        </p>
+        <p class="text-xl md:text-2xl font-jakarta font-medium text-white tracking-tight leading-snug">
+          Se você sente que precisa voltar para si…
+        </p>
+        <p class="text-xl md:text-2xl font-jakarta font-medium tracking-tight leading-snug mt-1">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">esse lugar é seu.</span>
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="flex flex-col items-center gap-3 reveal delay-4">
+        <a href="#participar" class="cta-pill">
+          <span class="cta-glow"></span>
+          <span class="cta-fill"></span>
+          <span class="cta-reflect"></span>
+          <span class="cta-label font-geist font-medium">
+            Garanta o seu lugar
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+        <span class="text-[11px] font-geist text-[#555] tracking-wide">Apenas 30 vagas • Evento presencial</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION 4: PROVA SOCIAL / DEPOIMENTOS
+       ================================================================ -->
+  <section class="relative py-24 md:py-32 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
+
+    <!-- Ambient glows -->
+    <div class="absolute top-[10%] right-0 w-[500px] h-[400px] bg-orange-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="absolute bottom-[10%] left-0 w-[400px] h-[300px] bg-purple-500/[0.03] blur-[80px] rounded-full pointer-events-none"></div>
+
+    <!-- Noise grain -->
+    <div class="absolute inset-0 pointer-events-none opacity-15" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-6">
+
+      <!-- Cabeçalho -->
+      <div class="text-center mb-16 reveal">
+        <span class="ds-section-label font-geist">Prova Social</span>
+        <h2 class="text-3xl md:text-5xl font-medium text-white tracking-tight font-jakarta mt-6 mb-5 leading-[1.1]">
+          O que <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400" style="animation: shimmer 3s linear infinite; background-size: 200% 100%;">elas dizem</span>
+        </h2>
+        <p class="text-base md:text-lg text-[#888] font-geist leading-relaxed max-w-xl mx-auto">
+          Histórias reais de mulheres que decidiram parar, olhar pra dentro e se reencontrar.
+        </p>
+      </div>
+
+      <!-- Grid de Depoimentos (3 colunas) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+
+        <!-- Depoimento 1 -->
+        <div class="glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-colors reveal delay-1">
+          <!-- Noise texture inside card -->
+          <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+          <!-- Quote icon -->
+          <div class="absolute top-6 right-6">
+            <i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i>
+          </div>
+          <!-- Stars -->
+          <div class="flex gap-1 mb-5 relative z-10">
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+          </div>
+          <!-- Depoimento -->
+          <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">
+            "Eu achei que estava apenas cansada da minha rotina, mas a verdade é que eu estava exausta de tentar dar conta de tudo e me deixar para depois. A imersão com a Fabianna foi um divisor de águas. Eu finalmente saí do piloto automático e resgatei a mulher potente que eu sou."
+          </p>
+          <!-- Autora -->
+          <div class="flex items-center gap-3 relative z-10">
+            <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
+              <span class="font-jakarta font-medium text-white text-sm">C</span>
+            </div>
+            <div>
+              <div class="text-sm font-jakarta font-medium text-white">Camila R.</div>
+              <div class="text-xs font-geist text-orange-400">Empresária</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Depoimento 2 — Featured (rotating border) -->
+        <div class="relative group rounded-2xl p-[1px] overflow-hidden shadow-[0_0_30px_rgba(147,51,234,0.08)] reveal delay-2">
+          <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-[#1a1a1a]"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[12rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-60" style="animation: rotatePlan 8s linear infinite;"></div>
+          </div>
+          <div class="relative z-10 rounded-[15px] p-8" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.08) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.06) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.04) inset">
+            <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+            <!-- Quote icon -->
+            <div class="absolute top-6 right-6">
+              <i data-lucide="quote" class="w-8 h-8 text-purple-400/10"></i>
+            </div>
+            <!-- Stars -->
+            <div class="flex gap-1 mb-5 relative z-10">
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            </div>
+            <!-- Depoimento -->
+            <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">
+              "O ambiente que a Fabi cria é surreal. Você entra carregando o peso do mundo nas costas e sai leve, segura e conectada com a sua essência. Foi a experiência mais profunda de autoconhecimento que já vivi. Toda mulher deveria se dar esse presente."
+            </p>
+            <!-- Autora -->
+            <div class="flex items-center gap-3 relative z-10">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-white/10 flex items-center justify-center">
+                <span class="font-jakarta font-medium text-white text-sm">A</span>
+              </div>
+              <div>
+                <div class="text-sm font-jakarta font-medium text-white">Amanda T.</div>
+                <div class="text-xs font-geist text-orange-400">Médica</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Depoimento 3 -->
+        <div class="glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-colors reveal delay-3">
+          <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+          <!-- Quote icon -->
+          <div class="absolute top-6 right-6">
+            <i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i>
+          </div>
+          <!-- Stars -->
+          <div class="flex gap-1 mb-5 relative z-10">
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+          </div>
+          <!-- Depoimento -->
+          <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">
+            "Eu cheguei na imersão completamente desconectada da minha feminilidade, vivendo apenas para cumprir obrigações. Estar ao lado de outras mulheres incríveis e ser guiada pela Fabi me fez despertar. Hoje eu me escolho em primeiro lugar, sem culpa."
+          </p>
+          <!-- Autora -->
+          <div class="flex items-center gap-3 relative z-10">
+            <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
+              <span class="font-jakarta font-medium text-white text-sm">L</span>
+            </div>
+            <div>
+              <div class="text-sm font-jakarta font-medium text-white">Letícia V.</div>
+              <div class="text-xs font-geist text-orange-400">Diretora de RH</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Social proof stat bar -->
+      <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16 reveal delay-4">
+        <div class="text-center">
+          <div class="text-3xl font-jakarta font-medium text-white tracking-tight">+5.000</div>
+          <div class="text-xs text-[#555] font-geist mt-1">Mulheres impactadas</div>
+        </div>
+        <div class="hidden md:block w-px h-10 bg-white/10"></div>
+        <div class="text-center">
+          <div class="text-3xl font-jakarta font-medium text-white tracking-tight">98%</div>
+          <div class="text-xs text-[#555] font-geist mt-1">Recomendam a experiência</div>
+        </div>
+        <div class="hidden md:block w-px h-10 bg-white/10"></div>
+        <div class="text-center">
+          <div class="text-3xl font-jakarta font-medium text-white tracking-tight">4.9<span class="text-amber-400">/5</span></div>
+          <div class="text-xs text-[#555] font-geist mt-1">Avaliação média</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ============================================
        SCRIPTS
        ============================================ -->
@@ -702,6 +1194,20 @@
         document.addEventListener('touchstart', resetPulse);
         resetPulse();
       });
+
+      /* Lucide Icons init */
+      lucide.createIcons();
+
+      /* Scroll Reveal (IntersectionObserver) — design_system.html */
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
     });
   </script>
 
