@@ -982,54 +982,15 @@
         </p>
       </div>
 
-      <!-- Grid de Depoimentos (3 colunas) -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      <!-- Carrossel de Depoimentos -->
+      <div class="relative reveal delay-1 mb-16">
+        <!-- Scroll container -->
+        <div id="testimonialSlider" class="flex gap-5 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory px-6 md:px-12 py-4">
 
-        <!-- Depoimento 1 -->
-        <div class="glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-colors reveal delay-1">
-          <!-- Noise texture inside card -->
-          <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
-          <!-- Quote icon -->
-          <div class="absolute top-6 right-6">
-            <i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i>
-          </div>
-          <!-- Stars -->
-          <div class="flex gap-1 mb-5 relative z-10">
-            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
-            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
-            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
-            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
-            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
-          </div>
-          <!-- Depoimento -->
-          <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">
-            "Eu achei que estava apenas cansada da minha rotina, mas a verdade é que eu estava exausta de tentar dar conta de tudo e me deixar para depois. A imersão com a Fabianna foi um divisor de águas. Eu finalmente saí do piloto automático e resgatei a mulher potente que eu sou."
-          </p>
-          <!-- Autora -->
-          <div class="flex items-center gap-3 relative z-10">
-            <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
-              <span class="font-jakarta font-medium text-white text-sm">C</span>
-            </div>
-            <div>
-              <div class="text-sm font-jakarta font-medium text-white">Camila R.</div>
-              <div class="text-xs font-geist text-orange-400">Empresária</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Depoimento 2 — Featured (rotating border) -->
-        <div class="relative group rounded-2xl p-[1px] overflow-hidden shadow-[0_0_30px_rgba(147,51,234,0.08)] reveal delay-2">
-          <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-[#1a1a1a]"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[12rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-60" style="animation: rotatePlan 8s linear infinite;"></div>
-          </div>
-          <div class="relative z-10 rounded-[15px] p-8" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.08) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.06) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.04) inset">
-            <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
-            <!-- Quote icon -->
-            <div class="absolute top-6 right-6">
-              <i data-lucide="quote" class="w-8 h-8 text-purple-400/10"></i>
-            </div>
-            <!-- Stars -->
+          <!-- Card 1 -->
+          <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
+            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+            <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
             <div class="flex gap-1 mb-5 relative z-10">
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
@@ -1037,52 +998,133 @@
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
             </div>
-            <!-- Depoimento -->
-            <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">
-              "O ambiente que a Fabi cria é surreal. Você entra carregando o peso do mundo nas costas e sai leve, segura e conectada com a sua essência. Foi a experiência mais profunda de autoconhecimento que já vivi. Toda mulher deveria se dar esse presente."
-            </p>
-            <!-- Autora -->
+            <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">"Eu achei que estava apenas cansada da minha rotina, mas a verdade é que eu estava exausta de tentar dar conta de tudo e me deixar para depois. A imersão com a Fabianna foi um divisor de águas. Eu finalmente saí do piloto automático e resgatei a mulher potente que eu sou."</p>
             <div class="flex items-center gap-3 relative z-10">
-              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-white/10 flex items-center justify-center">
-                <span class="font-jakarta font-medium text-white text-sm">A</span>
-              </div>
+              <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">C</span></div>
               <div>
-                <div class="text-sm font-jakarta font-medium text-white">Amanda T.</div>
-                <div class="text-xs font-geist text-orange-400">Médica</div>
+                <div class="text-sm font-jakarta font-medium text-white">Camila R.</div>
+                <div class="text-xs font-geist text-orange-400">Empresária</div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- Depoimento 3 -->
-        <div class="glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-colors reveal delay-3">
-          <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
-          <!-- Quote icon -->
-          <div class="absolute top-6 right-6">
-            <i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i>
-          </div>
-          <!-- Stars -->
-          <div class="flex gap-1 mb-5 relative z-10">
-            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
-            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
-            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
-            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
-            <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
-          </div>
-          <!-- Depoimento -->
-          <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">
-            "Eu cheguei na imersão completamente desconectada da minha feminilidade, vivendo apenas para cumprir obrigações. Estar ao lado de outras mulheres incríveis e ser guiada pela Fabi me fez despertar. Hoje eu me escolho em primeiro lugar, sem culpa."
-          </p>
-          <!-- Autora -->
-          <div class="flex items-center gap-3 relative z-10">
-            <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
-              <span class="font-jakarta font-medium text-white text-sm">L</span>
+          <!-- Card 2 — Featured (rotating border) -->
+          <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center relative rounded-2xl p-[1px] overflow-hidden shadow-[0_0_30px_rgba(147,51,234,0.08)] transition-all duration-500">
+            <div class="absolute inset-0 z-0">
+              <div class="absolute inset-0 bg-[#1a1a1a]"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[12rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-60" style="animation: rotatePlan 8s linear infinite;"></div>
             </div>
-            <div>
-              <div class="text-sm font-jakarta font-medium text-white">Letícia V.</div>
-              <div class="text-xs font-geist text-orange-400">Diretora de RH</div>
+            <div class="relative z-10 rounded-[15px] p-8" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.08) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.06) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.04) inset">
+              <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+              <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-purple-400/10"></i></div>
+              <div class="flex gap-1 mb-5 relative z-10">
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              </div>
+              <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">"O ambiente que a Fabi cria é surreal. Você entra carregando o peso do mundo nas costas e sai leve, segura e conectada com a sua essência. Foi a experiência mais profunda de autoconhecimento que já vivi. Toda mulher deveria se dar esse presente."</p>
+              <div class="flex items-center gap-3 relative z-10">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-white/10 flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">A</span></div>
+                <div>
+                  <div class="text-sm font-jakarta font-medium text-white">Amanda T.</div>
+                  <div class="text-xs font-geist text-orange-400">Médica</div>
+                </div>
+              </div>
             </div>
           </div>
+
+          <!-- Card 3 -->
+          <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
+            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+            <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
+            <div class="flex gap-1 mb-5 relative z-10">
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            </div>
+            <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">"Eu cheguei na imersão completamente desconectada da minha feminilidade, vivendo apenas para cumprir obrigações. Estar ao lado de outras mulheres incríveis e ser guiada pela Fabi me fez despertar. Hoje eu me escolho em primeiro lugar, sem culpa."</p>
+            <div class="flex items-center gap-3 relative z-10">
+              <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">L</span></div>
+              <div>
+                <div class="text-sm font-jakarta font-medium text-white">Letícia V.</div>
+                <div class="text-xs font-geist text-orange-400">Diretora de RH</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
+            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+            <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
+            <div class="flex gap-1 mb-5 relative z-10">
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            </div>
+            <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">"Dediquei os últimos 10 anos exclusivamente à minha família. Construí um lar lindo, mas no meio do caminho, esqueci como era o meu próprio rosto. A imersão me devolveu a identidade que estava escondida atrás dos papéis de mãe e esposa. Voltei a sonhar."</p>
+            <div class="flex items-center gap-3 relative z-10">
+              <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">B</span></div>
+              <div>
+                <div class="text-sm font-jakarta font-medium text-white">Beatriz F.</div>
+                <div class="text-xs font-geist text-orange-400">Dona de Casa</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5 — Featured (rotating border) -->
+          <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center relative rounded-2xl p-[1px] overflow-hidden shadow-[0_0_30px_rgba(147,51,234,0.08)] transition-all duration-500">
+            <div class="absolute inset-0 z-0">
+              <div class="absolute inset-0 bg-[#1a1a1a]"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[12rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-60" style="animation: rotatePlan 8s linear infinite; animation-delay: -4s;"></div>
+            </div>
+            <div class="relative z-10 rounded-[15px] p-8" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.08) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.06) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.04) inset">
+              <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+              <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-purple-400/10"></i></div>
+              <div class="flex gap-1 mb-5 relative z-10">
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+                <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              </div>
+              <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">"A gente se anula achando que é um ato de amor, mas acaba se esvaziando. O Mulher por Inteiro me ensinou que para cuidar dos outros, eu preciso existir primeiro. Foi um resgate emocional tão poderoso que até o meu casamento melhorou."</p>
+              <div class="flex items-center gap-3 relative z-10">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-white/10 flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">P</span></div>
+                <div>
+                  <div class="text-sm font-jakarta font-medium text-white">Patrícia M.</div>
+                  <div class="text-xs font-geist text-orange-400">Dona de Casa</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
+            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+            <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
+            <div class="flex gap-1 mb-5 relative z-10">
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+              <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
+            </div>
+            <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">"Eu tinha muito sucesso profissional, mas um vazio enorme na vida pessoal. A Fabi conduziu dinâmicas que destrancaram dores que eu nem sabia que carregava. Saí de lá com uma autoconfiança que mudou a minha postura diante da vida."</p>
+            <div class="flex items-center gap-3 relative z-10">
+              <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">L</span></div>
+              <div>
+                <div class="text-sm font-jakarta font-medium text-white">Laura B.</div>
+                <div class="text-xs font-geist text-orange-400">Gestora de Projetos</div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -1208,6 +1250,66 @@
       }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
       document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+      /* Testimonial Carousel — active card highlight */
+      const slider = document.getElementById('testimonialSlider');
+      const cards = slider.querySelectorAll('.testimonial-card');
+
+      function updateActiveCard() {
+        const sliderRect = slider.getBoundingClientRect();
+        const centerX = sliderRect.left + sliderRect.width / 2;
+
+        cards.forEach(card => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const dist = Math.abs(centerX - cardCenter);
+          const maxDist = sliderRect.width / 2;
+          // Gradual opacity based on distance from center
+          const opacity = Math.max(0.35, 1 - (dist / maxDist) * 0.65);
+          const scale = Math.max(0.93, 1 - (dist / maxDist) * 0.07);
+          card.style.opacity = opacity;
+          card.style.transform = `scale(${scale})`;
+        });
+      }
+
+      slider.addEventListener('scroll', updateActiveCard);
+      updateActiveCard();
+
+      /* Auto-scroll loop — simple & clean */
+      let autoIdx = 0;
+      let autoInterval = null;
+      let resumeTimeout = null;
+
+      function advance() {
+        autoIdx = (autoIdx + 1) % cards.length;
+        cards[autoIdx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      function start() {
+        if (autoInterval) return;
+        autoInterval = setInterval(advance, 4500);
+      }
+
+      function pause() {
+        clearInterval(autoInterval);
+        autoInterval = null;
+        clearTimeout(resumeTimeout);
+        resumeTimeout = setTimeout(() => {
+          // Sync index with whatever card is centered now
+          const cx = slider.getBoundingClientRect().left + slider.getBoundingClientRect().width / 2;
+          let best = 0, bestD = Infinity;
+          cards.forEach((c, i) => {
+            const d = Math.abs(cx - (c.getBoundingClientRect().left + c.getBoundingClientRect().width / 2));
+            if (d < bestD) { bestD = d; best = i; }
+          });
+          autoIdx = best;
+          start();
+        }, 8000);
+      }
+
+      slider.addEventListener('pointerdown', pause);
+      slider.addEventListener('wheel', pause, { passive: true });
+      start();
     });
   </script>
 
