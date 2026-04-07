@@ -11,30 +11,23 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Mulher Por Inteiro — Imersão Feminina">
   <meta property="og:description" content="Uma imersão presencial para resgatar sua essência, romper o automático e despertar a mulher forte, confiante e viva que existe dentro de você.">
-  <meta property="og:image" content="assets/images/fabianna-hero.jpeg">
+  <meta property="og:image" content="assets/images/fabianna-hero.webp">
   <meta property="og:locale" content="pt_BR">
 
   <!-- Favicon (emoji fallback) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
 
-  <!-- Fonts (Design System) -->
+  <!-- Preload: hero image (LCP element) -->
+  <link rel="preload" href="assets/images/fabianna-hero.webp" as="image" type="image/webp">
+
+  <!-- Fonts (with font-display:swap to avoid blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS (must stay in head for class resolution) -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- GSAP + ScrollTrigger -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
-  <!-- Phosphor Icons -->
-  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@0.460.0"></script>
 
   <script>
     tailwind.config = {
@@ -63,7 +56,7 @@
   <!-- Fixed Background -->
   <div class="fixed inset-0 z-0 pointer-events-none">
     <div class="absolute inset-0 linear-grid"></div>
-    <div class="absolute top-0 right-0 w-[800px] h-[500px] bg-orange-500/[0.07] blur-[120px] rounded-full opacity-50"
+    <div class="absolute top-0 right-0 w-[800px] h-[500px] bg-amber-500/[0.07] blur-[120px] rounded-full opacity-50"
          style="animation: pulse-glow 8s ease-in-out infinite;"></div>
     <div class="absolute bottom-0 left-0 w-[500px] h-[400px] bg-amber-400/[0.04] blur-[100px] rounded-full opacity-40"
          style="animation: pulse-glow 10s ease-in-out infinite; animation-delay: 3s;"></div>
@@ -76,7 +69,7 @@
 
     <!-- Orbiting particles (from design_system.html) -->
     <div class="absolute top-1/2 right-[25%] -translate-y-1/2 w-[300px] h-[300px] pointer-events-none z-[5]">
-      <div class="absolute w-2 h-2 rounded-full bg-orange-400 shadow-[0_0_12px_rgba(249,115,22,0.8)]" style="animation: orbit 12s linear infinite;"></div>
+      <div class="absolute w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_12px_rgba(212,162,76,0.8)]" style="animation: orbit 12s linear infinite;"></div>
       <div class="absolute w-1.5 h-1.5 rounded-full bg-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.6)]" style="animation: orbit-reverse 18s linear infinite;"></div>
       <div class="absolute w-1 h-1 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]" style="animation: orbit 25s linear infinite; animation-delay: -5s;"></div>
     </div>
@@ -110,12 +103,12 @@
 
             <!-- Subtitle -->
             <p class="font-geist text-base md:text-[1.1rem] leading-relaxed max-w-lg reveal-up" style="color: var(--text-dim);">
-              Uma imersão para resgatar sua essência, romper o automático e despertar a mulher <em class="not-italic text-orange-300 font-medium">forte, confiante e viva</em> que existe dentro de você.
+              Uma imersão para resgatar sua essência, romper o automático e despertar a mulher <em class="not-italic text-amber-300 font-medium">forte, confiante e viva</em> que existe dentro de você.
             </p>
 
             <!-- Credibility -->
             <div class="credit-line font-geist reveal-up">
-              Conduzido por <strong class="text-white">Fabianna Lima</strong>, terapeuta sistêmica intercultural • <strong class="text-orange-400">+5.000 mulheres impactadas</strong>
+              Conduzido por <strong class="text-white">Fabianna Lima</strong>, terapeuta sistêmica intercultural • <strong class="text-amber-400">+5.000 mulheres impactadas</strong>
             </div>
 
             <!-- Info inline -->
@@ -152,10 +145,10 @@
         <div class="photo-col relative">
           <!-- Warm glow behind figure -->
           <div class="photo-glow absolute top-[0%] left-1/2 -translate-x-1/2 w-[120%] h-[90%] rounded-full pointer-events-none z-0"
-               style="background: radial-gradient(ellipse at 50% 45%, rgba(249,115,22,0.2) 0%, rgba(251,191,36,0.12) 20%, rgba(249,115,22,0.04) 45%, transparent 65%); filter: blur(70px); animation: pulse-glow 7s ease-in-out infinite;"></div>
+               style="background: radial-gradient(ellipse at 50% 45%, rgba(212,162,76,0.2) 0%, rgba(251,191,36,0.12) 20%, rgba(212,162,76,0.04) 45%, transparent 65%); filter: blur(70px); animation: pulse-glow 7s ease-in-out infinite;"></div>
 
           <div class="photo-wrapper relative z-10 reveal-up" id="heroPhoto" style="animation: float 8s ease-in-out infinite;">
-            <img src="assets/images/fabianna-hero.jpeg" alt="Fabianna Lima">
+            <img src="assets/images/fabianna-hero.webp" alt="Fabianna Lima" fetchpriority="high">
           </div>
 
           <!-- Floating card: Imersão info (DS dark glass pattern) -->
@@ -201,37 +194,37 @@
     <div class="flex items-center whitespace-nowrap" style="animation: marquee-rtl 40s linear infinite;">
       <!-- Set 1 -->
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Resgate sua essência</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Rompa o automático</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Desperte sua força</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Volte a se escolher</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Mulher por inteiro</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <!-- Set 2 -->
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Resgate sua essência</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Rompa o automático</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Desperte sua força</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Volte a se escolher</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Mulher por inteiro</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <!-- Set 3 -->
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Resgate sua essência</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Rompa o automático</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Desperte sua força</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Volte a se escolher</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
       <span class="text-xs font-geist font-semibold uppercase tracking-wider text-white/15 mx-6">Mulher por inteiro</span>
-      <i data-lucide="sparkles" class="w-3 h-3 text-orange-400/40 flex-shrink-0"></i>
+      <i data-lucide="sparkles" class="w-3 h-3 text-amber-400/40 flex-shrink-0"></i>
     </div>
   </div>
 
@@ -241,7 +234,7 @@
   <section class="relative py-16 md:py-24 section-glow" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.5) 50%, transparent 100%);">
 
     <!-- Ambient glow -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-orange-500/[0.04] blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-amber-500/[0.04] blur-[100px] rounded-full pointer-events-none"></div>
 
     <div class="relative z-10 max-w-5xl mx-auto px-6">
 
@@ -315,10 +308,10 @@
           Existe uma mulher dentro de você que não desapareceu.
         </p>
         <p class="text-xl md:text-2xl font-jakarta font-medium tracking-tight leading-snug">
-          Ela só está <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">adormecida.</span>
+          Ela só está <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">adormecida.</span>
         </p>
         <p class="text-lg md:text-xl text-[#888] font-geist leading-relaxed mt-4">
-          E essa imersão é sobre <em class="not-italic text-orange-300 font-medium">despertar ela.</em>
+          E essa imersão é sobre <em class="not-italic text-amber-300 font-medium">despertar ela.</em>
         </p>
       </div>
 
@@ -346,12 +339,12 @@
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
 
     <!-- Ambient glows -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-orange-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-amber-500/5 blur-[100px] rounded-full pointer-events-none"></div>
     <div class="absolute top-0 right-0 w-[400px] h-[300px] bg-purple-500/[0.03] blur-[80px] rounded-full pointer-events-none"></div>
 
     <!-- Orbiting particles -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] pointer-events-none">
-      <div class="absolute w-1.5 h-1.5 rounded-full bg-orange-400 shadow-[0_0_10px_rgba(249,115,22,0.6)]" style="animation: orbit 15s linear infinite;"></div>
+      <div class="absolute w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(212,162,76,0.6)]" style="animation: orbit 15s linear infinite;"></div>
       <div class="absolute w-1 h-1 rounded-full bg-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.4)]" style="animation: orbit-reverse 20s linear infinite;"></div>
     </div>
 
@@ -365,7 +358,7 @@
         <span class="ds-section-label font-geist">Para quem é essa imersão</span>
         <h2 class="text-3xl md:text-[3.5rem] font-medium text-white tracking-tight font-jakarta mb-6 mt-6 leading-[1.1]">
           Essa imersão é pra você que<br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">sente que é hora de voltar.</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">sente que é hora de voltar.</span>
         </h2>
         <p class="text-base md:text-[1.15rem] text-[#888] font-geist leading-relaxed max-w-2xl mx-auto">
           Não existe perfil ideal. Existe a mulher que escuta o chamado de dentro.
@@ -447,7 +440,7 @@
           Se você sente que precisa voltar para si…
         </p>
         <p class="text-xl md:text-2xl font-jakarta font-medium tracking-tight leading-snug mt-1">
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">esse lugar é seu.</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">esse lugar é seu.</span>
         </p>
       </div>
 
@@ -479,12 +472,12 @@
     <div class="absolute inset-0 pointer-events-none opacity-[0.07]" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
 
     <!-- Ambient glows -->
-    <div class="absolute top-[10%] left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-orange-500/[0.06] blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-[10%] left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-amber-500/[0.06] blur-[120px] rounded-full pointer-events-none"></div>
     <div class="absolute bottom-[10%] right-[10%] w-[400px] h-[300px] bg-purple-500/[0.04] blur-[80px] rounded-full pointer-events-none"></div>
 
     <!-- Orbiting particles -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] h-[250px] pointer-events-none z-[2]">
-      <div class="absolute w-1.5 h-1.5 rounded-full bg-orange-400 shadow-[0_0_10px_rgba(249,115,22,0.6)]" style="animation: orbit 18s linear infinite;"></div>
+      <div class="absolute w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_10px_rgba(212,162,76,0.6)]" style="animation: orbit 18s linear infinite;"></div>
       <div class="absolute w-1 h-1 rounded-full bg-amber-300 shadow-[0_0_8px_rgba(251,191,36,0.4)]" style="animation: orbit-reverse 24s linear infinite;"></div>
     </div>
 
@@ -500,7 +493,7 @@
         <h2 class="text-3xl md:text-[3.5rem] font-jakarta font-bold tracking-tight leading-[1.1] uppercase mb-3">
           Não é sobre mais um evento
         </h2>
-        <h2 class="text-3xl md:text-[3.5rem] font-jakarta font-bold tracking-tight leading-[1.1] uppercase text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">
+        <h2 class="text-3xl md:text-[3.5rem] font-jakarta font-bold tracking-tight leading-[1.1] uppercase text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">
           É sobre voltar para você
         </h2>
       </div>
@@ -517,10 +510,10 @@
       <!-- Transformações — glass cards elevados -->
       <div class="max-w-2xl mx-auto space-y-3 mb-20">
 
-        <div class="bg-[#131418] rounded-2xl border border-orange-500/[0.12] p-5 relative overflow-hidden group hover:border-orange-500/[0.25] transition-colors">
+        <div class="bg-[#131418] rounded-2xl border border-amber-500/[0.12] p-5 relative overflow-hidden group hover:border-amber-500/[0.25] transition-colors">
           <div class="relative z-10 flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/20 transition-colors">
-              <i data-lucide="sparkles" class="w-5 h-5 text-orange-400"></i>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/20 transition-colors">
+              <i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i>
             </div>
             <div>
               <h4 class="text-[15px] font-jakarta font-medium text-white tracking-tight mb-1">Se reconectar com sua essência</h4>
@@ -529,7 +522,7 @@
           </div>
         </div>
 
-        <div class="bg-[#131418] rounded-2xl border border-orange-500/[0.12] p-5 relative overflow-hidden group hover:border-orange-500/[0.25] transition-colors">
+        <div class="bg-[#131418] rounded-2xl border border-amber-500/[0.12] p-5 relative overflow-hidden group hover:border-amber-500/[0.25] transition-colors">
           <div class="relative z-10 flex items-start gap-4">
             <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/20 transition-colors">
               <i data-lucide="crown" class="w-5 h-5 text-amber-400"></i>
@@ -541,7 +534,7 @@
           </div>
         </div>
 
-        <div class="bg-[#131418] rounded-2xl border border-orange-500/[0.12] p-5 relative overflow-hidden group hover:border-orange-500/[0.25] transition-colors">
+        <div class="bg-[#131418] rounded-2xl border border-amber-500/[0.12] p-5 relative overflow-hidden group hover:border-amber-500/[0.25] transition-colors">
           <div class="relative z-10 flex items-start gap-4">
             <div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-rose-500/20 transition-colors">
               <i data-lucide="flame" class="w-5 h-5 text-rose-400"></i>
@@ -553,7 +546,7 @@
           </div>
         </div>
 
-        <div class="bg-[#131418] rounded-2xl border border-orange-500/[0.12] p-5 relative overflow-hidden group hover:border-orange-500/[0.25] transition-colors">
+        <div class="bg-[#131418] rounded-2xl border border-amber-500/[0.12] p-5 relative overflow-hidden group hover:border-amber-500/[0.25] transition-colors">
           <div class="relative z-10 flex items-start gap-4">
             <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/20 transition-colors">
               <i data-lucide="shield" class="w-5 h-5 text-purple-400"></i>
@@ -579,7 +572,7 @@
           Você vai acessar.
         </p>
         <p class="text-2xl md:text-3xl font-jakarta font-bold tracking-tight">
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400" style="animation: shimmer 3s linear infinite; background-size: 200% 100%;">Você vai se reconectar.</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500" style="animation: shimmer 3s linear infinite; background-size: 200% 100%;">Você vai se reconectar.</span>
         </p>
       </div>
 
@@ -607,7 +600,7 @@
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
 
     <!-- Ambient glows -->
-    <div class="absolute top-[10%] right-0 w-[500px] h-[400px] bg-orange-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-[10%] right-0 w-[500px] h-[400px] bg-amber-500/5 blur-[100px] rounded-full pointer-events-none"></div>
     <div class="absolute bottom-[10%] left-0 w-[400px] h-[300px] bg-purple-500/[0.03] blur-[80px] rounded-full pointer-events-none"></div>
 
     <!-- Noise grain -->
@@ -619,7 +612,7 @@
       <div class="text-center mb-16 reveal">
         <span class="ds-section-label font-geist">Prova Social</span>
         <h2 class="text-3xl md:text-[3.5rem] font-medium text-white tracking-tight font-jakarta mt-6 mb-5 leading-[1.1]">
-          O que <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">elas dizem</span>
+          O que <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">elas dizem</span>
         </h2>
         <p class="text-base md:text-[1.15rem] text-[#888] font-geist leading-relaxed max-w-xl mx-auto">
           Histórias reais de mulheres que decidiram parar, olhar pra dentro e se reencontrar.
@@ -647,7 +640,7 @@
               <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">C</span></div>
               <div>
                 <div class="text-sm font-jakarta font-medium text-white">Camila R.</div>
-                <div class="text-xs font-geist text-orange-400">Empresária</div>
+                <div class="text-xs font-geist text-amber-400">Empresária</div>
               </div>
             </div>
           </div>
@@ -673,7 +666,7 @@
                 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-white/10 flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">A</span></div>
                 <div>
                   <div class="text-sm font-jakarta font-medium text-white">Amanda T.</div>
-                  <div class="text-xs font-geist text-orange-400">Médica</div>
+                  <div class="text-xs font-geist text-amber-400">Médica</div>
                 </div>
               </div>
             </div>
@@ -695,7 +688,7 @@
               <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">L</span></div>
               <div>
                 <div class="text-sm font-jakarta font-medium text-white">Letícia V.</div>
-                <div class="text-xs font-geist text-orange-400">Diretora de RH</div>
+                <div class="text-xs font-geist text-amber-400">Diretora de RH</div>
               </div>
             </div>
           </div>
@@ -716,7 +709,7 @@
               <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">B</span></div>
               <div>
                 <div class="text-sm font-jakarta font-medium text-white">Beatriz F.</div>
-                <div class="text-xs font-geist text-orange-400">Dona de Casa</div>
+                <div class="text-xs font-geist text-amber-400">Dona de Casa</div>
               </div>
             </div>
           </div>
@@ -742,7 +735,7 @@
                 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-white/10 flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">P</span></div>
                 <div>
                   <div class="text-sm font-jakarta font-medium text-white">Patrícia M.</div>
-                  <div class="text-xs font-geist text-orange-400">Dona de Casa</div>
+                  <div class="text-xs font-geist text-amber-400">Dona de Casa</div>
                 </div>
               </div>
             </div>
@@ -764,7 +757,7 @@
               <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">L</span></div>
               <div>
                 <div class="text-sm font-jakarta font-medium text-white">Laura B.</div>
-                <div class="text-xs font-geist text-orange-400">Gestora de Projetos</div>
+                <div class="text-xs font-geist text-amber-400">Gestora de Projetos</div>
               </div>
             </div>
           </div>
@@ -779,7 +772,7 @@
             <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">"Sempre tive medo de me expor em grupo, mas o ambiente que a Fabi cria é de tanto respeito que me senti em casa nos primeiros 5 minutos. Ver outras mulheres lidando com os mesmos bloqueios que eu tirou um peso enorme das minhas costas."</p>
             <div class="flex items-center gap-3 relative z-10">
               <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">J</span></div>
-              <div><div class="text-sm font-jakarta font-medium text-white">Juliana P.</div><div class="text-xs font-geist text-orange-400">Empreendedora</div></div>
+              <div><div class="text-sm font-jakarta font-medium text-white">Juliana P.</div><div class="text-xs font-geist text-amber-400">Empreendedora</div></div>
             </div>
           </div>
 
@@ -794,7 +787,7 @@
               <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8">"A energia daquele lugar é indescritível. A gente chora, ri, se abraça... Saí de lá com uma rede de apoio maravilhosa e uma clareza absurda dos meus próximos passos."</p>
               <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-white/20 flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">R</span></div>
-                <div><div class="text-sm font-jakarta font-medium text-white">Renata F.</div><div class="text-xs font-geist text-orange-400">Advogada</div></div>
+                <div><div class="text-sm font-jakarta font-medium text-white">Renata F.</div><div class="text-xs font-geist text-amber-400">Advogada</div></div>
               </div>
             </div>
           </div>
@@ -809,7 +802,7 @@
             <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">"Fui sozinha, com muito medo de ficar deslocada. Acabou sendo a melhor escolha! Fui acolhida de um jeito tão genuíno e sem julgamentos... O Mulher por Inteiro é, de fato, uma comunidade que cura."</p>
             <div class="flex items-center gap-3 relative z-10">
               <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">V</span></div>
-              <div><div class="text-sm font-jakarta font-medium text-white">Vanessa S.</div><div class="text-xs font-geist text-orange-400">Dona de Casa</div></div>
+              <div><div class="text-sm font-jakarta font-medium text-white">Vanessa S.</div><div class="text-xs font-geist text-amber-400">Dona de Casa</div></div>
             </div>
           </div>
 
@@ -823,7 +816,7 @@
             <p class="text-[15px] text-[#888] font-geist leading-relaxed italic mb-8 relative z-10">"Você percebe que não tá sozinha. A troca com outras mulheres foi tão rica quanto o próprio conteúdo da imersão. Ganhei força, coragem e amigas que levarei para a vida."</p>
             <div class="flex items-center gap-3 relative z-10">
               <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center"><span class="font-jakarta font-medium text-white text-sm">C</span></div>
-              <div><div class="text-sm font-jakarta font-medium text-white">Carla M.</div><div class="text-xs font-geist text-orange-400">Professora</div></div>
+              <div><div class="text-sm font-jakarta font-medium text-white">Carla M.</div><div class="text-xs font-geist text-amber-400">Professora</div></div>
             </div>
           </div>
 
@@ -868,7 +861,7 @@
     <div class="absolute inset-0 pointer-events-none opacity-[0.07]" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
 
     <!-- Ambient glows -->
-    <div class="absolute top-[15%] right-0 w-[500px] h-[400px] bg-orange-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-[15%] right-0 w-[500px] h-[400px] bg-amber-500/5 blur-[100px] rounded-full pointer-events-none"></div>
     <div class="absolute bottom-[10%] left-[5%] w-[400px] h-[300px] bg-purple-500/[0.03] blur-[80px] rounded-full pointer-events-none"></div>
 
     <div class="relative z-10 max-w-6xl mx-auto px-6">
@@ -878,7 +871,7 @@
         <span class="ds-section-label font-geist">O que você vai viver</span>
         <h2 class="text-3xl md:text-[3.5rem] font-medium text-white tracking-tight font-jakarta mt-6 mb-5 leading-[1.1]">
           4 horas que vão transformar<br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">a forma como você se vê</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">a forma como você se vê</span>
         </h2>
       </div>
 
@@ -895,8 +888,8 @@
           <div class="space-y-3">
             <div class="linear-card rounded-2xl p-5 hover:scale-[1.02] transition-transform group">
               <div class="flex items-start gap-4">
-                <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/20 transition-colors">
-                  <i data-lucide="compass" class="w-5 h-5 text-orange-400"></i>
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/20 transition-colors">
+                  <i data-lucide="compass" class="w-5 h-5 text-amber-400"></i>
                 </div>
                 <div>
                   <h4 class="text-[15px] font-jakarta font-medium text-white tracking-tight mb-1">Reflexões guiadas</h4>
@@ -1046,7 +1039,7 @@
       <!-- Fechamento de Alto Impacto -->
       <div class="text-center mt-20 md:mt-28" data-animate="closing">
         <p class="text-lg text-[#888] font-geist italic mb-6">E principalmente…</p>
-        <h3 class="text-3xl lg:text-5xl font-jakarta font-bold tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">
+        <h3 class="text-3xl lg:text-5xl font-jakarta font-bold tracking-tight leading-[1.1] text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">
           Lembrar da mulher poderosa<br>que você é.
         </h3>
       </div>
@@ -1063,7 +1056,7 @@
 
     <!-- Noise grain -->
     <!-- Ambient glows -->
-    <div class="absolute top-[20%] left-[10%] w-[500px] h-[400px] bg-orange-500/[0.05] blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-[20%] left-[10%] w-[500px] h-[400px] bg-amber-500/[0.05] blur-[100px] rounded-full pointer-events-none"></div>
     <div class="absolute bottom-[15%] right-[5%] w-[400px] h-[300px] bg-purple-500/[0.03] blur-[80px] rounded-full pointer-events-none"></div>
 
     <div class="relative z-10 max-w-6xl mx-auto px-6">
@@ -1076,16 +1069,16 @@
 
           <!-- Glow atrás da foto -->
           <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[80%] rounded-full pointer-events-none"
-               style="background: radial-gradient(ellipse at center, rgba(249,115,22,0.12) 0%, rgba(251,191,36,0.06) 25%, transparent 60%); filter: blur(60px); animation: pulse-glow 7s ease-in-out infinite;"></div>
+               style="background: radial-gradient(ellipse at center, rgba(212,162,76,0.12) 0%, rgba(251,191,36,0.06) 25%, transparent 60%); filter: blur(60px); animation: pulse-glow 7s ease-in-out infinite;"></div>
 
           <!-- Moldura com borda rotacional (DS: Featured Card pattern) -->
-          <div class="relative rounded-2xl p-[2px] overflow-hidden shadow-[0_0_50px_rgba(249,115,22,0.1)] max-w-[400px] w-full" style="animation: float 8s ease-in-out infinite;">
+          <div class="relative rounded-2xl p-[2px] overflow-hidden shadow-[0_0_50px_rgba(212,162,76,0.1)] max-w-[400px] w-full" style="animation: float 8s ease-in-out infinite;">
             <div class="absolute inset-0 z-0">
               <div class="absolute inset-0 bg-[#111]"></div>
-              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[20rem] bg-gradient-to-b from-transparent via-orange-500/50 to-transparent opacity-60" style="animation: rotatePlan 10s linear infinite;"></div>
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[20rem] bg-gradient-to-b from-transparent via-amber-500/50 to-transparent opacity-60" style="animation: rotatePlan 10s linear infinite;"></div>
             </div>
             <div class="relative z-10 rounded-[14px] overflow-hidden">
-              <img src="assets/images/fabianna-autoridade.jpeg"
+              <img src="assets/images/fabianna-autoridade.webp" loading="lazy"
                    alt="Fabianna Lima — Terapeuta Sistêmica Intercultural"
                    class="w-full aspect-[3/4] object-cover object-top">
             </div>
@@ -1127,7 +1120,7 @@
           </h2>
 
           <!-- Subtítulo destaque -->
-          <p class="text-lg font-geist font-medium text-orange-400 leading-relaxed">
+          <p class="text-lg font-geist font-medium text-amber-400 leading-relaxed">
             Terapeuta sistêmica intercultural e mentora de terapeutas.
           </p>
 
@@ -1140,22 +1133,22 @@
               Seu trabalho é focado em ajudar mulheres a romper bloqueios emocionais, despertar consciência e se reconectar com sua identidade, seus sonhos e sua essência.
             </p>
             <p class="text-[15px] text-[#888] font-geist leading-relaxed">
-              Nessa imersão, ela vai te conduzir com <em class="not-italic text-orange-300 font-medium">profundidade, sensibilidade e verdade.</em>
+              Nessa imersão, ela vai te conduzir com <em class="not-italic text-amber-300 font-medium">profundidade, sensibilidade e verdade.</em>
             </p>
           </div>
 
           <!-- Credenciais em mini-cards -->
           <div class="flex flex-wrap gap-3 mt-2">
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02]">
-              <i data-lucide="award" class="w-3.5 h-3.5 text-orange-400"></i>
+              <i data-lucide="award" class="w-3.5 h-3.5 text-amber-400"></i>
               <span class="text-[11px] font-geist text-white/60">Terapeuta Sistêmica</span>
             </div>
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02]">
-              <i data-lucide="globe" class="w-3.5 h-3.5 text-orange-400"></i>
+              <i data-lucide="globe" class="w-3.5 h-3.5 text-amber-400"></i>
               <span class="text-[11px] font-geist text-white/60">Intercultural</span>
             </div>
             <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.02]">
-              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-orange-400"></i>
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i>
               <span class="text-[11px] font-geist text-white/60">Ela é Capaz</span>
             </div>
           </div>
@@ -1177,8 +1170,8 @@
     <!-- Warm purple glow (acolhimento) -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" style="animation: pulse-glow 8s ease-in-out infinite;"></div>
 
-    <!-- Secondary orange glow -->
-    <div class="absolute top-[20%] right-[10%] w-[300px] h-[250px] bg-orange-500/[0.03] blur-[80px] rounded-full pointer-events-none"></div>
+    <!-- Secondary gold glow -->
+    <div class="absolute top-[20%] right-[10%] w-[300px] h-[250px] bg-amber-500/[0.03] blur-[80px] rounded-full pointer-events-none"></div>
 
     <div class="relative z-10 max-w-5xl mx-auto px-6">
 
@@ -1187,7 +1180,7 @@
         <span class="ds-section-label font-geist">Conecte-se com outras mulheres</span>
         <h2 class="text-3xl md:text-[3.5rem] font-jakarta font-medium text-white tracking-tight mt-6 mb-6 leading-[1.1]">
           Você não precisa fazer<br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">isso sozinha.</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">isso sozinha.</span>
         </h2>
         <p class="text-base md:text-[1.15rem] text-[#888] font-geist leading-relaxed max-w-2xl mx-auto">
           Nesse encontro, você estará cercada por mulheres que também decidiram se escolher.
@@ -1242,7 +1235,7 @@
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
 
     <!-- Ambient glows -->
-    <div class="absolute top-[15%] left-[10%] w-[500px] h-[400px] bg-orange-500/[0.04] blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-[15%] left-[10%] w-[500px] h-[400px] bg-amber-500/[0.04] blur-[100px] rounded-full pointer-events-none"></div>
     <div class="absolute bottom-[10%] right-[5%] w-[400px] h-[300px] bg-purple-500/[0.03] blur-[80px] rounded-full pointer-events-none"></div>
 
     <div class="relative z-10 max-w-5xl mx-auto px-6">
@@ -1252,7 +1245,7 @@
         <span class="ds-section-label font-geist">Bônus</span>
         <h2 class="text-3xl md:text-[3.5rem] font-jakarta font-medium text-white tracking-tight mt-6 mb-6 leading-[1.1]">
           Bônus exclusivos para<br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">essa experiência</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">essa experiência</span>
         </h2>
         <p class="text-base md:text-[1.15rem] text-[#888] font-geist leading-relaxed max-w-3xl mx-auto">
           Além de tudo que você vai viver durante a imersão, preparamos momentos e experiências especiais para tornar esse encontro ainda mais profundo, leve e inesquecível.
@@ -1265,7 +1258,7 @@
         <!-- Card 1: Convidada Especial -->
         <div class="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-[#444] transition-colors group">
           <div class="w-full aspect-[4/3] bg-white/[0.03] border-b border-white/[0.04] overflow-hidden">
-            <img src="assets/images/aline.jpeg" alt="Aline Correia — Instrutora de Pilates e massoterapeuta" class="w-full h-full object-cover object-top">
+            <img src="assets/images/aline.webp" alt="Aline Correia — Instrutora de Pilates e massoterapeuta" class="w-full h-full object-cover object-top" loading="lazy">
           </div>
           <div class="p-6 flex flex-col flex-1">
             <h3 class="text-xl font-jakarta font-medium text-white tracking-tight mb-2">Convidada Especial: Aline Correia</h3>
@@ -1274,14 +1267,14 @@
             </p>
             <div class="space-y-3 mt-auto">
               <div class="flex items-center gap-3">
-                <div class="w-6 h-6 rounded-md bg-orange-500/10 flex items-center justify-center flex-shrink-0">
-                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-orange-400"></i>
+                <div class="w-6 h-6 rounded-md bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-400"></i>
                 </div>
                 <span class="text-sm text-white/90 font-geist">Liberação da musculatura</span>
               </div>
               <div class="flex items-center gap-3">
-                <div class="w-6 h-6 rounded-md bg-orange-500/10 flex items-center justify-center flex-shrink-0">
-                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-orange-400"></i>
+                <div class="w-6 h-6 rounded-md bg-amber-500/10 flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-400"></i>
                 </div>
                 <span class="text-sm text-white/90 font-geist">Alívio de tensões acumuladas no corpo</span>
               </div>
@@ -1292,7 +1285,7 @@
         <!-- Card 2: Registro Profissional -->
         <div class="glass-panel rounded-2xl overflow-hidden flex flex-col hover:border-[#444] transition-colors group">
           <div class="w-full aspect-[4/3] bg-white/[0.03] border-b border-white/[0.04] overflow-hidden">
-            <img src="assets/images/bibiel.jpeg" alt="Bibiel Fotografia — Registro profissional do evento" class="w-full h-full object-cover object-center">
+            <img src="assets/images/bibiel.webp" alt="Bibiel Fotografia — Registro profissional do evento" class="w-full h-full object-cover object-center" loading="lazy">
           </div>
           <div class="p-6 flex flex-col flex-1">
             <h3 class="text-xl font-jakarta font-medium text-white tracking-tight mb-2">Registro Profissional: Bibiel Fotografia</h3>
@@ -1339,7 +1332,7 @@
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
 
     <!-- Central glow -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-amber-500/10 blur-[120px] rounded-full pointer-events-none"></div>
 
     <!-- Secondary purple glow -->
     <div class="absolute top-[20%] right-[5%] w-[300px] h-[250px] bg-purple-500/[0.04] blur-[80px] rounded-full pointer-events-none"></div>
@@ -1350,7 +1343,7 @@
       <div class="text-center mb-16">
         <span class="ds-section-label font-geist">Garanta sua vaga</span>
         <h2 class="text-3xl md:text-[3.5rem] font-jakarta font-medium text-white tracking-tight mt-6 mb-6 leading-[1.1]">
-          Opções de <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">Ingresso</span>
+          Opções de <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">Ingresso</span>
         </h2>
         <p class="text-base md:text-[1.15rem] text-[#888] font-geist leading-relaxed max-w-2xl mx-auto">
           As vagas são limitadas e essa experiência foi pensada para ser profunda, íntima e transformadora. Se você sente que esse é o seu momento… confie nisso.
@@ -1364,8 +1357,8 @@
         <div class="rounded-2xl p-8 flex flex-col hover:border-[#555] transition-colors" style="background: rgba(17, 17, 17, 0.9); border: 1px solid #333; backdrop-filter: blur(12px);">
           <!-- Header -->
           <div class="flex items-center gap-3 mb-2">
-            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center">
-              <i data-lucide="ticket" class="w-5 h-5 text-orange-400"></i>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center">
+              <i data-lucide="ticket" class="w-5 h-5 text-amber-400"></i>
             </div>
             <div>
               <h3 class="text-lg font-jakarta font-medium text-white tracking-tight">Ingresso Mulher por Inteiro</h3>
@@ -1421,24 +1414,24 @@
         </div>
 
         <!-- Card 2: Dupla — Animated Border Card (DS pattern, laranja) -->
-        <div class="relative group rounded-2xl p-[1px] overflow-hidden shadow-[0_0_40px_rgba(249,115,22,0.12)] flex flex-col">
+        <div class="relative group rounded-2xl p-[1px] overflow-hidden shadow-[0_0_40px_rgba(212,162,76,0.12)] flex flex-col">
           <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 bg-[#222]"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[15rem] bg-gradient-to-b from-transparent via-[#F97316] to-transparent opacity-80" style="animation: rotatePlan 6s linear infinite;"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[15rem] bg-gradient-to-b from-transparent via-[#D4A24C] to-transparent opacity-80" style="animation: rotatePlan 6s linear infinite;"></div>
           </div>
-          <div class="relative z-10 rounded-[15px] p-8 flex flex-col flex-1" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(249,115,22,0.1) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(251,191,36,0.08) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.05) inset">
+          <div class="relative z-10 rounded-[15px] p-8 flex flex-col flex-1" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(212,162,76,0.1) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(251,191,36,0.08) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.05) inset">
             <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
 
             <div class="relative z-10 flex flex-col flex-1">
               <!-- Header -->
               <div class="flex items-center gap-3 mb-2">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500/20 to-amber-500/20 flex items-center justify-center border border-white/20">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500/20 to-yellow-500/20 flex items-center justify-center border border-white/20">
                   <i data-lucide="ticket" class="w-5 h-5 text-amber-400"></i>
                 </div>
                 <div>
                   <div class="flex items-center gap-2">
                     <h3 class="text-lg font-jakarta font-medium text-white tracking-tight">Ingresso em Dupla</h3>
-                    <span class="text-[10px] uppercase font-semibold text-orange-400 tracking-widest bg-orange-500/20 rounded-full px-2 py-0.5 font-geist">Melhor Oferta</span>
+                    <span class="text-[10px] uppercase font-semibold text-amber-400 tracking-widest bg-amber-500/20 rounded-full px-2 py-0.5 font-geist">Melhor Oferta</span>
                   </div>
                   <span class="text-xs font-geist text-[#555] uppercase tracking-wider">Você + uma amiga</span>
                 </div>
@@ -1447,7 +1440,7 @@
               <!-- Preço -->
               <div class="my-6">
                 <span class="text-5xl font-jakarta font-medium text-white tracking-tight">$186</span>
-                <p class="text-sm text-orange-400 font-geist font-medium mt-1">Apenas $93 por pessoa</p>
+                <p class="text-sm text-amber-400 font-geist font-medium mt-1">Apenas $93 por pessoa</p>
               </div>
 
               <!-- Benefícios -->
@@ -1513,7 +1506,7 @@
 
         <div class="faq-item linear-card rounded-2xl reveal">
           <button class="faq-trigger w-full flex items-center gap-3 p-6 text-left cursor-pointer">
-            <i data-lucide="help-circle" class="w-5 h-5 text-orange-400 shrink-0"></i>
+            <i data-lucide="help-circle" class="w-5 h-5 text-amber-400 shrink-0"></i>
             <span class="font-jakarta text-lg font-medium text-white leading-tight flex-1">Quanto tempo dura a imersão?</span>
             <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-white/40 shrink-0"></i>
           </button>
@@ -1528,7 +1521,7 @@
 
         <div class="faq-item linear-card rounded-2xl reveal">
           <button class="faq-trigger w-full flex items-center gap-3 p-6 text-left cursor-pointer">
-            <i data-lucide="help-circle" class="w-5 h-5 text-orange-400 shrink-0"></i>
+            <i data-lucide="help-circle" class="w-5 h-5 text-amber-400 shrink-0"></i>
             <span class="font-jakarta text-lg font-medium text-white leading-tight flex-1">Eu preciso ter algum tipo de experiência ou conhecimento?</span>
             <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-white/40 shrink-0"></i>
           </button>
@@ -1543,7 +1536,7 @@
 
         <div class="faq-item linear-card rounded-2xl reveal">
           <button class="faq-trigger w-full flex items-center gap-3 p-6 text-left cursor-pointer">
-            <i data-lucide="help-circle" class="w-5 h-5 text-orange-400 shrink-0"></i>
+            <i data-lucide="help-circle" class="w-5 h-5 text-amber-400 shrink-0"></i>
             <span class="font-jakarta text-lg font-medium text-white leading-tight flex-1">O evento é terapêutico?</span>
             <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-white/40 shrink-0"></i>
           </button>
@@ -1558,7 +1551,7 @@
 
         <div class="faq-item linear-card rounded-2xl reveal">
           <button class="faq-trigger w-full flex items-center gap-3 p-6 text-left cursor-pointer">
-            <i data-lucide="help-circle" class="w-5 h-5 text-orange-400 shrink-0"></i>
+            <i data-lucide="help-circle" class="w-5 h-5 text-amber-400 shrink-0"></i>
             <span class="font-jakarta text-lg font-medium text-white leading-tight flex-1">O que eu devo levar?</span>
             <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-white/40 shrink-0"></i>
           </button>
@@ -1573,7 +1566,7 @@
 
         <div class="faq-item linear-card rounded-2xl reveal">
           <button class="faq-trigger w-full flex items-center gap-3 p-6 text-left cursor-pointer">
-            <i data-lucide="help-circle" class="w-5 h-5 text-orange-400 shrink-0"></i>
+            <i data-lucide="help-circle" class="w-5 h-5 text-amber-400 shrink-0"></i>
             <span class="font-jakarta text-lg font-medium text-white leading-tight flex-1">Vai ter interação com outras mulheres?</span>
             <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-white/40 shrink-0"></i>
           </button>
@@ -1588,7 +1581,7 @@
 
         <div class="faq-item linear-card rounded-2xl reveal">
           <button class="faq-trigger w-full flex items-center gap-3 p-6 text-left cursor-pointer">
-            <i data-lucide="help-circle" class="w-5 h-5 text-orange-400 shrink-0"></i>
+            <i data-lucide="help-circle" class="w-5 h-5 text-amber-400 shrink-0"></i>
             <span class="font-jakarta text-lg font-medium text-white leading-tight flex-1">E se eu for mais reservada?</span>
             <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-white/40 shrink-0"></i>
           </button>
@@ -1603,7 +1596,7 @@
 
         <div class="faq-item linear-card rounded-2xl reveal">
           <button class="faq-trigger w-full flex items-center gap-3 p-6 text-left cursor-pointer">
-            <i data-lucide="help-circle" class="w-5 h-5 text-orange-400 shrink-0"></i>
+            <i data-lucide="help-circle" class="w-5 h-5 text-amber-400 shrink-0"></i>
             <span class="font-jakarta text-lg font-medium text-white leading-tight flex-1">Posso ir sozinha?</span>
             <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-white/40 shrink-0"></i>
           </button>
@@ -1618,7 +1611,7 @@
 
         <div class="faq-item linear-card rounded-2xl reveal">
           <button class="faq-trigger w-full flex items-center gap-3 p-6 text-left cursor-pointer">
-            <i data-lucide="help-circle" class="w-5 h-5 text-orange-400 shrink-0"></i>
+            <i data-lucide="help-circle" class="w-5 h-5 text-amber-400 shrink-0"></i>
             <span class="font-jakarta text-lg font-medium text-white leading-tight flex-1">Como funciona a compra?</span>
             <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-white/40 shrink-0"></i>
           </button>
@@ -1633,7 +1626,7 @@
 
         <div class="faq-item linear-card rounded-2xl reveal">
           <button class="faq-trigger w-full flex items-center gap-3 p-6 text-left cursor-pointer">
-            <i data-lucide="help-circle" class="w-5 h-5 text-orange-400 shrink-0"></i>
+            <i data-lucide="help-circle" class="w-5 h-5 text-amber-400 shrink-0"></i>
             <span class="font-jakarta text-lg font-medium text-white leading-tight flex-1">Posso cancelar ou transferir minha vaga?</span>
             <i data-lucide="chevron-down" class="faq-chevron w-5 h-5 text-white/40 shrink-0"></i>
           </button>
@@ -1659,7 +1652,7 @@
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.5) 50%, transparent 100%);">
 
     <!-- Ambient glow -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-orange-500/[0.04] blur-[100px] rounded-full pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-amber-500/[0.04] blur-[100px] rounded-full pointer-events-none"></div>
 
     <div class="relative z-10 max-w-5xl mx-auto px-6">
 
@@ -1668,7 +1661,7 @@
         <span class="ds-section-label font-geist">Última mensagem</span>
         <h2 class="text-3xl md:text-[3.5rem] font-medium text-white tracking-tight font-jakarta mt-6 mb-6 leading-[1.1]">
           Ainda estou em dúvida se<br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">esse evento é para mim…</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">esse evento é para mim…</span>
         </h2>
         <div class="max-w-2xl mx-auto space-y-4">
           <p class="text-base md:text-[1.15rem] text-[#888] font-geist leading-relaxed">
@@ -1682,7 +1675,7 @@
 
       <!-- Frase destaque -->
       <div class="text-center max-w-2xl mx-auto mb-20 reveal delay-1">
-        <p class="text-xl md:text-2xl font-jakarta font-medium text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-orange-400 to-amber-400">
+        <p class="text-xl md:text-2xl font-jakarta font-medium text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500">
           E talvez, no fundo, você já saiba a resposta.
         </p>
       </div>
@@ -1716,18 +1709,22 @@
        ================================================================ -->
   <footer class="relative bg-[#050505] py-10">
     <!-- Linha laranja divisória -->
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), rgba(249,115,22,0.25), rgba(255,255,255,0.08), transparent);"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[80%] h-px" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), rgba(212,162,76,0.25), rgba(255,255,255,0.08), transparent);"></div>
 
     <div class="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center gap-5 md:flex-row md:justify-between">
       <p class="font-geist text-sm md:text-base text-white/80">© 2025 Mulher por Inteiro — Fabianna Lima. Todos os direitos reservados.</p>
-      <a href="https://www.instagram.com/elaecapaz" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-orange-400 transition-colors">
+      <a href="https://www.instagram.com/elaecapaz" target="_blank" rel="noopener noreferrer" class="text-white/80 hover:text-amber-400 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
       </a>
     </div>
   </footer>
 
-  <!-- Main Script -->
-  <script src="assets/js/main.js"></script>
+  <!-- Scripts (moved to end of body to avoid render-blocking) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1" defer></script>
+  <script src="https://unpkg.com/lucide@0.460.0" defer></script>
+  <script src="assets/js/main.js" defer></script>
 
 </body>
 </html>
