@@ -776,43 +776,47 @@
         </div>
       </div>
 
-      <!-- Grid de Sintomas (2x2) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-20 reveal delay-1">
+      <!-- Lista de Sintomas (vertical, full-width) -->
+      <div class="max-w-2xl mx-auto space-y-4 mb-20 reveal delay-1">
 
-        <!-- Card 1 -->
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center mb-4 group-hover:bg-rose-500/20 transition-colors">
+        <div class="flex items-start gap-5 p-5 rounded-2xl border border-white/[0.06] hover:border-white/[0.12] transition-colors group">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-rose-500/20 transition-colors">
             <i data-lucide="zap-off" class="w-5 h-5 text-rose-400"></i>
           </div>
-          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Cansaço emocional</h3>
-          <p class="text-sm text-[#888] font-geist leading-relaxed">Aquele peso que não passa, mesmo quando você descansa. Uma exaustão que vem de dentro.</p>
+          <div>
+            <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-1">Cansaço emocional</h3>
+            <p class="text-sm text-[#888] font-geist leading-relaxed">Aquele peso que não passa, mesmo quando você descansa. Uma exaustão que vem de dentro.</p>
+          </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition-colors">
+        <div class="flex items-start gap-5 p-5 rounded-2xl border border-white/[0.06] hover:border-white/[0.12] transition-colors group">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/20 transition-colors">
             <i data-lucide="user-minus" class="w-5 h-5 text-amber-400"></i>
           </div>
-          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Falta de conexão com quem você é</h3>
-          <p class="text-sm text-[#888] font-geist leading-relaxed">Você olha no espelho e não reconhece a mulher que costumava ser. A essência está lá, mas distante.</p>
+          <div>
+            <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-1">Falta de conexão com quem você é</h3>
+            <p class="text-sm text-[#888] font-geist leading-relaxed">Você olha no espelho e não reconhece a mulher que costumava ser. A essência está lá, mas distante.</p>
+          </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors">
+        <div class="flex items-start gap-5 p-5 rounded-2xl border border-white/[0.06] hover:border-white/[0.12] transition-colors group">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/20 transition-colors">
             <i data-lucide="heart" class="w-5 h-5 text-purple-400"></i>
           </div>
-          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Sua autoestima mais baixa do que deveria</h3>
-          <p class="text-sm text-[#888] font-geist leading-relaxed">Você se cobra, se compara e sente que nunca é suficiente. Mas a verdade é que você é muito mais.</p>
+          <div>
+            <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-1">Sua autoestima mais baixa do que deveria</h3>
+            <p class="text-sm text-[#888] font-geist leading-relaxed">Você se cobra, se compara e sente que nunca é suficiente. Mas a verdade é que você é muito mais.</p>
+          </div>
         </div>
 
-        <!-- Card 4 -->
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center mb-4 group-hover:bg-sky-500/20 transition-colors">
+        <div class="flex items-start gap-5 p-5 rounded-2xl border border-white/[0.06] hover:border-white/[0.12] transition-colors group">
+          <div class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-sky-500/20 transition-colors">
             <i data-lucide="clock" class="w-5 h-5 text-sky-400"></i>
           </div>
-          <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Sempre ocupada… mas vazia</h3>
-          <p class="text-sm text-[#888] font-geist leading-relaxed">A agenda está cheia, mas o coração está vazio. Produtividade sem propósito não é viver.</p>
+          <div>
+            <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-1">Sempre ocupada… mas vazia</h3>
+            <p class="text-sm text-[#888] font-geist leading-relaxed">A agenda está cheia, mas o coração está vazio. Produtividade sem propósito não é viver.</p>
+          </div>
         </div>
 
       </div>
@@ -1021,42 +1025,54 @@
         </p>
       </div>
 
-      <!-- Grid de transformações -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto mb-20 text-left">
+      <!-- Transformações — glass cards elevados -->
+      <div class="max-w-2xl mx-auto space-y-3 mb-20">
 
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="flex items-center gap-4">
+        <div class="bg-[#131418] rounded-2xl border border-orange-500/[0.12] p-5 relative overflow-hidden group hover:border-orange-500/[0.25] transition-colors">
+          <div class="relative z-10 flex items-start gap-4">
             <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/20 transition-colors">
               <i data-lucide="sparkles" class="w-5 h-5 text-orange-400"></i>
             </div>
-            <p class="text-[15px] text-white/80 font-geist leading-relaxed">Se reconectar com sua essência</p>
+            <div>
+              <h4 class="text-[15px] font-jakarta font-medium text-white tracking-tight mb-1">Se reconectar com sua essência</h4>
+              <p class="text-xs text-[#888] font-geist leading-relaxed">Voltar a ouvir a sua voz interior — aquela que foi silenciada pela rotina.</p>
+            </div>
           </div>
         </div>
 
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/20 transition-colors">
-              <i data-lucide="sparkles" class="w-5 h-5 text-orange-400"></i>
+        <div class="bg-[#131418] rounded-2xl border border-orange-500/[0.12] p-5 relative overflow-hidden group hover:border-orange-500/[0.25] transition-colors">
+          <div class="relative z-10 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500/20 transition-colors">
+              <i data-lucide="crown" class="w-5 h-5 text-amber-400"></i>
             </div>
-            <p class="text-[15px] text-white/80 font-geist leading-relaxed">Resgatar sua autoestima</p>
+            <div>
+              <h4 class="text-[15px] font-jakarta font-medium text-white tracking-tight mb-1">Resgatar sua autoestima</h4>
+              <p class="text-xs text-[#888] font-geist leading-relaxed">Lembrar do seu valor — não pelo que faz, mas por quem é.</p>
+            </div>
           </div>
         </div>
 
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/20 transition-colors">
-              <i data-lucide="sparkles" class="w-5 h-5 text-orange-400"></i>
+        <div class="bg-[#131418] rounded-2xl border border-orange-500/[0.12] p-5 relative overflow-hidden group hover:border-orange-500/[0.25] transition-colors">
+          <div class="relative z-10 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-rose-500/20 transition-colors">
+              <i data-lucide="flame" class="w-5 h-5 text-rose-400"></i>
             </div>
-            <p class="text-[15px] text-white/80 font-geist leading-relaxed">Despertar sua energia feminina</p>
+            <div>
+              <h4 class="text-[15px] font-jakarta font-medium text-white tracking-tight mb-1">Despertar sua energia feminina</h4>
+              <p class="text-xs text-[#888] font-geist leading-relaxed">Acessar a força que nasce da sua feminilidade, não contra ela.</p>
+            </div>
           </div>
         </div>
 
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-500/20 transition-colors">
-              <i data-lucide="sparkles" class="w-5 h-5 text-orange-400"></i>
+        <div class="bg-[#131418] rounded-2xl border border-orange-500/[0.12] p-5 relative overflow-hidden group hover:border-orange-500/[0.25] transition-colors">
+          <div class="relative z-10 flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/20 transition-colors">
+              <i data-lucide="shield" class="w-5 h-5 text-purple-400"></i>
             </div>
-            <p class="text-[15px] text-white/80 font-geist leading-relaxed">Voltar a se sentir vivas, presentes e seguras</p>
+            <div>
+              <h4 class="text-[15px] font-jakarta font-medium text-white tracking-tight mb-1">Voltar a se sentir viva, presente e segura</h4>
+              <p class="text-xs text-[#888] font-geist leading-relaxed">Sair do piloto automático e habitar a sua vida de verdade.</p>
+            </div>
           </div>
         </div>
 
@@ -1681,46 +1697,39 @@
         </p>
       </div>
 
-      <!-- Subtítulo do grid -->
-      <p class="text-xl font-jakarta font-medium text-white tracking-tight text-center mb-8">Aqui você vai viver:</p>
+      <!-- Grid 1x4 horizontal -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
 
-      <!-- Grid 2x2 -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-
-        <!-- Card 1 -->
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/10 flex items-center justify-center mb-4 group-hover:bg-rose-500/20 transition-colors">
-            <i data-lucide="heart" class="w-5 h-5 text-rose-400"></i>
+        <div class="linear-card rounded-2xl p-6 text-center hover:scale-[1.02] transition-transform group">
+          <div class="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-rose-500/20 transition-colors">
+            <i data-lucide="heart" class="w-6 h-6 text-rose-400"></i>
           </div>
           <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Conexões reais</h3>
-          <p class="text-sm text-[#888] font-geist leading-relaxed">Sem máscaras, sem fachadas. Aqui você pode ser exatamente quem é.</p>
+          <p class="text-xs text-[#888] font-geist leading-relaxed">Sem máscaras. Aqui você pode ser quem é.</p>
         </div>
 
-        <!-- Card 2 -->
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center mb-4 group-hover:bg-amber-500/20 transition-colors">
-            <i data-lucide="users" class="w-5 h-5 text-amber-400"></i>
+        <div class="linear-card rounded-2xl p-6 text-center hover:scale-[1.02] transition-transform group">
+          <div class="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-500/20 transition-colors">
+            <i data-lucide="users" class="w-6 h-6 text-amber-400"></i>
           </div>
           <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Networking feminino</h3>
-          <p class="text-sm text-[#888] font-geist leading-relaxed">Mulheres na mesma frequência, prontas para crescer juntas.</p>
+          <p class="text-xs text-[#888] font-geist leading-relaxed">Mulheres prontas para crescer juntas.</p>
         </div>
 
-        <!-- Card 3 -->
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors">
-            <i data-lucide="sparkles" class="w-5 h-5 text-purple-400"></i>
+        <div class="linear-card rounded-2xl p-6 text-center hover:scale-[1.02] transition-transform group">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500/20 transition-colors">
+            <i data-lucide="sparkles" class="w-6 h-6 text-purple-400"></i>
           </div>
           <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Trocas profundas</h3>
-          <p class="text-sm text-[#888] font-geist leading-relaxed">Conversas verdadeiras que transformam e geram pertencimento.</p>
+          <p class="text-xs text-[#888] font-geist leading-relaxed">Conversas que transformam e geram pertencimento.</p>
         </div>
 
-        <!-- Card 4 -->
-        <div class="linear-card rounded-2xl p-6 hover:scale-[1.02] transition-transform group">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-4 group-hover:bg-emerald-500/20 transition-colors">
-            <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i>
+        <div class="linear-card rounded-2xl p-6 text-center hover:scale-[1.02] transition-transform group">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-emerald-500/20 transition-colors">
+            <i data-lucide="shield-check" class="w-6 h-6 text-emerald-400"></i>
           </div>
           <h3 class="text-base font-jakarta font-medium text-white tracking-tight mb-2">Ambiente seguro</h3>
-          <p class="text-sm text-[#888] font-geist leading-relaxed">Acolhedor e sem julgamentos. Um espaço onde vulnerabilidade é força.</p>
+          <p class="text-xs text-[#888] font-geist leading-relaxed">Onde vulnerabilidade é força.</p>
         </div>
 
       </div>
