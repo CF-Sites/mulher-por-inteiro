@@ -433,15 +433,26 @@
     .section-glow {
       position: relative;
     }
-    .section-glow::before {
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      position: relative;
+    }
+    .section-divider::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.15), rgba(249, 115, 22, 0.4), rgba(249, 115, 22, 0.15), transparent);
+      inset: 0;
+      background: linear-gradient(90deg, transparent 5%, rgba(249, 115, 22, 0.2) 20%, rgba(249, 115, 22, 0.5) 50%, rgba(249, 115, 22, 0.2) 80%, transparent 95%);
+    }
+    .section-divider::after {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 15%;
+      right: 15%;
+      height: 7px;
+      background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.2), transparent);
+      filter: blur(4px);
     }
 
     /* ============================================
@@ -853,7 +864,9 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <div class="section-divider"></div>
+
+  <!-- ===================================================================
        SECTION 3: PÚBLICO-ALVO
        ================================================================ -->
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
@@ -981,7 +994,9 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <div class="section-divider"></div>
+
+  <!-- ===================================================================
        SECTION 5: O CHAMADO / MANIFESTO
        ================================================================ -->
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
@@ -1110,7 +1125,9 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <div class="section-divider"></div>
+
+  <!-- ===================================================================
        SECTION 4: PROVA SOCIAL / DEPOIMENTOS (Unificada)
        ================================================================ -->
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
@@ -1363,7 +1380,9 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <div class="section-divider"></div>
+
+  <!-- ===================================================================
        SECTION 6: CONTEÚDO DA IMERSÃO
        ================================================================ -->
   <section class="relative py-16 md:py-24 section-glow overflow-hidden">
@@ -1561,7 +1580,9 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <div class="section-divider"></div>
+
+  <!-- ===================================================================
        SECTION 7: ANFITRIÃ / AUTORIDADE
        ================================================================ -->
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
@@ -1672,7 +1693,9 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <div class="section-divider"></div>
+
+  <!-- ===================================================================
        SECTION 8: COMUNIDADE / CONEXÃO
        ================================================================ -->
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
@@ -1737,7 +1760,9 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <div class="section-divider"></div>
+
+  <!-- ===================================================================
        SECTION 10: BÔNUS EXCLUSIVOS
        ================================================================ -->
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
@@ -1832,7 +1857,9 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <div class="section-divider"></div>
+
+  <!-- ===================================================================
        SECTION 11: PRICING / ÁREA DE COMPRA
        ================================================================ -->
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
@@ -1988,7 +2015,9 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <div class="section-divider"></div>
+
+  <!-- ===================================================================
        SECTION 12: FAQ / PERGUNTAS FREQUENTES
        ================================================================ -->
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
@@ -2148,7 +2177,9 @@
     </div>
   </section>
 
-  <!-- ================================================================
+  <div class="section-divider"></div>
+
+  <!-- ===================================================================
        SECTION 13: FECHAMENTO EMOCIONAL E CTA FINAL
        ================================================================ -->
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.5) 50%, transparent 100%);">
@@ -2203,6 +2234,8 @@
 
     </div>
   </section>
+
+  <div class="section-divider"></div>
 
   <!-- ================================================================
        FOOTER
