@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backups
+*.backup
+
+# Reference files (not needed for deploy)
+Fotos/
+fluxer-saas.aura.build/
+writer-platform-47.aura.build/
+Projeto Final/
+
+# Editor
+.vscode/
+.idea/
+
+# Images at root (originals, not optimized)
+Branding Fabi-*.jpg.jpeg

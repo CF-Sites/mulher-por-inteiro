@@ -1,0 +1,541 @@
+/* ============================================
+   ROOT VARIABLES — design_system.html
+   ============================================ */
+:root {
+  --bg-color: #050505;
+  --bg-elevated: #0a0a0a;
+  --card-bg: #111111;
+  --text-main: #ffffff;
+  --text-dim: #888888;
+  --text-subtle: #555555;
+  --border-color: #222222;
+  --border-elevated: #333333;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-surface: rgba(255, 255, 255, 0.03);
+  --accent-orange: #F97316;
+  --accent-amber: #FBBF24;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Inter', 'Geist', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   CUSTOM CURSOR
+   ============================================ */
+#cursor-dot,
+#cursor-outline {
+  pointer-events: none;
+  position: fixed;
+  top: 0; left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 99999;
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+#cursor-dot {
+  width: 6px; height: 6px;
+  background-color: #ffca28;
+  box-shadow: 0 0 10px #ff8f00;
+}
+#cursor-outline {
+  width: 35px; height: 35px;
+  border: 2px solid #ffca28;
+  background: radial-gradient(circle, rgba(255, 143, 0, 0.3) 0%, rgba(255, 202, 40, 0) 70%);
+  box-shadow: 0 0 15px rgba(255, 143, 0, 0.2);
+  transition: all 0.15s ease-out;
+}
+.cursor-active #cursor-dot {
+  transform: translate(-50%, -50%) scale(0.5);
+  background-color: #ffffff;
+}
+.cursor-active #cursor-outline {
+  transform: translate(-50%, -50%) scale(1.8);
+  background-color: rgba(255, 143, 0, 0.15);
+  border-color: #ffca28;
+  box-shadow: 0 0 25px rgba(255, 143, 0, 0.4);
+}
+@media (pointer: fine) {
+  html, body { cursor: none; }
+  a, button, .hover-target, [role="button"] { cursor: none !important; }
+}
+
+/* ============================================
+   GRID BACKGROUND
+   ============================================ */
+.linear-grid {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+}
+
+/* ============================================
+   NOISE OVERLAY
+   ============================================ */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ============================================
+   HERO PHOTO
+   ============================================ */
+.photo-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.photo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 10%;
+}
+
+/* ============================================
+   FEATURED CARD — rotating border
+   ============================================ */
+.featured-card-outer {
+  position: absolute;
+  bottom: -5%;
+  right: -8%;
+  z-index: 20;
+  border-radius: 16px;
+  padding: 1px;
+  overflow: hidden;
+  max-width: 320px;
+  box-shadow: 0 0 40px rgba(147, 51, 234, 0.1);
+}
+
+.featured-card-outer .rotating-border {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.featured-card-outer .rotating-border .border-bg {
+  position: absolute;
+  inset: 0;
+  background: #1a1a1a;
+}
+.featured-card-outer .rotating-border .border-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200%;
+  height: 10rem;
+  background: linear-gradient(to bottom, transparent, #9333ea, transparent);
+  opacity: 0.8;
+  animation: rotatePlan 6s linear infinite;
+}
+
+.featured-card-inner {
+  position: relative;
+  z-index: 10;
+  border-radius: 15px;
+  padding: 0.85rem 1.2rem;
+  background-color: #0a0a0a;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(168,85,247,0.12) 0px, transparent 65%),
+    radial-gradient(at 100% 100%, rgba(217,70,239,0.08) 0px, transparent 65%);
+  box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.05) inset;
+}
+
+.featured-card-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity: 0.1;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+@keyframes rotatePlan {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(120px) rotate(0deg); }
+  to { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+@keyframes orbit-reverse {
+  from { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+  to { transform: rotate(-360deg) translateX(180px) rotate(360deg); }
+}
+
+@keyframes marquee-rtl {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes breathe-cta {
+  0%, 100% { box-shadow: 0 0 20px rgba(249,115,22,0.3), 0 0 60px rgba(249,115,22,0.1); }
+  50% { box-shadow: 0 0 40px rgba(249,115,22,0.5), 0 0 100px rgba(249,115,22,0.2); }
+}
+
+/* ============================================
+   TITLE — Outline stroke style
+   ============================================ */
+.title-outline {
+  -webkit-text-stroke: 1.5px rgba(251, 191, 36, 0.7);
+  color: transparent;
+  font-size: clamp(3.8rem, 8vw, 8rem);
+  line-height: 0.9;
+}
+
+.title-solid {
+  color: var(--text-main);
+  font-size: clamp(3rem, 6.5vw, 6.5rem);
+  line-height: 0.95;
+}
+
+.title-gradient {
+  background: linear-gradient(90deg, #fdba74, #fb923c, #f97316, #fbbf24, #fdba74);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+/* ============================================
+   OVERLINE WITH LINE
+   ============================================ */
+.overline-line::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: var(--text-subtle);
+  vertical-align: middle;
+  margin-right: 12px;
+}
+
+/* ============================================
+   ACCENT TAG
+   ============================================ */
+.accent-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  background: rgba(249, 115, 22, 0.1);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-orange);
+}
+
+.accent-tag::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.6);
+}
+
+/* ============================================
+   INFO INLINE
+   ============================================ */
+.info-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: center;
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.info-inline .info-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.info-inline .ph {
+  font-size: 1rem;
+  color: var(--accent-orange);
+}
+
+.urgency-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ef4444;
+}
+
+.urgency-line .ph {
+  font-size: 1rem;
+  color: #ef4444;
+}
+
+/* ============================================
+   CREDIBILITY LINE
+   ============================================ */
+.credit-line {
+  padding-left: 1rem;
+  border-left: 2px solid rgba(249, 115, 22, 0.4);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ============================================
+   CTA — Orange Pill
+   ============================================ */
+.cta-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 56px;
+  padding: 0 2.2rem;
+  border-radius: 9999px;
+  font-family: 'Geist', 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+  text-decoration: none;
+}
+.cta-pill .cta-glow {
+  position: absolute; inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(to right, rgba(249,115,22,0.2), rgba(251,191,36,0.3), rgba(249,115,22,0.2));
+  box-shadow: 0 0 22px rgba(248,181,129,0.55);
+  outline: 1px solid rgba(251,191,36,0.6);
+  pointer-events: none;
+}
+.cta-pill .cta-fill {
+  position: absolute; inset: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, #fb923c, #f97316, #fbbf24);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.45);
+  pointer-events: none;
+}
+.cta-pill .cta-reflect {
+  position: absolute; bottom: -12px;
+  left: 50%; transform: translateX(-50%);
+  width: 70%; height: 16px;
+  border-radius: 9999px;
+  background: rgba(251,191,36,0.35);
+  filter: blur(16px);
+  pointer-events: none;
+}
+.cta-pill .cta-label {
+  position: relative; z-index: 10;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.cta-pill:hover {
+  transform: translateY(-3px) scale(1.04);
+  filter: brightness(1.1);
+}
+.cta-pill:active { transform: scale(0.97); }
+.cta-pill::after {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.6s; z-index: 11;
+}
+.cta-pill:hover::after { left: 100%; }
+
+.cta-breathing { animation: breathe-cta 2s ease-in-out infinite; }
+
+/* ============================================
+   SECTION GLOW & DIVIDER
+   ============================================ */
+.section-glow {
+  position: relative;
+}
+.section-divider {
+  width: 100%;
+  height: 1px;
+  position: relative;
+}
+.section-divider::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 5%, rgba(249, 115, 22, 0.2) 20%, rgba(249, 115, 22, 0.5) 50%, rgba(249, 115, 22, 0.2) 80%, transparent 95%);
+}
+.section-divider::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 15%;
+  right: 15%;
+  height: 7px;
+  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.2), transparent);
+  filter: blur(4px);
+}
+
+/* ============================================
+   LINEAR CARD
+   ============================================ */
+.linear-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.linear-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================
+   SCROLL REVEAL
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+}
+.reveal.delay-1 { transition-delay: 0.1s; }
+.reveal.delay-2 { transition-delay: 0.2s; }
+.reveal.delay-3 { transition-delay: 0.3s; }
+.reveal.delay-4 { transition-delay: 0.4s; }
+
+/* ============================================
+   DS SECTION LABEL
+   ============================================ */
+.ds-section-label {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.2rem 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ============================================
+   GLASS PANEL — dark glassmorphism card
+   ============================================ */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ============================================
+   SCROLLBAR HIDE (testimonial carousel)
+   ============================================ */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ============================================
+   FAQ ACCORDION
+   ============================================ */
+.faq-item .faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+.faq-item.open .faq-answer {
+  opacity: 1;
+}
+.faq-item .faq-chevron {
+  transition: transform 0.2s ease;
+}
+.faq-item.open .faq-chevron {
+  transform: rotate(180deg);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1023px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  .photo-col { order: -1; }
+  .content-col { order: 1; text-align: center; }
+  .content-inner { align-items: center !important; }
+  .photo-wrapper {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+  .featured-card-outer {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: -1.5rem auto 0;
+  }
+  .info-inline { justify-content: center; }
+  .credit-line { text-align: left; }
+  .cta-area { align-items: center; }
+}
+
+@media (max-width: 640px) {
+  .title-outline { font-size: clamp(2.8rem, 14vw, 4.5rem) !important; }
+  .title-solid { font-size: clamp(2.2rem, 11vw, 3.5rem) !important; }
+  .photo-wrapper { max-width: 300px; }
+  .info-inline { flex-direction: column; gap: 0.6rem; }
+}
