@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Conceito Criativo — Mulher Por Inteiro</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --gold: #DAA520;
+      --gold-light: #E8C44A;
+      --purple: #9333EA;
+      --bg: #0a0a0a;
+      --card: #111111;
+      --text: #e0e0e0;
+      --text-dim: #999;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 11pt;
+    }
+
+    /* ---- COVER ---- */
+    .cover {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 3rem;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(218,165,32,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(60px);
+    }
+
+    .cover-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(218,165,32,0.3);
+      padding: 0.3rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .cover h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .cover h1 span {
+      background: linear-gradient(90deg, #F0D878, #E8C44A, #DAA520);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-dim);
+      max-width: 400px;
+      margin-top: 1.5rem;
+      position: relative;
+    }
+
+    .cover-footer {
+      position: absolute;
+      bottom: 3rem;
+      font-size: 0.7rem;
+      color: #555;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ---- PAGES ---- */
+    .page {
+      padding: 3.5rem 3.5rem;
+      page-break-before: always;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(218,165,32,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.01em;
+    }
+
+    h2 .accent {
+      background: linear-gradient(90deg, #F0D878, #DAA520);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-line {
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1rem 0 2rem;
+    }
+
+    h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      margin: 2rem 0 0.5rem;
+    }
+
+    p {
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+
+    .dim { color: var(--text-dim); }
+
+    em.gold {
+      font-style: normal;
+      color: var(--gold-light);
+      font-weight: 500;
+    }
+
+    em.purple {
+      font-style: normal;
+      color: #c084fc;
+      font-weight: 500;
+    }
+
+    /* ---- COLOR SWATCHES ---- */
+    .swatches {
+      display: flex;
+      gap: 1.2rem;
+      margin: 1.5rem 0 2rem;
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 0.7rem 1rem;
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .swatch-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .swatch-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .swatch-name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    .swatch-hex {
+      font-size: 0.7rem;
+      color: #666;
+      font-family: monospace;
+    }
+
+    /* ---- CARDS ---- */
+    .concept-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .concept-card h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+
+    .concept-card p {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 0;
+    }
+
+    /* ---- TABLE ---- */
+    .summary-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 1.5rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .summary-table th {
+      background: rgba(218,165,32,0.08);
+      color: var(--gold);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.8rem 1.2rem;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .summary-table td {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.85rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .summary-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .summary-table td:first-child {
+      color: white;
+      font-weight: 500;
+    }
+
+    .summary-table td:last-child {
+      color: var(--text-dim);
+    }
+
+    /* ---- QUOTE ---- */
+    .quote-block {
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.5rem;
+      margin: 2rem 0;
+      background: rgba(218,165,32,0.04);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .quote-block p {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: white;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ---- BULLET LIST ---- */
+    .symbol-list {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .symbol-list li {
+      padding: 0.3rem 0 0.3rem 1.5rem;
+      position: relative;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    .symbol-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.7rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 6px rgba(218,165,32,0.5);
+    }
+
+    /* ---- FONT PREVIEW ---- */
+    .font-preview {
+      display: flex;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .font-card {
+      flex: 1;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .font-card .sample {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+
+    .font-card .sample.jakarta {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+    }
+
+    .font-card .sample.geist {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+    }
+
+    .font-card .meta {
+      font-size: 0.7rem;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ---- CLOSING ---- */
+    .closing-phrase {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 3rem 2rem;
+      position: relative;
+    }
+
+    .closing-phrase::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(218,165,32,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(40px);
+    }
+
+    .closing-phrase p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: white;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .closing-phrase .gold-text {
+      background: linear-gradient(90deg, #F0D878, #DAA520);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-number {
+      position: absolute;
+      bottom: 2rem;
+      right: 3.5rem;
+      font-size: 0.65rem;
+      color: #333;
+      letter-spacing: 0.1em;
+    }
+
+    .watermark {
+      position: absolute;
+      bottom: 2rem;
+      left: 3.5rem;
+      font-size: 0.6rem;
+      color: #333;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== COVER ==================== -->
+  <div class="cover">
+    <div class="cover-label">Conceito Criativo</div>
+    <h1>Mulher<br><span>Por Inteiro</span></h1>
+    <p class="cover-subtitle">Diretrizes de design, paleta de cores e conceito visual do site da imersão feminina conduzida por Fabianna Lima.</p>
+    <div class="cover-footer">Documento confidencial &mdash; Abril 2026</div>
+  </div>
+
+  <!-- ==================== PAGE 1: METÁFORA ==================== -->
+  <div class="page">
+    <h2>A Metáfora Central</h2>
+    <div class="section-line"></div>
+
+    <p>Todo o design deste site foi construído sobre uma única metáfora:</p>
+
+    <div class="quote-block">
+      <p>A mulher como uma brasa que nunca se apagou &mdash; apenas ficou coberta pelas cinzas da rotina.</p>
+    </div>
+
+    <p>Essa ideia guia cada decisão visual, desde as cores até os movimentos na tela. O fundo escuro representa o momento de silêncio antes do despertar. O dourado é a brasa. As animações são a respiração que traz tudo de volta à vida.</p>
+
+    <p class="dim">O objetivo não é apenas informar sobre o evento &mdash; é fazer a mulher <em class="gold">sentir</em> antes de pensar. Quando ela navega o site, já está vivenciando, simbolicamente, o processo de reconexão que a imersão propõe.</p>
+
+    <h3>Por que escuro (e não claro)?</h3>
+
+    <p>Um site claro e "feminino" no sentido convencional (rosa, tons pastel) teria comunicado delicadeza. Mas essa imersão <em class="gold">não é sobre delicadeza &mdash; é sobre força.</em> É sobre despertar.</p>
+
+    <div class="concept-card">
+      <h4>O escuro comunica três coisas:</h4>
+      <ul class="symbol-list">
+        <li><strong style="color: white;">Sofisticação</strong> &mdash; este é um evento premium, íntimo, de 30 vagas</li>
+        <li><strong style="color: white;">Profundidade</strong> &mdash; o trabalho interior acontece nas camadas mais profundas</li>
+        <li><strong style="color: white;">Contraste</strong> &mdash; quando a luz dourada aparece no escuro, ela tem 10x mais impacto. Assim como a mulher que desperta: quando ela acende, todos veem</li>
+      </ul>
+    </div>
+
+    <div class="watermark">Mulher Por Inteiro &mdash; Conceito Criativo</div>
+    <div class="page-number">01</div>
+  </div>
+
+  <!-- ==================== PAGE 2: PALETA ==================== -->
+  <div class="page">
+    <h2>Paleta de <span class="accent">Cores</span></h2>
+    <div class="section-line"></div>
+
+    <!-- Escuro -->
+    <h3>Fundo Escuro</h3>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-circle" style="background: #050505;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Base</span>
+          <span class="swatch-hex">#050505</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background: #0a0a0a;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Elevado</span>
+          <span class="swatch-hex">#0A0A0A</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background: #111111;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Card</span>
+          <span class="swatch-hex">#111111</span>
+        </div>
+      </div>
+    </div>
+    <p class="dim">O fundo escuro não é "sombrio" &mdash; ele representa o <em class="gold">silêncio interior</em>, aquele momento de pausa antes do despertar. Assim como num teatro, quando as luzes apagam, toda a atenção vai para o que ilumina. O escuro é o palco. A mulher é a luz.</p>
+
+    <!-- Dourado -->
+    <h3>Dourado / Âmbar &mdash; Cor Protagonista</h3>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-circle" style="background: #DAA520;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Gold</span>
+          <span class="swatch-hex">#DAA520</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background: #E8C44A;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Gold Light</span>
+          <span class="swatch-hex">#E8C44A</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background: #FBBF24;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Amber</span>
+          <span class="swatch-hex">#FBBF24</span>
+        </div>
+      </div>
+    </div>
+    <p>O dourado carrega três simbologias simultâneas:</p>
+    <ul class="symbol-list">
+      <li><strong style="color: white;">Fogo interior</strong> &mdash; a energia vital que está adormecida mas nunca se apagou</li>
+      <li><strong style="color: white;">Valor próprio</strong> &mdash; o ouro é universal como símbolo de algo precioso e raro</li>
+      <li><strong style="color: white;">Calor humano</strong> &mdash; é a cor da intimidade, do aconchego, da luz de vela num espaço seguro</li>
+    </ul>
+    <p class="dim">O gradiente que vai do dourado ao âmbar representa a <em class="gold">transição do adormecido para o desperto</em> &mdash; de uma brasa morna para uma chama viva.</p>
+
+    <!-- Roxo -->
+    <h3>Roxo / Púrpura &mdash; Cor de Destaque</h3>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-circle" style="background: #9333EA;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Purple</span>
+          <span class="swatch-hex">#9333EA</span>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-circle" style="background: #D946EF;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Fuchsia</span>
+          <span class="swatch-hex">#D946EF</span>
+        </div>
+      </div>
+    </div>
+    <p>Usado com parcimônia nos destaques especiais (cards com borda animada, badges):</p>
+    <ul class="symbol-list">
+      <li><strong style="color: white;">Espiritualidade e profundidade</strong> &mdash; este não é um evento superficial, é uma imersão</li>
+      <li><strong style="color: white;">Feminilidade sagrada</strong> &mdash; historicamente o roxo é associado ao poder feminino e à intuição</li>
+      <li><strong style="color: white;">O extraordinário</strong> &mdash; aparece apenas nos momentos de destaque, sinalizando que algo é especial</li>
+    </ul>
+    <p class="dim">A combinação <em class="gold">dourado + roxo</em> cria um contraste entre <em class="gold">calor e profundidade</em>, entre o emocional e o espiritual &mdash; exatamente o que a imersão propõe.</p>
+
+    <div class="watermark">Mulher Por Inteiro &mdash; Conceito Criativo</div>
+    <div class="page-number">02</div>
+  </div>
+
+  <!-- ==================== PAGE 3: TIPOGRAFIA ==================== -->
+  <div class="page">
+    <h2>Tipografia</h2>
+    <div class="section-line"></div>
+
+    <div class="font-preview">
+      <div class="font-card">
+        <div class="sample jakarta">Mulher<br>Por Inteiro</div>
+        <div class="meta">Plus Jakarta Sans &mdash; Titulos</div>
+      </div>
+      <div class="font-card">
+        <div class="sample geist">Uma imersao para resgatar sua essencia.</div>
+        <div class="meta">Geist / Inter &mdash; Corpo</div>
+      </div>
+    </div>
+
+    <div class="concept-card">
+      <h4>Plus Jakarta Sans (Titulos)</h4>
+      <p>Moderna, com peso visual forte. Transmite <em class="gold">autoridade sem rigidez</em>. A mulher que se reconecta nao e fragil &mdash; ela e firme, presente, decidida.</p>
+    </div>
+
+    <div class="concept-card">
+      <h4>Geist / Inter (Corpo e Labels)</h4>
+      <p>Clean, leve, altamente legivel. Representa a <em class="gold">clareza</em> que vem depois do caos interno. A comunicacao e direta porque a proposta e direta: pare de se deixar para depois.</p>
+    </div>
+
+    <p class="dim">O contraste entre titulos pesados e textos leves cria um ritmo de leitura que alterna entre <em class="gold">impacto emocional e acolhimento</em>.</p>
+
+    <h2 style="margin-top: 3rem;">Movimento e <span class="accent">Interacao</span></h2>
+    <div class="section-line"></div>
+
+    <div class="concept-card">
+      <h4>Particulas Orbitando</h4>
+      <p>Simbolizam a energia em movimento, aquilo que esta ao redor da mulher esperando ser reconectado.</p>
+    </div>
+
+    <div class="concept-card">
+      <h4>Animacoes de Flutuacao (float)</h4>
+      <p>Nada e agressivo. Tudo respira. O site tem um ritmo organico porque a proposta e sair do automatico e voltar ao ritmo natural do corpo.</p>
+    </div>
+
+    <div class="concept-card">
+      <h4>Cursor Personalizado Dourado</h4>
+      <p>Cada movimento do mouse deixa um rastro de luz. A mulher que navega esse site ja esta, simbolicamente, <em class="gold">acendendo algo</em> a cada gesto.</p>
+    </div>
+
+    <div class="concept-card">
+      <h4>Gradientes Pulsantes (pulse-glow)</h4>
+      <p>Como uma respiracao visual. O site respira junto com quem le.</p>
+    </div>
+
+    <div class="watermark">Mulher Por Inteiro &mdash; Conceito Criativo</div>
+    <div class="page-number">03</div>
+  </div>
+
+  <!-- ==================== PAGE 4: ESTRUTURA + RESUMO ==================== -->
+  <div class="page">
+    <h2>Estrutura <span class="accent">Visual</span></h2>
+    <div class="section-line"></div>
+
+    <div class="concept-card">
+      <h4>Cards com Vidro Escuro (Glassmorphism)</h4>
+      <p>Representam janelas de introspecao. Cada card e como um espelho escuro onde a mulher se ve refletida nos sintomas, nas promessas, nas transformacoes.</p>
+    </div>
+
+    <div class="concept-card">
+      <h4>Bordas Animadas Rotacionais</h4>
+      <p>Energia em movimento constante. Quando algo tem essa borda girando, comunica: <em class="gold">isso esta vivo, isso pulsa, isso e diferente.</em></p>
+    </div>
+
+    <div class="concept-card">
+      <h4>Grid Sutil no Fundo</h4>
+      <p>Estrutura invisivel. Mesmo no caos emocional da rotina, existe uma base. O grid diz: <em class="gold">existe ordem por baixo de tudo &mdash; voce so precisa se reconectar com ela.</em></p>
+    </div>
+
+    <h2 style="margin-top: 3rem;">Resumo da <span class="accent">Intencao</span></h2>
+    <div class="section-line"></div>
+
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>O que comunica</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fundo escuro</td>
+          <td>Profundidade, introspecao, palco para o despertar</td>
+        </tr>
+        <tr>
+          <td>Dourado / Ambar</td>
+          <td>Valor proprio, fogo interior, calor e acolhimento</td>
+        </tr>
+        <tr>
+          <td>Roxo</td>
+          <td>Feminilidade sagrada, espiritualidade, o extraordinario</td>
+        </tr>
+        <tr>
+          <td>Tipografia forte</td>
+          <td>Autoridade, decisao, presenca</td>
+        </tr>
+        <tr>
+          <td>Animacoes organicas</td>
+          <td>Respiracao, ritmo natural, saida do automatico</td>
+        </tr>
+        <tr>
+          <td>Glassmorphism escuro</td>
+          <td>Introspecao, espelhos internos</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="closing-phrase">
+      <p>O site e uma experiencia visual que faz a mulher sentir antes de pensar &mdash; ela entra no escuro, encontra a brasa, e quando clica no botao dourado, ja esta simbolicamente dizendo:<br><br><span class="gold-text">&ldquo;Eu me escolho.&rdquo;</span></p>
+    </div>
+
+    <div class="watermark">Mulher Por Inteiro &mdash; Conceito Criativo</div>
+    <div class="page-number">04</div>
+  </div>
+
+</body>
+</html>

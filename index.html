@@ -20,28 +20,14 @@
   <!-- Preload: hero image (LCP element) -->
   <link rel="preload" href="assets/images/fabianna-hero.webp" as="image" type="image/webp">
 
-  <!-- Fonts (with font-display:swap to avoid blocking) -->
+  <!-- Fonts (unified request, non-blocking) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
 
-  <!-- Tailwind CSS (must stay in head for class resolution) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            jakarta: ['"Plus Jakarta Sans"', 'sans-serif'],
-            geist: ['"Geist"', '"Inter"', 'sans-serif'],
-            inter: ['"Inter"', 'sans-serif'],
-          }
-        }
-      }
-    };
-  </script>
+  <!-- Utility CSS (replaces Tailwind CDN) -->
+  <link rel="stylesheet" href="assets/css/tailwind-utilities.css">
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -114,14 +100,14 @@
 
             <!-- Info inline -->
             <div class="info-inline reveal-up">
-              <span class="info-item"><i class="ph ph-map-pin"></i> Los Altos, Califórnia</span>
-              <span class="info-item"><i class="ph ph-calendar-blank"></i> 16 de Maio</span>
-              <span class="info-item"><i class="ph ph-clock"></i> 2:00 PM</span>
+              <span class="info-item"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="color: var(--accent-gold)"><path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.17,83.41,134.55a8,8,0,0,0,9.18,0C136,236.17,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/></svg> Los Altos, Califórnia</span>
+              <span class="info-item"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="color: var(--accent-gold)"><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32Zm0,176H48V48H72v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24Z"/></svg> 16 de Maio</span>
+              <span class="info-item"><svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="color: var(--accent-gold)"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm56,112H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48a8,8,0,0,1,0,16Z"/></svg> 2:00 PM</span>
             </div>
 
             <!-- Urgency line -->
             <div class="urgency-line reveal-up">
-              <i class="ph ph-users"></i>
+              <svg width="16" height="16" viewBox="0 0 256 256" fill="currentColor" style="color: #ef4444"><path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,49.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"/></svg>
               <span>Apenas 30 vagas</span>
             </div>
 
@@ -162,7 +148,7 @@
             <div class="featured-card-inner">
               <div class="relative z-10 flex items-center gap-3">
                 <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center border border-white/10 flex-shrink-0">
-                  <i class="ph ph-sun text-lg text-purple-400"></i>
+                  <svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" class="text-purple-400"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/></svg>
                 </div>
                 <div>
                   <div class="text-[12px] font-jakarta font-medium text-white tracking-tight">Imersão Presencial</div>
@@ -350,7 +336,7 @@
     </div>
 
     <!-- Noise grain overlay -->
-    <div class="absolute inset-0 pointer-events-none opacity-[0.07]" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+    <div class="noise-grain"></div>
 
     <div class="relative z-10 max-w-5xl mx-auto px-6">
 
@@ -415,7 +401,7 @@
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[10rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-70" style="animation: rotatePlan 6s linear infinite;"></div>
           </div>
           <div class="relative z-10 rounded-[15px] p-6 md:p-8" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.1) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.08) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.04) inset">
-            <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-[15px]"></div>
             <div class="relative z-10 flex items-center gap-5">
               <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center border border-white/10 flex-shrink-0">
                 <i data-lucide="users" class="w-6 h-6 text-purple-400"></i>
@@ -470,7 +456,7 @@
   <section class="relative py-16 md:py-24 section-glow overflow-hidden" style="background: linear-gradient(180deg, transparent 0%, rgba(10,10,10,0.4) 50%, transparent 100%);">
 
     <!-- Noise grain -->
-    <div class="absolute inset-0 pointer-events-none opacity-[0.07]" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+    <div class="noise-grain"></div>
 
     <!-- Ambient glows -->
     <div class="absolute top-[10%] left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-amber-500/[0.06] blur-[120px] rounded-full pointer-events-none"></div>
@@ -605,7 +591,7 @@
     <div class="absolute bottom-[10%] left-0 w-[400px] h-[300px] bg-purple-500/[0.03] blur-[80px] rounded-full pointer-events-none"></div>
 
     <!-- Noise grain -->
-    <div class="absolute inset-0 pointer-events-none opacity-[0.07]" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+    <div class="noise-grain"></div>
 
     <div class="relative z-10 max-w-6xl mx-auto px-6">
 
@@ -627,7 +613,7 @@
 
           <!-- Card 1 -->
           <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
-            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-2xl"></div>
             <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
             <div class="flex gap-1 mb-5 relative z-10">
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
@@ -653,7 +639,7 @@
               <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[12rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-60" style="animation: rotatePlan 8s linear infinite;"></div>
             </div>
             <div class="relative z-10 rounded-[15px] p-8" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.08) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.06) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.04) inset">
-              <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+              <div class="noise-card rounded-[15px]"></div>
               <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-purple-400/10"></i></div>
               <div class="flex gap-1 mb-5 relative z-10">
                 <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
@@ -675,7 +661,7 @@
 
           <!-- Card 3 -->
           <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
-            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-2xl"></div>
             <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
             <div class="flex gap-1 mb-5 relative z-10">
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
@@ -696,7 +682,7 @@
 
           <!-- Card 4 -->
           <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
-            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-2xl"></div>
             <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
             <div class="flex gap-1 mb-5 relative z-10">
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
@@ -722,7 +708,7 @@
               <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[12rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-60" style="animation: rotatePlan 8s linear infinite; animation-delay: -4s;"></div>
             </div>
             <div class="relative z-10 rounded-[15px] p-8" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.08) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.06) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.04) inset">
-              <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+              <div class="noise-card rounded-[15px]"></div>
               <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-purple-400/10"></i></div>
               <div class="flex gap-1 mb-5 relative z-10">
                 <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
@@ -744,7 +730,7 @@
 
           <!-- Card 6 -->
           <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
-            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-2xl"></div>
             <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
             <div class="flex gap-1 mb-5 relative z-10">
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
@@ -765,7 +751,7 @@
 
           <!-- Card 1 -->
           <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
-            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-2xl"></div>
             <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
             <div class="flex gap-1 mb-5 relative z-10">
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
@@ -779,7 +765,7 @@
 
           <!-- Card 2 — Featured (DS: gradientes internos, sem rotate border) -->
           <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(147,51,234,0.08)] border border-purple-500/20 transition-all duration-500" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.12) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.12) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.05) inset">
-            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-2xl"></div>
             <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-purple-400/10"></i></div>
             <div class="p-8 relative z-10">
               <div class="flex gap-1 mb-5">
@@ -795,7 +781,7 @@
 
           <!-- Card 3 -->
           <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
-            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-2xl"></div>
             <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
             <div class="flex gap-1 mb-5 relative z-10">
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
@@ -809,7 +795,7 @@
 
           <!-- Card 4 -->
           <div class="testimonial-card w-[85vw] md:w-[400px] shrink-0 snap-center glass-panel rounded-2xl p-8 relative group hover:border-[#444] transition-all duration-500">
-            <div class="absolute inset-0 rounded-2xl bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-2xl"></div>
             <div class="absolute top-6 right-6"><i data-lucide="quote" class="w-8 h-8 text-white/[0.06]"></i></div>
             <div class="flex gap-1 mb-5 relative z-10">
               <i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i><i data-lucide="star" class="w-3.5 h-3.5 text-amber-400 fill-amber-400"></i>
@@ -859,7 +845,7 @@
     <div class="absolute inset-0 linear-grid opacity-30 pointer-events-none"></div>
 
     <!-- Noise grain -->
-    <div class="absolute inset-0 pointer-events-none opacity-[0.07]" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+    <div class="noise-grain"></div>
 
     <!-- Ambient glows -->
     <div class="absolute top-[15%] right-0 w-[500px] h-[400px] bg-amber-500/5 blur-[100px] rounded-full pointer-events-none"></div>
@@ -955,7 +941,7 @@
           <div class="space-y-3">
             <!-- Glass card 1 -->
             <div class="bg-[#131418] rounded-2xl border border-white/[0.08] p-5 relative overflow-hidden group hover:border-white/[0.15] transition-colors">
-              <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+              <div class="noise-card"></div>
               <div class="relative z-10 flex items-start gap-4">
                 <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/20 transition-colors">
                   <i data-lucide="key" class="w-5 h-5 text-purple-400"></i>
@@ -969,7 +955,7 @@
 
             <!-- Glass card 2 -->
             <div class="bg-[#131418] rounded-2xl border border-white/[0.08] p-5 relative overflow-hidden group hover:border-white/[0.15] transition-colors">
-              <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+              <div class="noise-card"></div>
               <div class="relative z-10 flex items-start gap-4">
                 <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/20 transition-colors">
                   <i data-lucide="hand" class="w-5 h-5 text-purple-400"></i>
@@ -983,7 +969,7 @@
 
             <!-- Glass card 3 -->
             <div class="bg-[#131418] rounded-2xl border border-white/[0.08] p-5 relative overflow-hidden group hover:border-white/[0.15] transition-colors">
-              <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+              <div class="noise-card"></div>
               <div class="relative z-10 flex items-start gap-4">
                 <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/20 transition-colors">
                   <i data-lucide="crown" class="w-5 h-5 text-purple-400"></i>
@@ -997,7 +983,7 @@
 
             <!-- Glass card 4 -->
             <div class="bg-[#131418] rounded-2xl border border-white/[0.08] p-5 relative overflow-hidden group hover:border-white/[0.15] transition-colors">
-              <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+              <div class="noise-card"></div>
               <div class="relative z-10 flex items-start gap-4">
                 <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/20 transition-colors">
                   <i data-lucide="fingerprint" class="w-5 h-5 text-purple-400"></i>
@@ -1016,7 +1002,7 @@
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[10rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-60" style="animation: rotatePlan 8s linear infinite;"></div>
               </div>
               <div class="relative z-10 rounded-[15px] p-5" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.08) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.06) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.04) inset">
-                <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+                <div class="noise-card rounded-[15px]"></div>
                 <div class="relative z-10 flex items-start gap-4">
                   <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center border border-white/10 flex-shrink-0">
                     <i data-lucide="zap" class="w-5 h-5 text-purple-400"></i>
@@ -1093,7 +1079,7 @@
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[10rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-60" style="animation: rotatePlan 6s linear infinite;"></div>
               </div>
               <div class="relative z-10 rounded-[15px] px-5 py-4" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.08) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.06) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.04) inset">
-                <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+                <div class="noise-card rounded-[15px]"></div>
                 <div class="relative z-10 flex items-center gap-3">
                   <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center border border-white/10 flex-shrink-0">
                     <i data-lucide="heart" class="w-5 h-5 text-purple-400"></i>
@@ -1306,7 +1292,7 @@
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[15rem] bg-gradient-to-b from-transparent via-[#9333ea] to-transparent opacity-80" style="animation: rotatePlan 6s linear infinite;"></div>
           </div>
           <div class="relative z-10 rounded-[15px] p-8 md:p-10 text-center" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(147,51,234,0.12) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(217,70,239,0.12) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.05) inset">
-            <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-[15px]"></div>
             <div class="relative z-10">
               <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 flex items-center justify-center border border-white/20 mx-auto mb-5">
                 <i data-lucide="gift" class="w-7 h-7 text-purple-400"></i>
@@ -1421,7 +1407,7 @@
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[15rem] bg-gradient-to-b from-transparent via-[#DAA520] to-transparent opacity-80" style="animation: rotatePlan 6s linear infinite;"></div>
           </div>
           <div class="relative z-10 rounded-[15px] p-8 flex flex-col flex-1" style="background-color: #0a0a0a; background-image: radial-gradient(at 0% 0%, rgba(218,165,32,0.1) 0px, transparent 65%), radial-gradient(at 100% 100%, rgba(251,191,36,0.08) 0px, transparent 65%); box-shadow: 0px -16px 24px 0px rgba(255,255,255,0.05) inset">
-            <div class="absolute inset-0 rounded-[15px] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 pointer-events-none"></div>
+            <div class="noise-card rounded-[15px]"></div>
 
             <div class="relative z-10 flex flex-col flex-1">
               <!-- Header -->
@@ -1725,7 +1711,6 @@
   <!-- Scripts (moved to end of body to avoid render-blocking) -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-  <script src="https://unpkg.com/@phosphor-icons/web@2.1.1" defer></script>
   <script src="https://unpkg.com/lucide@0.460.0" defer></script>
   <script src="assets/js/main.js" defer></script>
 
