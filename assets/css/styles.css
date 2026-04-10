@@ -67,10 +67,7 @@ body {
   border-color: #ffca28;
   box-shadow: 0 0 25px rgba(255, 143, 0, 0.4);
 }
-@media (pointer: fine) {
-  html, body { cursor: none; }
-  a, button, .hover-target, [role="button"] { cursor: none !important; }
-}
+/* Custom cursor desativado */
 
 /* ============================================
    GRID BACKGROUND
